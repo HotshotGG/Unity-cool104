@@ -1,0 +1,12 @@
+@startuml
+class AdjacencyMatrix {
+    nnz : int
+    + <<readonly>> N : int
+    + AdjacencyMatrix(mesh:Mesh)
+    + AdjacencyMatrix(pcol:int[], irow:int[])
+    + Bandwidth() : int
+    AdjacencyCount(mesh:Mesh) : int[]
+    AdjacencySet(mesh:Mesh, pcol:int[]) : int[]
+    + SortIndices() : void
+}
+@enduml

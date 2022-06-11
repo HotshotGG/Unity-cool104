@@ -1,0 +1,9 @@
+@startuml
+class TermSize {
+    Awake() : void
+    + {static} orthographicSizeAuto() : void
+    + {static} isIPad : bool <<get>>
+    + {static} isIPadDeviceAspect() : bool
+}
+MonoBehaviour <|-- TermSize
+@enduml

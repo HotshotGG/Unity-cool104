@@ -1,0 +1,5 @@
+@startuml
+interface ITriangulator {
+    Triangulate(points:IList<Vertex>, config:Configuration) : IMesh
+}
+@enduml

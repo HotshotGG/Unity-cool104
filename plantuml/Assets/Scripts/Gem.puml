@@ -1,0 +1,11 @@
+@startuml
+class Gem {
+    + _suit : int
+    + _number : int
+    + _isSelectable : bool = true
+    + CheckStatus() : bool
+    Update() : void
+    + Move() : void
+}
+MonoBehaviour <|-- Gem
+@enduml

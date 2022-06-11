@@ -1,0 +1,9 @@
+@startuml
+class BuildStatusButton {
+    + BuildStatusButton(clickEvent:Action)
+    + BuildStatusButton(clickEvent:Action, state:BuildState, failures:int)
+}
+Button <|-- BuildStatusButton
+BuildStatusButton o-> "labelElement" Label
+BuildStatusButton o-> "iconElement" Image
+@enduml

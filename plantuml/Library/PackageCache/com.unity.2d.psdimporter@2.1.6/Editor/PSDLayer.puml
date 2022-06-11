@@ -1,0 +1,27 @@
+@startuml
+class PSDLayer {
+    m_Name : string
+    m_SpriteName : string
+    m_IsGroup : bool
+    m_ParentIndex : int
+    m_SpriteID : string
+    m_LayerID : int
+    + PSDLayer(tex:NativeArray<Color32>, parent:int, group:bool, layerName:string, width:int, height:int, id:int)
+    + layerID : int <<get>>
+    + name : string <<get>>
+    + spriteName : string <<get>> <<set>>
+    + isGroup : bool <<get>>
+    + parentIndex : int <<get>>
+    + width : int <<get>>
+    + height : int <<get>>
+    + Dispose() : void
+}
+class "NativeArray`1"<T> {
+}
+PSDLayer --> "m_MosaicPosition" Vector2Int
+PSDLayer --> "m_GameObject" GameObject
+PSDLayer --> "mosaicPosition" Vector2Int
+PSDLayer --> "spriteID" GUID
+PSDLayer --> "gameObject" GameObject
+PSDLayer --> "texture<Color32>" "NativeArray`1"
+@enduml

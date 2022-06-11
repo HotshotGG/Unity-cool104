@@ -1,0 +1,12 @@
+@startuml
+interface ITriangle {
+    ID : int <<get>> <<set>>
+    Label : int <<get>> <<set>>
+    Area : double <<get>> <<set>>
+    GetVertex(index:int) : Vertex
+    GetVertexID(index:int) : int
+    GetNeighbor(index:int) : ITriangle
+    GetNeighborID(index:int) : int
+    GetSegment(index:int) : ISegment
+}
+@enduml

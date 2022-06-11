@@ -1,0 +1,8 @@
+@startuml
+interface IPolygonFormat {
+    Read(filename:string) : IPolygon
+    Write(polygon:IPolygon, filename:string) : void
+    Write(polygon:IPolygon, stream:Stream) : void
+}
+IFileFormat <|-- IPolygonFormat
+@enduml

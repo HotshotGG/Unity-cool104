@@ -1,0 +1,13 @@
+@startuml
+class BindingUtility <<static>> {
+    + {static} GetRequiredBindingType(binding:PlayableBinding) : Type
+    + {static} Bind(director:PlayableDirector, bindTo:TrackAsset, objectToBind:Object) : void
+    + {static} GetBindingAction(requiredBindingType:Type, objectToBind:Object) : BindingAction
+}
+enum BindingAction {
+    DoNotBind,
+    BindDirectly,
+    BindToExistingComponent,
+    BindToMissingComponent,
+}
+@enduml

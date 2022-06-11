@@ -1,0 +1,13 @@
+@startuml
+class TriangleWriter {
+    + Write(mesh:Mesh, filename:string) : void
+    + WriteNodes(mesh:Mesh, filename:string) : void
+    + WriteElements(mesh:Mesh, filename:string) : void
+    + WritePoly(polygon:IPolygon, filename:string) : void
+    + WritePoly(mesh:Mesh, filename:string) : void
+    + WritePoly(mesh:Mesh, filename:string, writeNodes:bool) : void
+    + WriteEdges(mesh:Mesh, filename:string) : void
+    + WriteNeighbors(mesh:Mesh, filename:string) : void
+}
+TriangleWriter o-> "nfi" NumberFormatInfo
+@enduml

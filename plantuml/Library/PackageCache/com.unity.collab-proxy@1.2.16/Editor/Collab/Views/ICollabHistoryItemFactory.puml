@@ -1,0 +1,5 @@
+@startuml
+interface ICollabHistoryItemFactory {
+    GenerateElements(revsRevisions:IEnumerable<Revision>, mTotalRevisions:int, startIndex:int, tipRev:string, inProgressRevision:string, revisionActionsEnabled:bool, buildServiceEnabled:bool, currentUser:string) : IEnumerable<RevisionData>
+}
+@enduml

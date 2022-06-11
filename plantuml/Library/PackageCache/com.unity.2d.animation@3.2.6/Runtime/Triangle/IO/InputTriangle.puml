@@ -1,0 +1,14 @@
+@startuml
+class InputTriangle {
+    + InputTriangle(p0:int, p1:int, p2:int)
+    + ID : int <<get>> <<set>>
+    + Label : int <<get>> <<set>>
+    + Area : double <<get>> <<set>>
+    + GetVertex(index:int) : Vertex
+    + GetVertexID(index:int) : int
+    + GetNeighbor(index:int) : ITriangle
+    + GetNeighborID(index:int) : int
+    + GetSegment(index:int) : ISegment
+}
+ITriangle <|-- InputTriangle
+@enduml

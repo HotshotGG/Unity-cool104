@@ -1,0 +1,15 @@
+@startuml
+class InlineCurveResize {
+    m_Captured : bool
+    m_CapturedHeight : float
+    m_CaptureMouseYPos : float
+}
+class TrackDoubleClick {
+}
+class TrackShortcutManipulator {
+}
+Manipulator <|-- InlineCurveResize
+InlineCurveResize --> "m_Target" InlineCurveResizeHandle
+Manipulator <|-- TrackDoubleClick
+Manipulator <|-- TrackShortcutManipulator
+@enduml

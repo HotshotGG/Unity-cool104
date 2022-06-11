@@ -1,0 +1,8 @@
+@startuml
+interface IPredicates {
+    CounterClockwise(a:Point, b:Point, c:Point) : double
+    InCircle(a:Point, b:Point, c:Point, p:Point) : double
+    FindCircumcenter(org:Point, dest:Point, apex:Point, xi:double, eta:double) : Point
+    FindCircumcenter(org:Point, dest:Point, apex:Point, xi:double, eta:double, offconstant:double) : Point
+}
+@enduml

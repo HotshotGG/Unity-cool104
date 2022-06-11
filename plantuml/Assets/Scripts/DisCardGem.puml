@@ -1,0 +1,6 @@
+@startuml
+class DisCardGem {
+}
+MonoBehaviour <|-- DisCardGem
+DisCardGem --> "gemObject" GameObject
+@enduml

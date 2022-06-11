@@ -1,0 +1,17 @@
+@startuml
+class ConstraintMesher {
+    + ConstraintMesher(mesh:Mesh, config:Configuration)
+    + Apply(input:IPolygon, options:ConstraintOptions) : void
+    Plague() : void
+}
+class "List`1"<T> {
+}
+class "ILog`1"<T> {
+}
+ConstraintMesher --> "predicates" IPredicates
+ConstraintMesher --> "mesh" Mesh
+ConstraintMesher --> "behavior" Behavior
+ConstraintMesher --> "locator" TriangleLocator
+ConstraintMesher --> "viri<Triangle>" "List`1"
+ConstraintMesher --> "logger<LogItem>" "ILog`1"
+@enduml

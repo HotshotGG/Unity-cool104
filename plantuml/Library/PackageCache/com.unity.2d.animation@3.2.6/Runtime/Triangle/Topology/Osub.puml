@@ -1,0 +1,13 @@
+@startuml
+class Osub <<struct>> {
+    + <<override>> ToString() : string
+    + Sym(os:Osub) : void
+    + Sym() : void
+    + Pivot(os:Osub) : void
+    + Next(ot:Osub) : void
+    + Next() : void
+    + Org() : Vertex
+    + Dest() : Vertex
+}
+Osub --> "Segment" SubSegment
+@enduml

@@ -1,0 +1,25 @@
+@startuml
+class GameScript {
+    + _currentSuit : int = 0
+    + _currentNumber : int = 0
+    Start() : void
+    SetMiniGems() : void
+    deleteMinigem() : void
+    + mainClick(eventData:BaseEventData) : void
+    + Reset() : void
+}
+class "List`1"<T> {
+}
+MonoBehaviour <|-- GameScript
+GameScript o-> "instance" GameScript
+GameScript o-> "_saveManager" SaveManager
+GameScript --> "_gemDeck<GameObject>" "List`1"
+GameScript --> "_gemsBase<GameObject>" "List`1"
+GameScript --> "_miniGemsBase" GameObject
+GameScript --> "_disCardGem" GameObject
+GameScript --> "_worldRecord" GameObject
+GameScript --> "_score" GameObject
+GameScript --> "_bestScore" GameObject
+GameScript --> "_datetime" GameObject
+GameScript --> "_tryCount" GameObject
+@enduml

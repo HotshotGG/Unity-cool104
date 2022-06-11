@@ -1,0 +1,27 @@
+@startuml
+class ClearSelection {
+}
+class ItemSelection <<static>> {
+    + {static} CanClearSelection(evt:Event) : bool
+    + {static} RangeSelectItems(lastItemToSelect:ITimelineItem) : void
+    + {static} HandleSingleSelection(evt:Event) : ISelectable
+    + {static} HandleItemSelection(evt:Event, item:ISelectable) : void
+}
+class SelectAndMoveItem {
+    m_Dragged : bool
+    m_HorizontalMovementDone : bool
+    m_VerticalMovementDone : bool
+    m_CycleMarkersPending : bool
+    + <<override>> Overlay(evt:Event, state:WindowState) : void
+    HandleMarkerCycle() : bool
+    HandleSingleSelection(evt:Event) : bool
+    DropItems() : void
+    {static} GetTrackDropTargetAt(state:WindowState, point:Vector2) : TrackAsset
+}
+Manipulator <|-- ClearSelection
+Manipulator <|-- SelectAndMoveItem
+SelectAndMoveItem --> "m_SnapEngine" SnapEngine
+SelectAndMoveItem --> "m_TimeAreaAutoPanner" TimeAreaAutoPanner
+SelectAndMoveItem --> "m_MouseDownPosition" Vector2
+SelectAndMoveItem --> "m_MoveItemHandler" MoveItemHandler
+@enduml

@@ -1,0 +1,7 @@
+@startuml
+interface IEdge {
+    P0 : int <<get>>
+    P1 : int <<get>>
+    Label : int <<get>>
+}
+@enduml

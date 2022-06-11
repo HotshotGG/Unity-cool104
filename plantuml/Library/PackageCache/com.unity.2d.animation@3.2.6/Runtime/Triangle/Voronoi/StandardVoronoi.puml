@@ -1,0 +1,8 @@
+@startuml
+class StandardVoronoi {
+    + StandardVoronoi(mesh:Mesh)
+    + StandardVoronoi(mesh:Mesh, box:Rectangle)
+    + StandardVoronoi(mesh:Mesh, box:Rectangle, factory:IVoronoiFactory, predicates:IPredicates)
+}
+VoronoiBase <|-- StandardVoronoi
+@enduml

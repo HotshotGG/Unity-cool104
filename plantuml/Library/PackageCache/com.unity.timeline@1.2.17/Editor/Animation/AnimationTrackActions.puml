@@ -1,0 +1,31 @@
+@startuml
+class AddOverrideTrackAction {
+    + <<override>> Execute(state:WindowState, tracks:TrackAsset[]) : bool
+}
+class ConvertToClipModeAction {
+    + <<override>> Execute(state:WindowState, tracks:TrackAsset[]) : bool
+}
+class ConvertFromClipTrackAction {
+    + <<override>> Execute(state:WindowState, tracks:TrackAsset[]) : bool
+}
+abstract class TrackOffsetBaseAction {
+    + <<override>> Execute(state:WindowState, tracks:TrackAsset[]) : bool
+}
+class ApplyTransformOffsetAction {
+}
+class ApplySceneOffsetAction {
+}
+class ApplyAutoAction {
+}
+TrackAction <|-- AddOverrideTrackAction
+TrackAction <|-- ConvertToClipModeAction
+TrackAction <|-- ConvertFromClipTrackAction
+TrackAction <|-- TrackOffsetBaseAction
+TrackOffsetBaseAction --> "trackOffset" TrackOffset
+TrackOffsetBaseAction <|-- ApplyTransformOffsetAction
+ApplyTransformOffsetAction --> "trackOffset" TrackOffset
+TrackOffsetBaseAction <|-- ApplySceneOffsetAction
+ApplySceneOffsetAction --> "trackOffset" TrackOffset
+TrackOffsetBaseAction <|-- ApplyAutoAction
+ApplyAutoAction --> "trackOffset" TrackOffset
+@enduml

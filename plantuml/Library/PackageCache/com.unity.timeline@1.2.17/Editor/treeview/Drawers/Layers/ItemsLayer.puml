@@ -1,0 +1,41 @@
+@startuml
+enum Layer {
+    Clips,
+    ClipHandles,
+    Markers,
+    MarkerHeaderTrack,
+    MarkersOnHeader,
+}
+class LayerZOrder <<struct>> {
+    m_ZOrder : int
+    + LayerZOrder(layer:Layer, zOrder:int)
+    + CompareTo(other:LayerZOrder) : int
+    + ChangeLayer(layer:Layer) : LayerZOrder
+}
+interface ILayerable {
+}
+interface IZOrderProvider {
+    Next() : LayerZOrder
+}
+abstract class ItemsLayer {
+    m_PreviousLayerStateHash : int
+    + Next() : LayerZOrder
+    m_NeedSort : bool = true
+    + <<virtual>> Draw(rect:Rect, state:WindowState) : void
+    Sort() : void
+    GetLayerViewStateChanged(rect:Rect, state:WindowState) : bool
+}
+class "IComparable`1"<T> {
+}
+class "List`1"<T> {
+}
+class "IEnumerable`1"<T> {
+}
+"IComparable`1" "<LayerZOrder>" <|-- LayerZOrder
+LayerZOrder --> "m_Layer" Layer
+ILayerable --> "zOrder" LayerZOrder
+IZOrderProvider <|-- ItemsLayer
+ItemsLayer --> "m_LastZOrder" LayerZOrder
+ItemsLayer o-> "m_Items<TimelineItemGUI>" "List`1"
+ItemsLayer --> "items<TimelineItemGUI>" "IEnumerable`1"
+@enduml

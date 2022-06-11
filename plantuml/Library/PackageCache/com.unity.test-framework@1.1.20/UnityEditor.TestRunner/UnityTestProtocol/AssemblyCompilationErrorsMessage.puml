@@ -1,0 +1,7 @@
+@startuml
+class AssemblyCompilationErrorsMessage {
+    + assembly : string
+    + AssemblyCompilationErrorsMessage()
+}
+Message <|-- AssemblyCompilationErrorsMessage
+@enduml

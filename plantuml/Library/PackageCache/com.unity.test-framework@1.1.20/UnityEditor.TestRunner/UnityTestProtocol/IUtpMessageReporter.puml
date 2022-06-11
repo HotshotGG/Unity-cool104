@@ -1,0 +1,8 @@
+@startuml
+interface IUtpMessageReporter {
+    ReportAssemblyCompilationErrors(assembly:string, errorCompilerMessages:IEnumerable<CompilerMessage>) : void
+    ReportTestFinished(result:ITestResultAdaptor) : void
+    ReportTestRunStarted(testsToRun:ITestAdaptor) : void
+    ReportTestStarted(test:ITestAdaptor) : void
+}
+@enduml

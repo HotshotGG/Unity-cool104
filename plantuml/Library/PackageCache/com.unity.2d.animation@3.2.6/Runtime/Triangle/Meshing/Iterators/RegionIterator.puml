@@ -1,0 +1,11 @@
+@startuml
+class RegionIterator {
+    + RegionIterator(mesh:Mesh)
+    + Process(triangle:Triangle, boundary:int) : void
+    + Process(triangle:Triangle, action:Action<Triangle>, boundary:int) : void
+    ProcessRegion(action:Action<Triangle>, protector:Func<SubSegment, bool>) : void
+}
+class "List`1"<T> {
+}
+RegionIterator --> "region<Triangle>" "List`1"
+@enduml

@@ -1,0 +1,8 @@
+@startuml
+class PlaymodeTestsControllerSettings {
+    + sceneBased : bool
+    + originalScene : string
+    + bootstrapScene : string
+    + {static} CreateRunnerSettings(filters:RuntimeTestRunnerFilter[]) : PlaymodeTestsControllerSettings
+}
+@enduml

@@ -1,0 +1,21 @@
+@startuml
+class Point {
+    + Point()
+    + Point(x:double, y:double)
+    + Point(x:double, y:double, label:int)
+    + ID : int <<get>> <<set>>
+    + X : double <<get>> <<set>>
+    + Y : double <<get>> <<set>>
+    + Label : int <<get>> <<set>>
+    + <<override>> Equals(obj:object) : bool
+    + Equals(p:Point) : bool
+    + CompareTo(other:Point) : int
+    + <<override>> GetHashCode() : int
+}
+class "IComparable`1"<T> {
+}
+class "IEquatable`1"<T> {
+}
+"IComparable`1" "<Point>" <|-- Point
+"IEquatable`1" "<Point>" <|-- Point
+@enduml

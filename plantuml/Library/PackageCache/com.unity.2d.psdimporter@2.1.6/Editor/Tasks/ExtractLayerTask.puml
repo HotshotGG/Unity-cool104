@@ -1,0 +1,17 @@
+@startuml
+class ExtractLayerTask {
+    + {static} <<unsafe>> Execute(extractedLayer:List<PSDLayer>, layers:List<BitmapLayer>, importHiddenLayer:bool) : void
+    {static} ExtractLayer(extractedLayer:List<PSDLayer>, layers:List<BitmapLayer>, importHiddenLayer:bool) : int
+}
+class ConvertBufferJob <<struct>> {
+    + <<unsafe>> Execute(index:int) : void
+}
+class "NativeArray`1"<T> {
+}
+ExtractLayerTask +-- ConvertBufferJob
+IJobParallelFor <|-- ConvertBufferJob
+ConvertBufferJob --> "original<IntPtr>" "NativeArray`1"
+ConvertBufferJob --> "width<int>" "NativeArray`1"
+ConvertBufferJob --> "height<int>" "NativeArray`1"
+ConvertBufferJob --> "output<IntPtr>" "NativeArray`1"
+@enduml

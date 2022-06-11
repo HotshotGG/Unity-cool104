@@ -1,0 +1,18 @@
+@startuml
+class TimelineAssetInspector {
+    InitializeProperties() : void
+    + OnEnable() : void
+    + <<override>> OnInspectorGUI() : void
+}
+class Styles <<static>> {
+}
+Editor <|-- TimelineAssetInspector
+TimelineAssetInspector --> "m_FrameRateProperty" SerializedProperty
+TimelineAssetInspector --> "m_DurationModeProperty" SerializedProperty
+TimelineAssetInspector --> "m_FixedDurationProperty" SerializedProperty
+TimelineAssetInspector +-- Styles
+Styles o-> "FrameRate" GUIContent
+Styles o-> "DurationMode" GUIContent
+Styles o-> "Duration" GUIContent
+Styles o-> "HeaderTitleMultiselection" GUIContent
+@enduml

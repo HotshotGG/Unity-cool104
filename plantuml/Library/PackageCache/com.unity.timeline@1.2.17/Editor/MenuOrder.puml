@@ -1,0 +1,82 @@
+@startuml
+class MenuOrder <<static>> {
+    + <<const>> DefaultPriority : int = 9000
+    + <<const>> SeparatorAt : int = 1000
+    + <<const>> AddGroupItemStart : int
+    + <<const>> AddTrackItemStart : int
+    + <<const>> AddCustomTrackItemStart : int
+    + <<const>> AddClipItemStart : int
+    + <<const>> AddCustomClipItemStart : int
+    + <<const>> AddMarkerItemStart : int
+    + <<const>> AddCustomMarkerItemStart : int
+}
+class TimelineAction <<static>> {
+    + <<const>> Start : int = 1000
+    + <<const>> Copy : int
+    + <<const>> Paste : int
+    + <<const>> Duplicate : int
+    + <<const>> Delete : int
+    + <<const>> MatchContent : int
+}
+class TrackAction <<static>> {
+    + <<const>> Start : int
+    + <<const>> LockTrack : int
+    + <<const>> LockSelected : int
+    + <<const>> MuteTrack : int
+    + <<const>> MuteSelected : int
+    + <<const>> ShowHideMarkers : int
+    + <<const>> RemoveInvalidMarkers : int
+    + <<const>> EditInAnimationWindow : int
+}
+class TrackAddMenu <<static>> {
+    + <<const>> Start : int
+    + <<const>> AddLayerTrack : int
+}
+class ClipEditAction <<static>> {
+    + <<const>> Start : int
+    + <<const>> EditInAnimationWindow : int
+    + <<const>> EditSubTimeline : int
+}
+class ClipAction <<static>> {
+    + <<const>> Start : int
+    + <<const>> TrimStart : int
+    + <<const>> TrimEnd : int
+    + <<const>> Split : int
+    + <<const>> CompleteLastLoop : int
+    + <<const>> TrimLastLoop : int
+    + <<const>> MatchDuration : int
+    + <<const>> DoubleSpeed : int
+    + <<const>> HalfSpeed : int
+    + <<const>> ResetDuration : int
+    + <<const>> ResetSpeed : int
+    + <<const>> ResetAll : int
+    + <<const>> Tile : int
+    + <<const>> FindSourceAsset : int
+}
+class MarkerAction <<static>> {
+    + <<const>> Start : int
+}
+class CustomTrackAction <<static>> {
+    + <<const>> Start : int
+    + <<const>> AnimConvertToClipMode : int
+    + <<const>> AnimConvertFromClipMode : int
+    + <<const>> AnimApplyTrackOffset : int
+    + <<const>> AnimApplySceneOffset : int
+    + <<const>> AnimApplyAutoOffset : int
+    + <<const>> AnimAddOverrideTrack : int
+}
+class CustomClipAction <<static>> {
+    + <<const>> Start : int
+    + <<const>> AnimClipMatchPrevious : int
+    + <<const>> AnimClipMatchNext : int
+    + <<const>> AnimClipResetOffset : int
+}
+MenuOrder +-- TimelineAction
+MenuOrder +-- TrackAction
+MenuOrder +-- TrackAddMenu
+MenuOrder +-- ClipEditAction
+MenuOrder +-- ClipAction
+MenuOrder +-- MarkerAction
+MenuOrder +-- CustomTrackAction
+MenuOrder +-- CustomClipAction
+@enduml

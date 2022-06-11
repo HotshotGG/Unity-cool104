@@ -1,0 +1,7 @@
+@startuml
+class CollabHistoryItemFactory {
+    <<const>> k_MaxChangesPerRevision : int = 10
+    + GenerateElements(revisions:IEnumerable<Revision>, totalRevisions:int, startIndex:int, tipRev:string, inProgressRevision:string, revisionActionsEnabled:bool, buildServiceEnabled:bool, currentUser:string) : IEnumerable<RevisionData>
+}
+ICollabHistoryItemFactory <|-- CollabHistoryItemFactory
+@enduml

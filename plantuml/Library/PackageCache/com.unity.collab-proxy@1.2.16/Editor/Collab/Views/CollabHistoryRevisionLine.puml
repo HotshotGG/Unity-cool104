@@ -1,0 +1,7 @@
+@startuml
+class CollabHistoryRevisionLine {
+    + CollabHistoryRevisionLine(number:int)
+    + CollabHistoryRevisionLine(date:DateTime, isFullDateObtained:bool)
+}
+VisualElement <|-- CollabHistoryRevisionLine
+@enduml

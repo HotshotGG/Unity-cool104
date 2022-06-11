@@ -1,0 +1,33 @@
+@startuml
+class WindowConstants <<static>> {
+    + <<const>> timeAreaYPosition : float = 19.0f
+    + <<const>> timeAreaHeight : float = 22.0f
+    + <<const>> timeAreaMinWidth : float = 50.0f
+    + <<const>> timeAreaShownRangePadding : float = 5.0f
+    + <<const>> markerRowHeight : float = 18.0f
+    + <<const>> markerRowYPosition : float
+    + <<const>> defaultHeaderWidth : float = 315.0f
+    + <<const>> defaultBindingAreaWidth : float = 40.0f
+    + <<const>> minHierarchySplitter : float = 0.15f
+    + <<const>> maxHierarchySplitter : float = 10.50f
+    + <<const>> hierarchySplitterDefaultPercentage : float = 0.2f
+    + <<const>> minHeaderWidth : float = 315.0f
+    + <<const>> maxHeaderWidth : float = 650.0f
+    + <<const>> maxTimeAreaScaling : float = 90000.0f
+    + <<const>> minTimeCodeWidth : float = 28.0f
+    + <<const>> sliderWidth : float = 15
+    + <<const>> shadowUnderTimelineHeight : float = 15.0f
+    + <<const>> createButtonWidth : float = 70.0f
+    + <<const>> refTimeWidth : float = 50.0f
+    + <<const>> selectorWidth : float = 23.0f
+    + <<const>> cogButtonWidth : float = 32.0f
+    + <<const>> cogButtonPadding : float = 16.0f
+    + <<const>> trackHeaderButtonSize : float = 16.0f
+    + <<const>> trackHeaderButtonPadding : float = 6f
+    + <<const>> trackHeaderButtonSpacing : float = 3.0f
+    + <<const>> trackOptionButtonVerticalPadding : float = 0f
+    + <<const>> trackHeaderMaxButtonsWidth : float
+    + <<const>> trackInsertionMarkerHeight : float = 1f
+    + <<const>> autoPanPaddingInPixels : int = 50
+}
+@enduml

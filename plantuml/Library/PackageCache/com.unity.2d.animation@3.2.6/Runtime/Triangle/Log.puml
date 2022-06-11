@@ -1,0 +1,17 @@
+@startuml
+class Log <<sealed>> {
+    {static} Log()
+    + Add(item:LogItem) : void
+    + Clear() : void
+    + Info(message:string) : void
+    + Warning(message:string, location:string) : void
+    + Error(message:string, location:string) : void
+}
+class "ILog`1"<T> {
+}
+class "IList`1"<T> {
+}
+"ILog`1" "<LogItem>" <|-- Log
+Log --> "Data<LogItem>" "IList`1"
+Log --> "Level" LogLevel
+@enduml

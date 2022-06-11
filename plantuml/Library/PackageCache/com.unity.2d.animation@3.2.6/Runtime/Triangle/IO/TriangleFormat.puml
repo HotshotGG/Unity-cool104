@@ -1,0 +1,13 @@
+@startuml
+class TriangleFormat {
+    + IsSupported(file:string) : bool
+    + Import(filename:string) : IMesh
+    + Write(mesh:IMesh, filename:string) : void
+    + Write(mesh:IMesh, stream:Stream) : void
+    + Read(filename:string) : IPolygon
+    + Write(polygon:IPolygon, filename:string) : void
+    + Write(polygon:IPolygon, stream:Stream) : void
+}
+IPolygonFormat <|-- TriangleFormat
+IMeshFormat <|-- TriangleFormat
+@enduml

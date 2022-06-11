@@ -1,0 +1,28 @@
+@startuml
+interface IUnityTestAssemblyRunner {
+    IsTestLoaded : bool <<get>>
+    IsTestRunning : bool <<get>>
+    IsTestComplete : bool <<get>>
+    GetCurrentContext() : UnityTestExecutionContext
+    Load(assemblies:Assembly[], testPlatform:TestPlatform, settings:IDictionary<string, object>) : ITest
+    Run(listener:ITestListener, filter:ITestFilter) : IEnumerable
+    StopRun() : void
+}
+class UnityTestAssemblyRunner {
+    + GetCurrentContext() : UnityTestExecutionContext
+    + IsTestLoaded : bool <<get>>
+    + IsTestRunning : bool <<get>>
+    + IsTestComplete : bool <<get>>
+    + UnityTestAssemblyRunner(builder:UnityTestAssemblyBuilder, factory:WorkItemFactory)
+    + Load(assemblies:Assembly[], testPlatform:TestPlatform, settings:IDictionary<string, object>) : ITest
+    + Run(listener:ITestListener, filter:ITestFilter) : IEnumerable
+    + StopRun() : void
+}
+IUnityTestAssemblyRunner --> "LoadedTest" ITest
+IUnityTestAssemblyRunner --> "Result" ITestResult
+IUnityTestAssemblyRunner --> "TopLevelWorkItem" UnityWorkItem
+IUnityTestAssemblyRunner <|-- UnityTestAssemblyRunner
+UnityTestAssemblyRunner --> "LoadedTest" ITest
+UnityTestAssemblyRunner --> "Result" ITestResult
+UnityTestAssemblyRunner --> "TopLevelWorkItem" UnityWorkItem
+@enduml

@@ -1,0 +1,12 @@
+@startuml
+class QualityOptions {
+    + MaximumAngle : double <<get>> <<set>>
+    + MinimumAngle : double <<get>> <<set>>
+    + MaximumArea : double <<get>> <<set>>
+    + VariableArea : bool <<get>> <<set>>
+    + SteinerPoints : int <<get>> <<set>>
+}
+class "Func`3"<T1,T2,T3> {
+}
+QualityOptions --> "UserTest<ITriangle,double,bool>" "Func`3"
+@enduml

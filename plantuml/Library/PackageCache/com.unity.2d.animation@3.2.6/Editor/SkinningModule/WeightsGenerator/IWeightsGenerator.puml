@@ -1,0 +1,5 @@
+@startuml
+interface IWeightsGenerator {
+    Calculate(vertices:Vector2[], edges:Edge[], controlPoints:Vector2[], bones:Edge[], pins:int[]) : BoneWeight[]
+}
+@enduml

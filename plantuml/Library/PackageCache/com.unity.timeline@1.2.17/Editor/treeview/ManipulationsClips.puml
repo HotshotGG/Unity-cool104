@@ -1,0 +1,11 @@
+@startuml
+class ItemActionShortcutManipulator {
+}
+class DrillIntoClip {
+}
+class ContextMenuManipulator {
+}
+Manipulator <|-- ItemActionShortcutManipulator
+Manipulator <|-- DrillIntoClip
+Manipulator <|-- ContextMenuManipulator
+@enduml

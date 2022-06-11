@@ -1,0 +1,8 @@
+@startuml
+class GUIColorOverride <<struct>> {
+    + GUIColorOverride(newColor:Color)
+    + Dispose() : void
+}
+IDisposable <|-- GUIColorOverride
+GUIColorOverride --> "m_OldColor" Color
+@enduml

@@ -1,0 +1,12 @@
+@startuml
+class Face {
+    {static} Face()
+    + ID : int <<get>> <<set>>
+    + Bounded : bool <<get>> <<set>>
+    + Face(generator:Point)
+    + Face(generator:Point, edge:HalfEdge)
+    + EnumerateEdges() : IEnumerable<HalfEdge>
+    + <<override>> ToString() : string
+}
+Face --> "Edge" HalfEdge
+@enduml

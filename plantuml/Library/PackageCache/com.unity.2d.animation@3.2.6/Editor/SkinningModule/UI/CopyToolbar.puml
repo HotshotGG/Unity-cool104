@@ -1,0 +1,22 @@
+@startuml
+class CopyToolbar {
+    +  <<event>> onDoCopy : Action 
+    +  <<event>> onDoPaste : Action 
+    + CopyToolbar()
+    + DoCopy() : void
+    + DoPaste() : void
+    + BindElements() : void
+    + {static} GenerateFromUXML() : CopyToolbar
+}
+class CopyToolbarFactory {
+}
+class CopyToolbarUxmlTraits {
+}
+class "UxmlFactory`2"<T1,T2> {
+}
+Toolbar <|-- CopyToolbar
+CopyToolbar +-- CopyToolbarFactory
+"UxmlFactory`2" "<CopyToolbar,CopyToolbarUxmlTraits>" <|-- CopyToolbarFactory
+CopyToolbar +-- CopyToolbarUxmlTraits
+UxmlTraits <|-- CopyToolbarUxmlTraits
+@enduml

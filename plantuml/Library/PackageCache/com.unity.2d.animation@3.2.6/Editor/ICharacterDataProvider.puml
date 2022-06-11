@@ -1,0 +1,27 @@
+@startuml
+interface ICharacterDataProvider {
+    GetCharacterData() : CharacterData
+    SetCharacterData(characterData:CharacterData) : void
+}
+class CharacterData <<struct>> {
+}
+interface ICharacterOrder {
+    order : int <<get>> <<set>>
+}
+class CharacterGroup <<struct>> {
+    + name : string
+    + parentGroup : int
+    m_Order : int
+    + order : int <<get>> <<set>>
+}
+class CharacterPart <<struct>> {
+    + spriteId : string
+    + parentGroup : int
+    m_Order : int
+    + order : int <<get>> <<set>>
+}
+CharacterData --> "dimension" Vector2Int
+ICharacterOrder <|-- CharacterGroup
+ICharacterOrder <|-- CharacterPart
+CharacterPart --> "spritePosition" RectInt
+@enduml

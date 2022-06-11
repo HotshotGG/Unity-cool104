@@ -1,0 +1,15 @@
+@startuml
+class DcelMesh {
+    + DcelMesh()
+    + <<virtual>> IsConsistent(closed:bool, depth:int) : bool
+    + ResolveBoundaryEdges() : void
+}
+class "List`1"<T> {
+}
+class "IEnumerable`1"<T> {
+}
+DcelMesh --> "Vertices<Vertex>" "List`1"
+DcelMesh --> "HalfEdges<HalfEdge>" "List`1"
+DcelMesh --> "Faces<Face>" "List`1"
+DcelMesh --> "Edges<IEdge>" "IEnumerable`1"
+@enduml

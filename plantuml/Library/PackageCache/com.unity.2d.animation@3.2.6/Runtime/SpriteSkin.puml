@@ -1,0 +1,37 @@
+@startuml
+class PositionVertex <<struct>> {
+}
+class PositionTangentVertex <<struct>> {
+}
+class DeformVerticesBuffer <<struct>> {
+    + <<const>> k_DefaultBufferSize : int = 2
+    m_BufferCount : int
+    m_CurrentBuffer : int
+    + DeformVerticesBuffer(bufferCount:int)
+    + Dispose() : void
+    + GetBuffer(expectedSize:int) : ref NativeArray<byte>
+}
+class SpriteSkin <<sealed>> <<partial>> {
+    m_IsValid : bool = false
+    m_TransformsHash : int = 0
+    OnEnable() : void
+    CacheValidFlag() : void
+    Reset() : void
+    + HasCurrentDeformedVertices() : bool
+    + GetDeformedVertexPositionData() : IEnumerable<Vector3>
+    + GetDeformedVertexTangentData() : IEnumerable<Vector4>
+    OnDisable() : void
+    LateUpdate() : void
+    CacheCurrentSprite() : void
+    + alwaysUpdate : bool <<get>> <<set>>
+    OnDestroy() : void
+    + OnBeforeSerialize() : void
+    + OnAfterDeserialize() : void
+}
+PositionVertex --> "position" Vector3
+PositionTangentVertex --> "position" Vector3
+PositionTangentVertex --> "tangent" Vector4
+MonoBehaviour <|-- SpriteSkin
+ISerializationCallbackReceiver <|-- SpriteSkin
+SpriteSkin --> "rootBone" Transform
+@enduml

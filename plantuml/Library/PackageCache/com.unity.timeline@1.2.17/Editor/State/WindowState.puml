@@ -1,0 +1,147 @@
+@startuml
+class WindowState {
+    <<const>> k_TimeCodeTextFieldId : int = 3790
+    m_Recording : bool
+    m_DirtyStamp : int
+    m_SequencerHeaderWidth : float
+    m_BindingAreaWidth : float
+    m_MustRebuildGraph : bool
+    m_LastTime : float
+    + {static} kTimeEpsilon : double <<get>>
+    + {static} <<readonly>> kMaxShownTime : float
+    +  <<event>> windowOnGuiStarted : Action<WindowState, Event> 
+    +  <<event>> windowOnGuiFinished : Action<WindowState, Event> 
+    +  <<event>> OnPlayStateChange : Action<bool> 
+    +  <<event>> OnDirtyStampChange : Action 
+    +  <<event>> OnRebuildGraphChange : Action 
+    +  <<event>> OnTimeChange : Action 
+    +  <<event>> OnRecordingChange : Action 
+    +  <<event>> OnBeforeSequenceChange : Action 
+    +  <<event>> OnAfterSequenceChange : Action 
+    + WindowState(w:TimelineWindow, hierarchy:SequenceHierarchy)
+    + rebuildGraph : bool <<get>> <<set>>
+    + mouseDragLag : float <<get>> <<set>>
+    + AddCaptured(manipulator:Manipulator) : void
+    + RemoveCaptured(manipulator:Manipulator) : void
+    + isJogging : bool <<get>> <<set>>
+    + viewStateHash : int <<get>>
+    + bindingAreaWidth : float <<get>> <<set>>
+    + sequencerHeaderWidth : float <<get>> <<set>>
+    + mainAreaWidth : float <<get>> <<set>>
+    + trackScale : float <<get>> <<set>>
+    + dirtyStamp : int <<get>>
+    + showQuadTree : bool <<get>> <<set>>
+    + canRecord : bool <<get>>
+    + recording : bool <<get>> <<set>>
+    + previewMode : bool <<get>> <<set>>
+    + playing : bool <<get>>
+    + playbackSpeed : float <<get>> <<set>>
+    + frameSnap : bool <<get>> <<set>>
+    + edgeSnaps : bool <<get>> <<set>>
+    + muteAudioScrubbing : bool <<get>> <<set>>
+    + playRangeLoopMode : bool <<get>> <<set>>
+    + timeInFrames : bool <<get>> <<set>>
+    + showAudioWaveform : bool <<get>> <<set>>
+    + showMarkerHeader : bool <<get>> <<set>>
+    UnSelectMarkerOnHeaderTrack() : void
+    + isClipSnapping : bool <<get>> <<set>>
+    + OnDestroy() : void
+    + OnSceneSaved() : void
+    + SetCurrentSequence(timelineAsset:TimelineAsset, director:PlayableDirector, hostClip:TimelineClip) : void
+    + PopSequencesUntilCount(count:int) : void
+    + GetCurrentSequencePath() : SequencePath
+    + SetCurrentSequencePath(path:SequencePath, forceRebuild:bool) : void
+    + GetAllSequences() : IEnumerable<ISequenceState>
+    + SnapToFrameIfRequired(currentTime:double) : double
+    + Reset() : void
+    + GetSnappedTimeAtMousePosition(mousePos:Vector2) : double
+    {static} SyncNotifyValue(oldValue:T, newValue:T, changeStateCallback:Action) : void
+    + SetTimeAreaTransform(newTranslation:Vector2, newScale:Vector2) : void
+    + SetTimeAreaShownRange(min:float, max:float) : void
+    + ResetPreviewMode() : void
+    + TimeIsInRange(value:float) : bool
+    + RangeIsVisible(range:Range) : bool
+    + EnsurePlayHeadIsVisible() : void
+    + SetPlayHeadToMiddle() : void
+    + windowHeight : float <<get>>
+    + playRangeEnabled : bool <<get>> <<set>>
+    + GetWindow() : TimelineWindow
+    + Play() : void
+    + Pause() : void
+    + SetPlaying(start:bool) : void
+    + Stop() : void
+    InvokePlayStateChangeCallback(isPlaying:bool) : void
+    + RebuildPlayableGraph() : void
+    + Evaluate() : void
+    + EvaluateImmediate() : void
+    + Refresh() : void
+    + UpdateViewStateHash() : void
+    + IsEditingASubItem() : bool
+    + IsEditingASubTimeline() : bool
+    + IsEditingAnEmptyTimeline() : bool
+    + IsEditingAPrefabAsset() : bool
+    + IsCurrentEditingASequencerTextField() : bool
+    + TimeToTimeAreaPixel(t:double) : float
+    + TimeToScreenSpacePixel(time:double) : float
+    + TimeToPixel(time:double) : float
+    + PixelToTime(pixel:float) : float
+    + PixelDeltaToDeltaTime(p:float) : float
+    + TimeAreaPixelToTime(pixel:float) : float
+    + ScreenSpacePixelToTimeAreaTime(p:float) : float
+    + TrackSpacePixelToTimeAreaTime(p:float) : float
+    + OffsetTimeArea(pixels:int) : void
+    + GetSceneReference(asset:TrackAsset) : GameObject
+    + CalculateRowRects() : void
+    + ArmForRecord(track:TrackAsset) : void
+    + UnarmForRecord(track:TrackAsset) : void
+    + UpdateRecordingState() : void
+    + IsTrackRecordable(track:TrackAsset) : bool
+    + IsArmedForRecord(track:TrackAsset) : bool
+    + GetArmedTrack(track:TrackAsset) : TrackAsset
+    CheckRecordingState() : void
+    OnCurrentDirectorWillChange() : void
+    + GatherProperties(director:PlayableDirector) : void
+    OnStartPreview(director:PlayableDirector) : void
+    OnStopPreview() : void
+    + AddStartFrameDelegate(updateDelegate:PendingUpdateDelegate) : void
+    + AddEndFrameDelegate(updateDelegate:PendingUpdateDelegate) : void
+    + UpdateRootPlayableDuration(duration:double) : void
+    + InvokeTimeChangeCallback() : void
+    ValidatePlayRange(range:Vector2) : Vector2
+    EnsureWindowTimeConsistency() : void
+    SynchronizeSequencesAfterPlayback() : void
+    {static} SynchronizeViewModelTime(state:ISequenceState) : void
+    {static} ForceTimeOnDirector(director:PlayableDirector) : void
+}
+class "List`1"<T> {
+}
+class "Dictionary`2"<T1,T2> {
+}
+WindowState --> "m_Window" TimelineWindow
+WindowState o-> "m_SpacePartitioner" SpacePartitioner
+WindowState o-> "m_CaptureSession<Manipulator>" "List`1"
+WindowState o-> "m_PropertyCollector" PropertyCollector
+WindowState --> "s_PreviewDriver" AnimationModeDriver
+WindowState --> "m_PreviewedAnimators<Animator>" "List`1"
+WindowState --> "m_PreviewedComponents<IAnimationWindowPreview>" "List`1"
+WindowState o-> "k_NullSequenceState" ISequenceState
+WindowState o-> "m_ArmedTracks<TrackAsset,TrackAsset>" "Dictionary`2"
+WindowState --> "m_OnStartFrameUpdates<PendingUpdateDelegate>" "List`1"
+WindowState --> "m_OnEndFrameUpdates<PendingUpdateDelegate>" "List`1"
+WindowState --> "m_SequenceHierarchy" SequenceHierarchy
+WindowState --> "previewDriver" AnimationModeDriver
+WindowState --> "editorWindow" EditorWindow
+WindowState --> "editSequence" ISequenceState
+WindowState --> "masterSequence" ISequenceState
+WindowState --> "referenceSequence" ISequenceState
+WindowState --> "spacePartitioner" SpacePartitioner
+WindowState --> "captured<Manipulator>" "List`1"
+WindowState --> "timeReferenceMode" TimeReferenceMode
+WindowState --> "playRange" Vector2
+WindowState --> "autoScrollMode" PlaybackScrollMode
+WindowState --> "previewedDirectors<PlayableDirector>" "List`1"
+WindowState --> "timeAreaShownRange" Vector2
+WindowState --> "timeAreaTranslation" Vector2
+WindowState --> "timeAreaScale" Vector2
+WindowState --> "timeAreaRect" Rect
+@enduml

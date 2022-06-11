@@ -1,0 +1,24 @@
+@startuml
+class CollabHistoryItem {
+    + RevisionActionsEnabled : bool <<set>>
+    + CollabHistoryItem(data:RevisionData)
+    + {static} SetUpCallbacks(Restore:RevisionAction, GoBack:RevisionAction, Update:RevisionAction) : void
+    + SetInProgressStatus(revisionIdInProgress:string) : void
+    ShowBuildForCommit() : void
+    ShowServicePage() : void
+    Restore() : void
+    GoBackTo() : void
+    UpdateTo() : void
+    UpdateTimeAgo() : void
+    ShouldTruncateDescription(description:string) : bool
+    GetTruncatedDescription(description:string) : string
+    ToggleDescription() : void
+}
+VisualElement <|-- CollabHistoryItem
+CollabHistoryItem --> "s_OnRestore" RevisionAction
+CollabHistoryItem --> "s_OnGoBack" RevisionAction
+CollabHistoryItem --> "s_OnUpdate" RevisionAction
+CollabHistoryItem --> "s_OnShowBuild" ShowBuildAction
+CollabHistoryItem --> "s_OnShowServices" Action
+CollabHistoryItem --> "timeStamp" DateTime
+@enduml

@@ -1,0 +1,22 @@
+@startuml
+abstract class RectangleTool {
+    m_Id : int
+    + OnGUI(state:WindowState, rawType:EventType, mousePosition:Vector2) : void
+    {static} IsValidRect(rect:Rect) : bool
+    CurrentRectangle() : Rect
+}
+class TimelinePoint <<struct>> {
+    <<readonly>> m_Time : double
+    <<readonly>> m_YPos : float
+    <<readonly>> m_YScrollPos : float
+    + TimelinePoint(state:WindowState, mousePosition:Vector2)
+    + ToPixel() : Vector2
+}
+RectangleTool --> "m_TimeAreaAutoPanner" TimeAreaAutoPanner
+RectangleTool --> "m_StartPoint" TimelinePoint
+RectangleTool o-> "m_EndPixel" Vector2
+RectangleTool --> "m_ActiveRect" Rect
+RectangleTool +-- TimelinePoint
+TimelinePoint --> "m_State" WindowState
+TimelinePoint --> "m_TreeViewGUI" TimelineTreeViewGUI
+@enduml

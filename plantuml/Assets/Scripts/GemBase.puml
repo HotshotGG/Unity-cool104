@@ -1,0 +1,9 @@
+@startuml
+class GemBase {
+    + Drow() : void
+    + SetLabel(isTouch:bool) : void
+}
+MonoBehaviour <|-- GemBase
+GemBase --> "_labelObject" GameObject
+GemBase --> "_gemObject" GameObject
+@enduml

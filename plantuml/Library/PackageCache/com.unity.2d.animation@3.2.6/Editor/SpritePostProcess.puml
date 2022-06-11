@@ -1,0 +1,11 @@
+@startuml
+class SpritePostProcess {
+    OnPostprocessSprites(texture:Texture2D, sprites:Sprite[]) : void
+    {static} RefreshSpriteSkinCache() : void
+    {static} CalculateLocaltoWorldMatrix(i:int, spriteRect:SpriteRect, definitionScale:float, pixelsPerUnit:float, spriteBone:List<UnityEngine.U2D.SpriteBone>, outpriteBone:UnityEngine.U2D.SpriteBone?[], bindPose:NativeArray<Matrix4x4>) : void
+    {static} PostProcessBoneData(spriteDataProvider:ISpriteEditorDataProvider, definitionScale:float, sprites:Sprite[]) : bool
+    {static} PostProcessSpriteMeshData(spriteDataProvider:ISpriteEditorDataProvider, definitionScale:float, sprites:Sprite[]) : bool
+    {static} CalculateDefinitionScale(texture:Texture2D, dataProvider:ITextureDataProvider) : float
+}
+AssetPostprocessor <|-- SpritePostProcess
+@enduml

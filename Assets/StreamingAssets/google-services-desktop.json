@@ -1,0 +1,37 @@
+{
+  "client": [
+    {
+      "services": {
+        "appinvite_service": {
+          "status": 1
+        }, 
+        "analytics_service": {
+          "status": 0
+        }
+      }, 
+      "oauth_client": [
+        {
+          "client_id": "545928507553-c736inq9dd40gekqdias67lb18n3p4ap.apps.googleusercontent.com"
+        }
+      ], 
+      "api_key": [
+        {
+          "current_key": "AIzaSyCFCIIxVfZfnmxXkEEM2kuTnTesivemKaI"
+        }
+      ], 
+      "client_info": {
+        "mobilesdk_app_id": "1:545928507553:ios:1db05d42be59709e96c0e0", 
+        "android_client_info": {
+          "package_name": "com.unbobo.cool104"
+        }
+      }
+    }
+  ], 
+  "configuration_version": "1", 
+  "project_info": {
+    "storage_bucket": "cool104-b9bfc.appspot.com", 
+    "project_id": "cool104-b9bfc", 
+    "firebase_url": "https://cool104-b9bfc.firebaseio.com", 
+    "project_number": "545928507553"
+  }
+}

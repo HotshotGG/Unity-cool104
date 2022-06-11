@@ -1,0 +1,11 @@
+@startuml
+class PickerUtils <<static>> {
+    + {static} DoPick(state:WindowState, mousePosition:Vector2) : void
+    + {static} PickedLayerableOfType() : T
+    + {static} PickedInlineCurveResizer() : InlineCurveResizeHandle
+    + {static} PickedTrackBaseGUI() : TimelineTrackBaseGUI
+}
+class "List`1"<T> {
+}
+PickerUtils --> "pickedElements<object>" "List`1"
+@enduml

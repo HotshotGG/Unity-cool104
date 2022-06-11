@@ -1,0 +1,33 @@
+@startuml
+class MoveItemHandler {
+    m_Grabbing : bool
+    + allowTrackSwitch : bool <<get>>
+    m_GrabbedModalUndoGroup : int
+    + MoveItemHandler(state:WindowState)
+    + Grab(items:IEnumerable<ITimelineItem>, referenceTrack:TrackAsset) : void
+    + Grab(items:IEnumerable<ITimelineItem>, referenceTrack:TrackAsset, mousePosition:Vector2) : void
+    + Drop() : void
+    IsValidDrop() : bool
+    Cancel() : void
+    Done() : void
+    + start : double <<get>>
+    + end : double <<get>>
+    + ShouldSnapTo(snappable:ISnappable) : bool
+    + UpdateTrackTarget(track:TrackAsset) : void
+    + OnGUI(evt:Event) : void
+    + OnAttractedEdge(attractable:IAttractable, manipulateEdges:ManipulateEdges, edge:AttractedEdge, time:double) : void
+    + RefreshPreviewItems() : void
+    {static} ValidateItemDrag(itemsGroup:ItemsPerTrack) : bool
+    + OnTrackDetach() : void
+}
+class "HashSet`1"<T> {
+}
+IAttractable <|-- MoveItemHandler
+IAttractionHandler <|-- MoveItemHandler
+MoveItemHandler --> "m_LeftMostMovingItems" MovingItems
+MoveItemHandler --> "m_RightMostMovingItems" MovingItems
+MoveItemHandler --> "m_ItemGUIs<TimelineItemGUI>" "HashSet`1"
+MoveItemHandler --> "m_ItemsGroup" ItemsGroup
+MoveItemHandler --> "targetTrack" TrackAsset
+MoveItemHandler --> "m_State" WindowState
+@enduml

@@ -1,0 +1,8 @@
+@startuml
+class TimeReferenceUtility <<static>> {
+    + {static} SnapToFrame(time:double) : double
+    + {static} ToTimeString(time:double, format:string) : string
+    + {static} FromTimeString(timeString:string) : double
+}
+TimeReferenceUtility --> "state" WindowState
+@enduml

@@ -1,0 +1,12 @@
+@startuml
+class Edge <<struct>> {
+    m_Index1 : int
+    m_Index2 : int
+    + index1 : int <<get>> <<set>>
+    + index2 : int <<get>> <<set>>
+    + Edge(inIndex1:int, inIndex2:int)
+    + Contains(index:int) : bool
+    + <<override>> Equals(obj:System.Object) : bool
+    + <<override>> GetHashCode() : int
+}
+@enduml

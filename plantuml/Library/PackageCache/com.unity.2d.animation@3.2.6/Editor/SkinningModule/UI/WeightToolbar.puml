@@ -1,0 +1,19 @@
+@startuml
+class WeightToolbar {
+    +  <<event>> SetWeightTool : Action<Tools> 
+    + WeightToolbar()
+    + EnableBoneInfluenceWidget() : void
+    + DisableBoneInfluenceWidget() : void
+    + BindElements() : void
+    + {static} GenerateFromUXML() : WeightToolbar
+    + UpdateToggleState() : void
+}
+class CustomUXMLFactor {
+}
+class "UxmlFactory`2"<T1,T2> {
+}
+Toolbar <|-- WeightToolbar
+WeightToolbar --> "skinningCache" SkinningCache
+WeightToolbar +-- CustomUXMLFactor
+"UxmlFactory`2" "<WeightToolbar,UxmlTraits>" <|-- CustomUXMLFactor
+@enduml

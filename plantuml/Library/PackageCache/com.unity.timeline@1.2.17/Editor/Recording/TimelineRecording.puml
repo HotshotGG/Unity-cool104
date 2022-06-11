@@ -1,0 +1,26 @@
+@startuml
+class TimelineRecording <<static>> <<partial>> {
+    {static} GetTarget(undo:UndoPropertyModification) : UnityEngine.Object
+    {static} GetTrackForGameObject(gameObject:GameObject, state:WindowState) : TrackAsset
+    + {static} GetRecordingTrack(property:SerializedProperty, state:WindowState) : TrackAsset
+    {static} GatherModifications(property:SerializedProperty, modifications:List<PropertyModification>) : void
+    + {static} CanRecord(property:SerializedProperty, state:WindowState) : bool
+    + {static} AddKey(prop:SerializedProperty, state:WindowState) : void
+    + {static} AddKey(modifications:IEnumerable<PropertyModification>, state:WindowState) : void
+    {static} PropertyModificationToUndoPropertyModification(prop:PropertyModification) : UndoPropertyModification
+    {static} GetRecordingClip(asset:TrackAsset, state:WindowState, startTime:double, timeScale:double) : AnimationClip
+    {static} GetClipAndRelativeTime(target:UnityEngine.Object, state:WindowState, outClip:AnimationClip, keyTime:double, keyInRange:bool) : bool
+    + {static} HasCurve(modifications:IEnumerable<PropertyModification>, target:UnityEngine.Object, state:WindowState) : bool
+    + {static} HasKey(modifications:IEnumerable<PropertyModification>, target:UnityEngine.Object, state:WindowState) : bool
+    {static} HasBinding(target:UnityEngine.Object, modification:PropertyModification, clip:AnimationClip, binding:EditorCurveBinding) : bool
+    + {static} RemoveKey(target:UnityEngine.Object, modifications:IEnumerable<PropertyModification>, state:WindowState) : void
+    {static} GetKeyTimes(target:UnityEngine.Object, modifications:IEnumerable<PropertyModification>, state:WindowState) : HashSet<double>
+    + {static} NextKey(target:UnityEngine.Object, modifications:IEnumerable<PropertyModification>, state:WindowState) : void
+    + {static} PrevKey(target:UnityEngine.Object, modifications:IEnumerable<PropertyModification>, state:WindowState) : void
+    + {static} RemoveCurve(target:UnityEngine.Object, modifications:IEnumerable<PropertyModification>, state:WindowState) : void
+    + {static} GetRecordableGameObjects(state:WindowState) : IEnumerable<GameObject>
+}
+class "List`1"<T> {
+}
+TimelineRecording o-> "s_TempPropertyModifications<PropertyModification>" "List`1"
+@enduml

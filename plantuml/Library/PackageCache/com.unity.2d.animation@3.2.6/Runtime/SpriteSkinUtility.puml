@@ -1,0 +1,15 @@
+@startuml
+enum SpriteSkinValidationResult {
+    SpriteNotFound,
+    SpriteHasNoSkinningInformation,
+    SpriteHasNoWeights,
+    RootTransformNotFound,
+    InvalidTransformArray,
+    InvalidTransformArrayLength,
+    TransformArrayContainsNull,
+    RootNotFoundInTransformArray,
+    Ready,
+}
+class SpriteSkinUtility <<static>> {
+}
+@enduml

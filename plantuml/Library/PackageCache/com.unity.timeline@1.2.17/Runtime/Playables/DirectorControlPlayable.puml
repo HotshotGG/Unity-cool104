@@ -1,0 +1,17 @@
+@startuml
+class DirectorControlPlayable {
+    + {static} Create(graph:PlayableGraph, director:PlayableDirector) : ScriptPlayable<DirectorControlPlayable>
+    + <<override>> OnPlayableDestroy(playable:Playable) : void
+    + <<override>> PrepareFrame(playable:Playable, info:FrameData) : void
+    + <<override>> OnBehaviourPlay(playable:Playable, info:FrameData) : void
+    + <<override>> OnBehaviourPause(playable:Playable, info:FrameData) : void
+    + <<override>> ProcessFrame(playable:Playable, info:FrameData, playerData:object) : void
+    SyncSpeed(speed:double) : void
+    SyncPlayState(graph:PlayableGraph, playableTime:double) : void
+    DetectDiscontinuity(playable:Playable, info:FrameData) : bool
+    DetectOutOfSync(playable:Playable) : bool
+    UpdateTime(playable:Playable) : void
+}
+PlayableBehaviour <|-- DirectorControlPlayable
+DirectorControlPlayable --> "director" PlayableDirector
+@enduml

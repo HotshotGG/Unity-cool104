@@ -1,0 +1,12 @@
+@startuml
+class SkeletonToolView {
+    +  <<event>> onBoneNameChanged : Action<BoneCache, string> 
+    +  <<event>> onBoneDepthChanged : Action<BoneCache, int> 
+    + SkeletonToolView()
+    + Initialize(layout:LayoutOverlay) : void
+    + Show(target:BoneCache) : void
+    + Hide() : void
+    + Update(name:string, depth:int) : void
+}
+SkeletonToolView --> "target" BoneCache
+@enduml

@@ -1,0 +1,116 @@
+@startuml
+interface IGenerator {
+    SyncIfNeeded(affectedFiles:IEnumerable<string>, reimportedFiles:IEnumerable<string>) : bool
+    Sync() : void
+    HasSolutionBeenGenerated() : bool
+    SolutionFile() : string
+    ProjectDirectory : string <<get>>
+    GenerateAll(generateAll:bool) : void
+}
+interface IFileIO {
+    Exists(fileName:string) : bool
+    ReadAllText(fileName:string) : string
+    WriteAllText(fileName:string, content:string) : void
+}
+interface IGUIDGenerator {
+    ProjectGuid(projectName:string, assemblyName:string) : string
+    SolutionGuid(projectName:string, extension:string) : string
+}
+interface IAssemblyNameProvider {
+    GetAssemblyNameFromScriptPath(path:string) : string
+    GetAssemblies(shouldFileBePartOfSolution:Func<string, bool>) : IEnumerable<Assembly>
+    GetAllAssetPaths() : IEnumerable<string>
+    FindForAssetPath(assetPath:string) : UnityEditor.PackageManager.PackageInfo
+    ParseResponseFile(responseFilePath:string, projectDirectory:string, systemReferenceDirectories:string[]) : ResponseFileData
+}
+class AssemblyNameProvider {
+    + GetAssemblyNameFromScriptPath(path:string) : string
+    + GetAssemblies(shouldFileBePartOfSolution:Func<string, bool>) : IEnumerable<Assembly>
+    + GetAllAssetPaths() : IEnumerable<string>
+    + FindForAssetPath(assetPath:string) : UnityEditor.PackageManager.PackageInfo
+    + ParseResponseFile(responseFilePath:string, projectDirectory:string, systemReferenceDirectories:string[]) : ResponseFileData
+}
+class ProjectGeneration {
+    + {static} <<readonly>> MSBuildNamespaceUri : string = "http://schemas.microsoft.com/developer/msbuild/2003"
+    m_SolutionProjectEntryTemplate : string
+    m_SolutionProjectConfigurationTemplate : string
+    m_ShouldGenerateAll : bool
+    + ProjectDirectory : string <<get>>
+    + GenerateAll(generateAll:bool) : void
+    <<readonly>> m_ProjectName : string
+    <<const>> k_ToolsVersion : string = "4.0"
+    <<const>> k_ProductVersion : string = "10.0.20506"
+    <<const>> k_BaseDirectory : string = "."
+    <<const>> k_TargetFrameworkVersion : string = "v4.7.1"
+    <<const>> k_TargetLanguageVersion : string = "latest"
+    + ProjectGeneration()
+    + ProjectGeneration(tempDirectory:string)
+    + ProjectGeneration(tempDirectory:string, assemblyNameProvider:IAssemblyNameProvider, fileIoProvider:IFileIO, guidGenerator:IGUIDGenerator)
+    + SyncIfNeeded(affectedFiles:IEnumerable<string>, reimportedFiles:IEnumerable<string>) : bool
+    HasFilesBeenModified(affectedFiles:IEnumerable<string>, reimportedFiles:IEnumerable<string>) : bool
+    {static} ShouldSyncOnReimportedAsset(asset:string) : bool
+    + Sync() : void
+    + HasSolutionBeenGenerated() : bool
+    SetupProjectSupportedExtensions() : void
+    ShouldFileBePartOfSolution(file:string) : bool
+    IsSupportedExtension(extension:string) : bool
+    {static} ScriptingLanguageFor(island:Assembly) : ScriptingLanguage
+    {static} GetExtensionOfSourceFiles(files:string[]) : string
+    {static} GetExtensionOfSourceFile(file:string) : string
+    {static} ScriptingLanguageFor(extension:string) : ScriptingLanguage
+    + GenerateAndWriteSolutionAndProjects(types:Type[]) : void
+    ParseResponseFileData(assembly:Assembly) : IEnumerable<ResponseFileData>
+    GenerateAllAssetProjectParts() : Dictionary<string, string>
+    IsInternalizedPackagePath(file:string) : bool
+    SyncProject(island:Assembly, allAssetsProjectParts:Dictionary<string, string>, responseFilesData:IEnumerable<ResponseFileData>, allProjectIslands:List<Assembly>, types:Type[]) : void
+    SyncProjectFileIfNotChanged(path:string, newContents:string, types:Type[]) : void
+    SyncSolutionFileIfNotChanged(path:string, newContents:string, types:Type[]) : void
+    {static} SafeGetTypes(a:System.Reflection.Assembly) : List<Type>
+    {static} OnGeneratedCSProjectFiles(types:Type[]) : void
+    + {static} GetAssetPostprocessorTypes() : Type[]
+    {static} OnPreGeneratingCSProjectFiles(types:Type[]) : bool
+    {static} OnGeneratedCSProject(path:string, content:string, types:Type[]) : string
+    {static} OnGeneratedSlnSolution(path:string, content:string, types:Type[]) : string
+    SyncFileIfNotChanged(filename:string, newContents:string) : void
+    ProjectText(assembly:Assembly, allAssetsProjectParts:Dictionary<string, string>, responseFilesData:List<ResponseFileData>, allProjectIslands:List<Assembly>) : string
+    {static} AppendReference(fullReference:string, projectBuilder:StringBuilder) : void
+    + ProjectFile(assembly:Assembly) : string
+    + SolutionFile() : string
+    ProjectHeader(assembly:Assembly, responseFilesData:List<ResponseFileData>) : string
+    {static} GetSolutionText() : string
+    {static} GetProjectFooterTemplate() : string
+    {static} GetProjectHeaderTemplate() : string
+    SyncSolution(islands:IEnumerable<Assembly>, types:Type[]) : void
+    SolutionText(islands:IEnumerable<Assembly>) : string
+    {static} RelevantIslandsForMode(islands:IEnumerable<Assembly>) : IEnumerable<Assembly>
+    GetProjectEntries(islands:IEnumerable<Assembly>) : string
+    GetProjectActiveConfigurations(projectGuid:string) : string
+    EscapedRelativePathFor(file:string) : string
+    {static} SkipPathPrefix(path:string, prefix:string) : string
+    {static} NormalizePath(path:string) : string
+    {static} ProjectFooter() : string
+    {static} GetProjectExtension() : string
+}
+class SolutionGuidGenerator <<static>> {
+    + {static} GuidForProject(projectName:string) : string
+    + {static} GuidForSolution(projectName:string, sourceFileExtension:string) : string
+    {static} ComputeGuidHashFor(input:string) : string
+    {static} HashAsGuid(hash:string) : string
+    {static} HashToString(bs:byte[]) : string
+}
+enum ScriptingLanguage {
+    None,
+    CSharp,
+}
+class "Dictionary`2"<T1,T2> {
+}
+IAssemblyNameProvider <|-- AssemblyNameProvider
+IGenerator <|-- ProjectGeneration
+ProjectGeneration o-> "k_BuiltinSupportedExtensions<string,ScriptingLanguage>" "Dictionary`2"
+ProjectGeneration o-> "k_ScriptReferenceExpression" Regex
+ProjectGeneration --> "m_AssemblyNameProvider" IAssemblyNameProvider
+ProjectGeneration --> "m_FileIOProvider" IFileIO
+ProjectGeneration --> "m_GUIDGenerator" IGUIDGenerator
+ProjectGeneration o-> "scriptReferenceExpression" Regex
+ProjectGeneration +-- ScriptingLanguage
+@enduml

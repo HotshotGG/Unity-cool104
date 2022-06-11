@@ -1,0 +1,16 @@
+@startuml
+class CuthillMcKee {
+    + Renumber(mesh:Mesh) : int[]
+    + Renumber(matrix:AdjacencyMatrix) : int[]
+    GenerateRcm() : int[]
+    Rcm(root:int, mask:int[], perm:int[], offset:int, iccsze:int) : void
+    FindRoot(root:int, mask:int[], level_num:int, level_row:int[], level:int[], offset:int) : void
+    GetLevelSet(root:int, mask:int[], level_num:int, level_row:int[], level:int[], offset:int) : void
+    Degree(root:int, mask:int[], deg:int[], iccsze:int, ls:int[], offset:int) : void
+    PermBandwidth(perm:int[], perm_inv:int[]) : int
+    PermInverse(perm:int[]) : int[]
+    ReverseVector(a:int[], offset:int, size:int) : void
+    Shift(a:int[], up:bool) : void
+}
+CuthillMcKee --> "matrix" AdjacencyMatrix
+@enduml

@@ -1,0 +1,22 @@
+@startuml
+class SignalReceiverTreeView {
+    + dirty : bool <<set>>
+    <<const>> k_VerticalPadding : float = 5
+    <<const>> k_HorizontalPadding : float = 5
+    + SignalReceiverTreeView(state:TreeViewState, multiColumnHeader:MultiColumnHeader, receiver:SignalReceiver, serializedObject:SerializedObject)
+    + readonlySignals : bool <<get>> <<set>>
+    + SetSignalContext(assetContext:SignalAsset) : void
+    SetSerializedProperties(serializedObject:SerializedObject) : void
+    + Draw() : void
+    + RefreshIfDirty() : void
+    + {static} GetColumns() : MultiColumnHeaderState.Column[]
+    AddItem(root:TreeViewItem, id:int, enabled:bool) : void
+    GetTotalHeight() : float
+    {static} FindIdForSignal(signals:SerializedProperty, signalToFind:SignalAsset) : int
+}
+TreeView <|-- SignalReceiverTreeView
+SignalReceiverTreeView --> "signals" SerializedProperty
+SignalReceiverTreeView --> "events" SerializedProperty
+SignalReceiverTreeView --> "m_Target" SignalReceiver
+SignalReceiverTreeView --> "signalAssetContext" SignalAsset
+@enduml

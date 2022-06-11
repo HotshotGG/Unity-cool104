@@ -1,0 +1,14 @@
+@startuml
+class TestResultRenderer {
+    + TestResultRenderer(testResults:ITestResult)
+    + ShowResults() : void
+    + Draw() : void
+}
+class Styles <<static>> {
+    {static} Styles()
+}
+TestResultRenderer +-- Styles
+Styles --> "SucceedLabelStyle" GUIStyle
+Styles --> "FailedLabelStyle" GUIStyle
+Styles --> "FailedMessagesStyle" GUIStyle
+@enduml

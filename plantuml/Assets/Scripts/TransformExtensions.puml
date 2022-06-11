@@ -1,0 +1,6 @@
+@startuml
+class TransformExtensions <<static>> {
+    + {static} LookAt2D(self:Transform, target:Transform, forward:Vector2) : void
+    + {static} LookAt2D(self:Transform, target:Vector3, forward:Vector2) : void
+}
+@enduml

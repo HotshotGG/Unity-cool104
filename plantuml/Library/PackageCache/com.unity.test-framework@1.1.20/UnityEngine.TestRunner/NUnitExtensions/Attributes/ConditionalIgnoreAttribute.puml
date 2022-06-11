@@ -1,0 +1,14 @@
+@startuml
+class ConditionalIgnoreAttribute {
+    m_ConditionKey : string
+    m_IgnoreReason : string
+    + ConditionalIgnoreAttribute(conditionKey:string, ignoreReason:string)
+    + ApplyToTest(test:Test) : void
+    + {static} AddConditionalIgnoreMapping(key:string, value:bool) : void
+}
+class "Dictionary`2"<T1,T2> {
+}
+NUnitAttribute <|-- ConditionalIgnoreAttribute
+IApplyToTest <|-- ConditionalIgnoreAttribute
+ConditionalIgnoreAttribute o-> "m_ConditionMap<string,bool>" "Dictionary`2"
+@enduml

@@ -1,0 +1,33 @@
+@startuml
+class Behavior {
+    poly : bool = false
+    quality : bool = false
+    varArea : bool = false
+    convex : bool = false
+    jettison : bool = false
+    boundaryMarkers : bool = true
+    noHoles : bool = false
+    conformDel : bool = false
+    noBisect : int = 0
+    minAngle : double = 0.0
+    maxAngle : double = 0.0
+    maxArea : double
+    + Behavior(quality:bool, minAngle:double)
+    + Quality : bool <<get>> <<set>>
+    + MinAngle : double <<get>> <<set>>
+    + MaxAngle : double <<get>> <<set>>
+    + MaxArea : double <<get>> <<set>>
+    + VarArea : bool <<get>> <<set>>
+    + Poly : bool <<get>> <<set>>
+    + Convex : bool <<get>> <<set>>
+    + ConformingDelaunay : bool <<get>> <<set>>
+    + NoBisect : int <<get>> <<set>>
+    + UseBoundaryMarkers : bool <<get>> <<set>>
+    + NoHoles : bool <<get>> <<set>>
+    + Jettison : bool <<get>> <<set>>
+}
+class "Func`3"<T1,T2,T3> {
+}
+Behavior --> "usertest<ITriangle,double,bool>" "Func`3"
+Behavior --> "UserTest<ITriangle,double,bool>" "Func`3"
+@enduml

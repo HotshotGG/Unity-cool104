@@ -1,0 +1,16 @@
+@startuml
+class MeshTool <<partial>> {
+    + disable : bool <<get>> <<set>>
+    + <<override>> defaultControlID : int <<get>>
+    + BeginPositionOverride() : void
+    + EndPositionOverride() : void
+    + UpdateWeights() : void
+    + UpdateMesh() : void
+}
+class "ISelection`1"<T> {
+}
+BaseTool <|-- MeshTool
+MeshTool --> "mesh" MeshCache
+MeshTool --> "mode" SpriteMeshViewMode
+MeshTool --> "selectionOverride<int>" "ISelection`1"
+@enduml

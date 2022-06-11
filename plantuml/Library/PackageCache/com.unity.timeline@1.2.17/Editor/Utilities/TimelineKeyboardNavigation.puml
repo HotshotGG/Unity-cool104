@@ -1,0 +1,24 @@
+@startuml
+class KeyboardNavigation <<static>> {
+    + {static} FrameTrackHeader(treeItem:TreeViewItem) : void
+    + {static} TrackHeadActive() : bool
+    + {static} ClipAreaActive() : bool
+    + {static} GetVisibleSelectedItems() : IEnumerable<ITimelineItem>
+    + {static} GetVisibleTracks() : IEnumerable<TimelineTrackBaseGUI>
+    {static} PreviousTrack(track:TrackAsset) : TrackAsset
+    {static} NextTrack(track:TrackAsset) : TrackAsset
+    {static} PreviousItem(item:ITimelineItem, clipOnly:bool) : ITimelineItem
+    {static} NextItem(item:ITimelineItem, clipOnly:bool) : ITimelineItem
+    {static} FilterItems(items:List<ITimelineItem>) : bool
+    {static} GetClosestItem(track:TrackAsset, refItem:ITimelineItem) : ITimelineItem
+    + {static} FocusFirstVisibleItem(state:WindowState, focusTracks:IEnumerable<TrackAsset>) : bool
+    + {static} CollapseGroup(state:WindowState) : bool
+    + {static} SelectLeftItem(state:WindowState, shift:bool) : bool
+    + {static} SelectRightItem(state:WindowState, shift:bool) : bool
+    + {static} UnCollapseGroup(state:WindowState) : bool
+    + {static} SelectUpTrack(shift:bool) : bool
+    + {static} SelectUpItem(state:WindowState) : bool
+    + {static} SelectDownTrack(shift:bool) : bool
+    + {static} SelectDownItem(state:WindowState) : bool
+}
+@enduml

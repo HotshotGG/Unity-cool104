@@ -1,0 +1,167 @@
+@startuml
+abstract class TimelineAction {
+    + {abstract} Execute(state:WindowState) : bool
+    + <<virtual>> GetDisplayState(state:WindowState) : MenuActionDisplayState
+    + <<virtual>> IsChecked(state:WindowState) : bool
+    CanExecute(state:WindowState) : bool
+    + {static} Invoke(state:WindowState) : void
+    + {static} GetMenuEntries(actions:IEnumerable<TimelineAction>, mousePos:Vector2?, items:List<MenuActionItem>) : void
+    + {static} HandleShortcut(state:WindowState, evt:Event) : bool
+}
+abstract class MarkerHeaderAction {
+}
+class CopyAction {
+    + {static} Do(state:WindowState) : bool
+    + <<override>> GetDisplayState(state:WindowState) : MenuActionDisplayState
+    + <<override>> Execute(state:WindowState) : bool
+}
+class PasteAction {
+    + {static} Do(state:WindowState) : bool
+    + <<override>> GetDisplayState(state:WindowState) : MenuActionDisplayState
+    + <<override>> Execute(state:WindowState) : bool
+    CanPaste(state:WindowState) : bool
+    {static} CanPasteItems(itemsGroups:ICollection<ItemsPerTrack>, state:WindowState, mousePosition:Vector2?) : bool
+    {static} PasteItems(state:WindowState, mousePosition:Vector2?) : void
+    {static} FindSuitableParentForSingleTrackPasteWithoutMouse(itemsGroup:ItemsPerTrack) : TrackAsset
+    {static} IsTrackValidForItems(track:TrackAsset, items:IEnumerable<ITimelineItem>) : bool
+    {static} GetPickedTrack() : TrackAsset
+    {static} PasteTracks(state:WindowState) : void
+}
+class DuplicateAction {
+    + <<override>> Execute(state:WindowState) : bool
+    {static} CalculateDuplicateTime(duplicatedItems:IEnumerable<ItemsPerTrack>, gapBetweenItems:Func<ITimelineItem, ITimelineItem, double>) : double
+}
+class DeleteAction {
+    + <<override>> GetDisplayState(state:WindowState) : MenuActionDisplayState
+    {static} CanDelete(state:WindowState) : bool
+    + <<override>> Execute(state:WindowState) : bool
+}
+class MatchContent {
+    + <<override>> GetDisplayState(state:WindowState) : MenuActionDisplayState
+    + <<override>> Execute(state:WindowState) : bool
+}
+class PlayTimelineAction {
+    + <<override>> Execute(state:WindowState) : bool
+}
+class SelectAllAction {
+    + <<override>> Execute(state:WindowState) : bool
+}
+class PreviousFrameAction {
+    + <<override>> Execute(state:WindowState) : bool
+}
+class NextFrameAction {
+    + <<override>> Execute(state:WindowState) : bool
+}
+class FrameAllAction {
+    + <<override>> Execute(state:WindowState) : bool
+}
+class FrameSelectedAction {
+    + {static} FrameRange(startTime:float, endTime:float, state:WindowState) : void
+    + <<override>> Execute(state:WindowState) : bool
+    + {static} FrameInlineCurves(curveEditorOwner:IClipCurveEditorOwner, state:WindowState, selectionOnly:bool) : void
+}
+class PrevKeyAction {
+    + <<override>> Execute(state:WindowState) : bool
+}
+class NextKeyAction {
+    + <<override>> Execute(state:WindowState) : bool
+}
+class GotoStartAction {
+    + <<override>> Execute(state:WindowState) : bool
+}
+class GotoEndAction {
+    + <<override>> Execute(state:WindowState) : bool
+}
+class ZoomIn {
+    + <<override>> Execute(state:WindowState) : bool
+}
+class ZoomOut {
+    + <<override>> Execute(state:WindowState) : bool
+}
+class CollapseGroup {
+    + <<override>> Execute(state:WindowState) : bool
+}
+class UnCollapseGroup {
+    + <<override>> Execute(state:WindowState) : bool
+}
+class SelectLeftClip {
+    + <<override>> Execute(state:WindowState) : bool
+}
+class SelectRightClip {
+    + <<override>> Execute(state:WindowState) : bool
+}
+class SelectUpClip {
+    + <<override>> Execute(state:WindowState) : bool
+}
+class SelectUpTrack {
+    + <<override>> Execute(state:WindowState) : bool
+}
+class SelectDownClip {
+    + <<override>> Execute(state:WindowState) : bool
+}
+class SelectDownTrack {
+    + <<override>> Execute(state:WindowState) : bool
+}
+class MultiselectLeftClip {
+    + <<override>> Execute(state:WindowState) : bool
+}
+class MultiselectRightClip {
+    + <<override>> Execute(state:WindowState) : bool
+}
+class MultiselectUpTrack {
+    + <<override>> Execute(state:WindowState) : bool
+}
+class MultiselectDownTrack {
+    + <<override>> Execute(state:WindowState) : bool
+}
+class ToggleClipTrackArea {
+    + <<override>> Execute(state:WindowState) : bool
+}
+class ToggleMuteMarkersOnTimeline {
+    + <<override>> IsChecked(state:WindowState) : bool
+    + <<override>> Execute(state:WindowState) : bool
+    {static} ToggleMute(state:WindowState) : void
+    {static} IsMarkerTrackValid(state:WindowState) : bool
+}
+class ToggleShowMarkersOnTimeline {
+    + <<override>> IsChecked(state:WindowState) : bool
+    + <<override>> Execute(state:WindowState) : bool
+    {static} ToggleShow(state:WindowState) : void
+}
+class "KeyValuePair`2"<T1,T2> {
+}
+MenuItemActionBase <|-- TimelineAction
+TimelineAction <|-- MarkerHeaderAction
+TimelineAction <|-- CopyAction
+TimelineAction <|-- PasteAction
+TimelineAction <|-- DuplicateAction
+TimelineAction <|-- DeleteAction
+TimelineAction <|-- MatchContent
+TimelineAction <|-- PlayTimelineAction
+TimelineAction <|-- SelectAllAction
+TimelineAction <|-- PreviousFrameAction
+TimelineAction <|-- NextFrameAction
+TimelineAction <|-- FrameAllAction
+TimelineAction <|-- FrameSelectedAction
+TimelineAction <|-- PrevKeyAction
+TimelineAction <|-- NextKeyAction
+TimelineAction <|-- GotoStartAction
+TimelineAction <|-- GotoEndAction
+TimelineAction <|-- ZoomIn
+TimelineAction <|-- ZoomOut
+TimelineAction <|-- CollapseGroup
+TimelineAction <|-- UnCollapseGroup
+TimelineAction <|-- SelectLeftClip
+TimelineAction <|-- SelectRightClip
+TimelineAction <|-- SelectUpClip
+TimelineAction <|-- SelectUpTrack
+TimelineAction <|-- SelectDownClip
+TimelineAction <|-- SelectDownTrack
+TimelineAction <|-- MultiselectLeftClip
+TimelineAction <|-- MultiselectRightClip
+TimelineAction <|-- MultiselectUpTrack
+TimelineAction <|-- MultiselectDownTrack
+TimelineAction <|-- ToggleClipTrackArea
+MarkerHeaderAction <|-- ToggleMuteMarkersOnTimeline
+MarkerHeaderAction <|-- ToggleShowMarkersOnTimeline
+@enduml

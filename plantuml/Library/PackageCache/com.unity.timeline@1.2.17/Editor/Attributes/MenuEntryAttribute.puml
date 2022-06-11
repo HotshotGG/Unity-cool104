@@ -1,0 +1,9 @@
+@startuml
+class MenuEntryAttribute {
+    + <<readonly>> priority : int
+    + <<readonly>> name : string
+    + <<readonly>> subMenuPath : string
+    + MenuEntryAttribute(path:string, priority:int)
+}
+Attribute <|-- MenuEntryAttribute
+@enduml

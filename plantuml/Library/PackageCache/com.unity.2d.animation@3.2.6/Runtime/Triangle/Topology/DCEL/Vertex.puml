@@ -1,0 +1,9 @@
+@startuml
+class Vertex {
+    + Vertex(x:double, y:double)
+    + Vertex(x:double, y:double, leaving:HalfEdge)
+    + EnumerateEdges() : IEnumerable<HalfEdge>
+    + <<override>> ToString() : string
+}
+Vertex --> "Leaving" HalfEdge
+@enduml

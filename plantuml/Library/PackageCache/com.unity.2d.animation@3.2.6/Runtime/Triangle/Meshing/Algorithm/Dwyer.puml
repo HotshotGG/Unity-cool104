@@ -1,0 +1,12 @@
+@startuml
+class Dwyer {
+    + UseDwyer : bool = true
+    + Triangulate(points:IList<Vertex>, config:Configuration) : IMesh
+    MergeHulls(farleft:Otri, innerleft:Otri, innerright:Otri, farright:Otri, axis:int) : void
+    DivconqRecurse(left:int, right:int, axis:int, farleft:Otri, farright:Otri) : void
+    RemoveGhosts(startghost:Otri) : int
+}
+ITriangulator <|-- Dwyer
+Dwyer --> "predicates" IPredicates
+Dwyer --> "mesh" Mesh
+@enduml

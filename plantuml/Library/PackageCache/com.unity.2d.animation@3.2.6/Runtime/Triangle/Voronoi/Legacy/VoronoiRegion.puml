@@ -1,0 +1,24 @@
+@startuml
+class VoronoiRegion {
+    id : int
+    bounded : bool
+    + ID : int <<get>>
+    + Bounded : bool <<get>> <<set>>
+    + VoronoiRegion(generator:Vertex)
+    + Add(point:Point) : void
+    + Add(points:List<Point>) : void
+    + GetNeighbor(p:Point) : VoronoiRegion
+    + <<override>> ToString() : string
+}
+class "List`1"<T> {
+}
+class "Dictionary`2"<T1,T2> {
+}
+class "ICollection`1"<T> {
+}
+VoronoiRegion --> "generator" Point
+VoronoiRegion --> "vertices<Point>" "List`1"
+VoronoiRegion --> "neighbors<int,VoronoiRegion>" "Dictionary`2"
+VoronoiRegion --> "Generator" Point
+VoronoiRegion --> "Vertices<Point>" "ICollection`1"
+@enduml

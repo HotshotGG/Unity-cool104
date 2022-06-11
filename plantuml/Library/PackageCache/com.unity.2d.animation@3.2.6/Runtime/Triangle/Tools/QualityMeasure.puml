@@ -1,0 +1,52 @@
+@startuml
+class QualityMeasure {
+    + QualityMeasure()
+    + AreaMinimum : double <<get>>
+    + AreaMaximum : double <<get>>
+    + AreaRatio : double <<get>>
+    + AlphaMinimum : double <<get>>
+    + AlphaMaximum : double <<get>>
+    + AlphaAverage : double <<get>>
+    + AlphaArea : double <<get>>
+    + Q_Minimum : double <<get>>
+    + Q_Maximum : double <<get>>
+    + Q_Average : double <<get>>
+    + Q_Area : double <<get>>
+    + Update(mesh:Mesh) : void
+    + Bandwidth() : int
+}
+class AreaMeasure {
+    + area_min : double
+    + area_max : double
+    + area_total : double = 0
+    + area_zero : int = 0
+    + Reset() : void
+    + Measure(a:Point, b:Point, c:Point) : double
+}
+class AlphaMeasure {
+    + alpha_min : double
+    + alpha_max : double
+    + alpha_ave : double
+    + alpha_area : double
+    + Reset() : void
+    acos(c:double) : double
+    + Measure(ab:double, bc:double, ca:double, area:double) : double
+    + Normalize(n:int, area_total:double) : void
+}
+class Q_Measure {
+    + q_min : double
+    + q_max : double
+    + q_ave : double
+    + q_area : double
+    + Reset() : void
+    + Measure(ab:double, bc:double, ca:double, area:double) : double
+    + Normalize(n:int, area_total:double) : void
+}
+QualityMeasure --> "areaMeasure" AreaMeasure
+QualityMeasure --> "alphaMeasure" AlphaMeasure
+QualityMeasure --> "qMeasure" Q_Measure
+QualityMeasure --> "mesh" Mesh
+QualityMeasure +-- AreaMeasure
+QualityMeasure +-- AlphaMeasure
+QualityMeasure +-- Q_Measure
+@enduml

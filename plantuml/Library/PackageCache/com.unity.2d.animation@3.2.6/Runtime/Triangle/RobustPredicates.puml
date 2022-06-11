@@ -1,0 +1,12 @@
+@startuml
+class RobustPredicates {
+    {static} RobustPredicates()
+    + RobustPredicates()
+    + CounterClockwise(pa:Point, pb:Point, pc:Point) : double
+    + InCircle(pa:Point, pb:Point, pc:Point, pd:Point) : double
+    + NonRegular(pa:Point, pb:Point, pc:Point, pd:Point) : double
+    + FindCircumcenter(org:Point, dest:Point, apex:Point, xi:double, eta:double, offconstant:double) : Point
+    + FindCircumcenter(org:Point, dest:Point, apex:Point, xi:double, eta:double) : Point
+}
+IPredicates <|-- RobustPredicates
+@enduml

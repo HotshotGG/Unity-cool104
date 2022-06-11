@@ -1,0 +1,22 @@
+@startuml
+interface ILogScope {
+    IgnoreFailingMessages : bool <<get>> <<set>>
+    IsNUnitException : bool <<get>>
+    IsNUnitSuccessException : bool <<get>>
+    IsNUnitInconclusiveException : bool <<get>>
+    IsNUnitIgnoreException : bool <<get>>
+    NUnitExceptionMessage : string <<get>>
+    AddLog(message:string, stacktrace:string, type:LogType) : void
+    AnyFailingLogs() : bool
+    ProcessExpectedLogs() : void
+    NoUnexpectedReceived() : void
+}
+class "Queue`1"<T> {
+}
+class "List`1"<T> {
+}
+IDisposable <|-- ILogScope
+ILogScope --> "ExpectedLogs<LogMatch>" "Queue`1"
+ILogScope --> "AllLogs<LogEvent>" "List`1"
+ILogScope --> "FailingLogs<LogEvent>" "List`1"
+@enduml

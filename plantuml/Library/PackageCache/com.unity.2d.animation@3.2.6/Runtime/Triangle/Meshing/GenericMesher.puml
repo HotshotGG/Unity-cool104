@@ -1,0 +1,15 @@
+@startuml
+class GenericMesher {
+    + GenericMesher()
+    + GenericMesher(triangulator:ITriangulator)
+    + GenericMesher(config:Configuration)
+    + GenericMesher(triangulator:ITriangulator, config:Configuration)
+    + Triangulate(points:IList<Vertex>) : IMesh
+    + Triangulate(polygon:IPolygon) : IMesh
+    + Triangulate(polygon:IPolygon, options:ConstraintOptions) : IMesh
+    + Triangulate(polygon:IPolygon, quality:QualityOptions) : IMesh
+    + Triangulate(polygon:IPolygon, options:ConstraintOptions, quality:QualityOptions) : IMesh
+}
+GenericMesher --> "config" Configuration
+GenericMesher --> "triangulator" ITriangulator
+@enduml

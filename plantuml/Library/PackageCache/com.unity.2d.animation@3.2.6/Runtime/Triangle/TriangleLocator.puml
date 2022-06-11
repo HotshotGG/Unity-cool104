@@ -1,0 +1,13 @@
+@startuml
+class TriangleLocator {
+    + TriangleLocator(mesh:Mesh)
+    + TriangleLocator(mesh:Mesh, predicates:IPredicates)
+    + Update(otri:Otri) : void
+    + Reset() : void
+    + PreciseLocate(searchpoint:Point, searchtri:Otri, stopatsubsegment:bool) : LocateResult
+    + Locate(searchpoint:Point, searchtri:Otri) : LocateResult
+}
+TriangleLocator --> "sampler" TriangleSampler
+TriangleLocator --> "mesh" Mesh
+TriangleLocator --> "predicates" IPredicates
+@enduml

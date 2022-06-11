@@ -1,0 +1,13 @@
+@startuml
+class BindingTreeViewGUI {
+    {static} <<readonly>> s_RowRightOffset : float = 10
+    {static} <<readonly>> s_ColorIndicatorTopMargin : float = 3
+    + BindingTreeViewGUI(treeView:TreeViewController)
+    + <<override>> OnRowGUI(rowRect:Rect, node:TreeViewItem, row:int, selected:bool, focused:bool) : void
+    + <<override>> BeginRename(item:TreeViewItem, delay:float) : bool
+    DoCurveColorIndicator(rect:Rect, node:CurveTreeViewNode) : void
+}
+TreeViewGUI <|-- BindingTreeViewGUI
+BindingTreeViewGUI o-> "s_KeyColorForNonCurves" Color
+BindingTreeViewGUI o-> "s_ChildrenCurveLabelColor" Color
+@enduml

@@ -1,0 +1,8 @@
+@startuml
+interface ILogItem {
+    Message : string <<get>>
+    Info : string <<get>>
+}
+ILogItem --> "Time" DateTime
+ILogItem --> "Level" LogLevel
+@enduml

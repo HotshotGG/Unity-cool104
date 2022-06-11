@@ -1,0 +1,22 @@
+@startuml
+class EaseClip {
+    m_IsCaptured : bool
+    m_UndoSaved : bool
+    m_OriginalValue : double
+    + {static} <<readonly>> EaseInClipText : string
+    + {static} <<readonly>> EaseOutClipText : string
+    + {static} <<readonly>> EaseInText : string
+    + {static} <<readonly>> EaseOutText : string
+    + {static} <<readonly>> DurationFrameText : string
+    + {static} <<readonly>> DurationSecText : string
+    + {static} <<readonly>> DeltaFrameText : string
+    + {static} <<readonly>> DeltaSecText : string
+    + <<override>> Overlay(evt:Event, state:WindowState) : void
+    RefreshOverlayStrings(handle:TimelineClipHandle, state:WindowState) : void
+}
+Manipulator <|-- EaseClip
+EaseClip --> "m_EaseClipHandler" TimelineClipHandle
+EaseClip --> "m_Edges" ManipulateEdges
+EaseClip --> "m_Clip" TimelineClip
+EaseClip o-> "m_OverlayText" StringBuilder
+@enduml

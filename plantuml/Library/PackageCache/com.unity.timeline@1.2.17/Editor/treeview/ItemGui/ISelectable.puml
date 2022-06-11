@@ -1,0 +1,8 @@
+@startuml
+interface ISelectable {
+    Select() : void
+    IsSelected() : bool
+    Deselect() : void
+}
+ILayerable <|-- ISelectable
+@enduml

@@ -1,0 +1,13 @@
+@startuml
+class AnimationTrackDrawer {
+    + <<override>> DrawTrackHeaderButton(rect:Rect, track:TrackAsset, state:WindowState) : bool
+    + <<override>> DrawRecordingBackground(trackRect:Rect, trackAsset:TrackAsset, visibleTime:Vector2, state:WindowState) : void
+    {static} DrawBorderOfAddedRecordingClip(trackRect:Rect, trackAsset:TrackAsset, visibleTime:Vector2, state:WindowState) : void
+}
+class Styles <<static>> {
+}
+TrackDrawer <|-- AnimationTrackDrawer
+AnimationTrackDrawer +-- Styles
+Styles o-> "AnimationButtonOnTooltip" GUIContent
+Styles o-> "AnimationButtonOffTooltip" GUIContent
+@enduml

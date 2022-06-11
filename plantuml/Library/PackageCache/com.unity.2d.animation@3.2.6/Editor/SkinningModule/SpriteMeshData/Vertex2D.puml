@@ -1,0 +1,10 @@
+@startuml
+class Vertex2D {
+    + Vertex2D(position:Vector2)
+    + Vertex2D(position:Vector2, weights:BoneWeight)
+}
+Vertex2D --> "position" Vector2
+Vertex2D --> "editableBoneWeight" EditableBoneWeight
+Vertex2D --> "m_Position" Vector2
+Vertex2D --> "m_EditableBoneWeight" EditableBoneWeight
+@enduml

@@ -1,0 +1,7 @@
+@startuml
+class Jog {
+    {static} JogShortcut(args:ShortcutArguments) : void
+}
+Manipulator <|-- Jog
+Jog o-> "m_MouseDownOrigin" Vector2
+@enduml

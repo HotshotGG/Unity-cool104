@@ -1,0 +1,22 @@
+@startuml
+class Drawer {
+    + DrawCreatePointPreview(position:Vector3) : void
+    + DrawPoint(position:Vector3) : void
+    + DrawPointHovered(position:Vector3) : void
+    + DrawPointSelected(position:Vector3) : void
+    + DrawLine(p1:Vector3, p2:Vector3, width:float, color:Color) : void
+    + DrawBezier(p1:Vector3, p2:Vector3, p3:Vector3, p4:Vector3, width:float, color:Color) : void
+    + DrawTangent(position:Vector3, tangent:Vector3) : void
+}
+class Styles {
+    + Styles()
+}
+IDrawer <|-- Drawer
+Drawer +-- Styles
+Styles --> "pointNormalStyle" GUIStyle
+Styles --> "pointHoveredStyle" GUIStyle
+Styles --> "pointSelectedStyle" GUIStyle
+Styles --> "pointPreviewStyle" GUIStyle
+Styles --> "tangentNormalStyle" GUIStyle
+Styles --> "tangentHoveredStyle" GUIStyle
+@enduml

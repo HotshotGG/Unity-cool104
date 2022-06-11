@@ -1,0 +1,7 @@
+@startuml
+class HistoryProgressSpinner {
+    + ProgressEnabled : bool <<set>>
+    + HistoryProgressSpinner()
+}
+Image <|-- HistoryProgressSpinner
+@enduml

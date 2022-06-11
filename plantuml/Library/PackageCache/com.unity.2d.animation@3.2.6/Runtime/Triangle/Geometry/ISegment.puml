@@ -1,0 +1,7 @@
+@startuml
+interface ISegment {
+    GetVertex(index:int) : Vertex
+    GetTriangle(index:int) : ITriangle
+}
+IEdge <|-- ISegment
+@enduml

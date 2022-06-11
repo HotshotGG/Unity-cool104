@@ -1,0 +1,28 @@
+@startuml
+class VoronoiFactory {
+    + VoronoiFactory()
+    + Initialize(vertexCount:int, edgeCount:int, faceCount:int) : void
+    + Reset() : void
+    + CreateVertex(x:double, y:double) : Vertex
+    + CreateHalfEdge(origin:Vertex, face:Face) : HalfEdge
+    + CreateFace(vertex:Geometry.Vertex) : Face
+}
+class "ObjectPool`1"<T> {
+}
+class "ObjectPool`1"<T> {
+    index : int
+    count : int
+    + Count : int <<get>>
+    + Capacity : int <<get>> <<set>>
+    + ObjectPool(capacity:int)
+    + ObjectPool(pool:T[])
+    + TryGet(obj:T) : bool
+    + Put(obj:T) : void
+    + Release() : void
+}
+IVoronoiFactory <|-- VoronoiFactory
+VoronoiFactory --> "vertices<Vertex>" "ObjectPool`1"
+VoronoiFactory --> "edges<HalfEdge>" "ObjectPool`1"
+VoronoiFactory --> "faces<Face>" "ObjectPool`1"
+VoronoiFactory +-- "ObjectPool`1"
+@enduml

@@ -1,0 +1,12 @@
+@startuml
+class TrackExtensions <<static>> {
+    + {static} <<readonly>> kMinOverlapTime : double
+    + {static} GetOrCreateClip(track:AnimationTrack) : AnimationClip
+    + {static} CreateClip(track:TrackAsset, time:double) : TimelineClip
+    {static} Overlaps(blendOut:TimelineClip, blendIn:TimelineClip) : bool
+    + {static} ComputeBlendsFromOverlaps(asset:TrackAsset) : void
+    + {static} IsCompatibleWithClip(track:TrackAsset, clip:TimelineClip) : bool
+    + {static} GetFlattenedChildTracks(asset:TrackAsset, list:List<TrackAsset>) : void
+    + {static} GetFlattenedChildTracks(asset:TrackAsset) : IEnumerable<TrackAsset>
+}
+@enduml

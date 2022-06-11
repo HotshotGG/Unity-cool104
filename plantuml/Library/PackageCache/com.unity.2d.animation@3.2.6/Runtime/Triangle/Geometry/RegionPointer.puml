@@ -1,0 +1,7 @@
+@startuml
+class RegionPointer {
+    + Area : double <<get>> <<set>>
+    + RegionPointer(x:double, y:double, id:int)
+    + RegionPointer(x:double, y:double, id:int, area:double)
+}
+@enduml

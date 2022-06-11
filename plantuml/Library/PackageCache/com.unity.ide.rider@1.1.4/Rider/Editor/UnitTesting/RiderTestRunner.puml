@@ -1,0 +1,5 @@
+@startuml
+class RiderTestRunner <<static>> {
+    + {static} RunTests(testMode:int, assemblyNames:string[], testNames:string[], categoryNames:string[], groupNames:string[], buildTarget:int?) : void
+}
+@enduml

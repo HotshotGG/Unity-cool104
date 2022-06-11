@@ -1,0 +1,8 @@
+@startuml
+class TestEnumerator {
+    + {static} Reset() : void
+    + TestEnumerator(context:ITestExecutionContext, testEnumerator:IEnumerator)
+    + Execute() : IEnumerator
+}
+TestEnumerator --> "Enumerator" IEnumerator
+@enduml

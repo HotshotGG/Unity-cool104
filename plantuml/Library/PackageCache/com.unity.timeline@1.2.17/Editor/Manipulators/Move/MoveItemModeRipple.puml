@@ -1,0 +1,34 @@
+@startuml
+class MoveItemModeRipple {
+    <<const>> k_SnapToEdgeDistance : float = 30.0f
+    m_PreviousEnd : double
+    m_TrackLocked : bool
+    m_Detached : bool
+    + OnTrackDetach(itemsGroups:IEnumerable<ItemsPerTrack>) : void
+    + HandleTrackSwitch(itemsGroups:IEnumerable<ItemsPerTrack>) : void
+    + AllowTrackSwitch() : bool
+    + AdjustStartTime(state:WindowState, itemsGroup:ItemsPerTrack, time:double) : double
+    StartDetachMode(itemsGroups:IEnumerable<ItemsPerTrack>) : void
+    + OnModeClutchEnter(itemsGroups:IEnumerable<ItemsPerTrack>) : void
+    + OnModeClutchExit(itemsGroups:IEnumerable<ItemsPerTrack>) : void
+    + BeginMove(itemsGroups:IEnumerable<ItemsPerTrack>) : void
+    + UpdateMove(itemsGroups:IEnumerable<ItemsPerTrack>) : void
+    {static} CalculatePrevItemInfo(orderedSelection:List<ITimelineItem>, orderedSiblings:List<ITimelineItem>, itemTypes:IEnumerable<Type>) : PrevItemInfo
+    + ValidateMove(itemsGroup:ItemsPerTrack) : bool
+    + FinishMove(itemsGroups:IEnumerable<ItemsPerTrack>) : void
+    + DrawGUI(state:WindowState, movingItems:IEnumerable<MovingItems>, color:Color) : void
+}
+class PrevItemInfo {
+    + blending : bool
+    + PrevItemInfo(item:ITimelineItem, firstSelectedItem:ITimelineItem)
+}
+class "Dictionary`2"<T1,T2> {
+}
+IMoveItemMode <|-- MoveItemModeRipple
+IMoveItemDrawer <|-- MoveItemModeRipple
+MoveItemModeRipple o-> "m_NextItems<Object,List<ITimelineItem>>" "Dictionary`2"
+MoveItemModeRipple o-> "m_PreviousItem<Object,PrevItemInfo>" "Dictionary`2"
+MoveItemModeRipple +-- PrevItemInfo
+PrevItemInfo --> "item" ITimelineItem
+PrevItemInfo --> "firstSelectedItem" ITimelineItem
+@enduml

@@ -1,0 +1,13 @@
+@startuml
+class CallbackData {
+    + isRider : bool
+    + {static}  <<event>> Changed : EventHandler 
+    + Clear() : void
+}
+class "ScriptableSingleton`1"<T> {
+}
+class "List`1"<T> {
+}
+"ScriptableSingleton`1" "<CallbackData>" <|-- CallbackData
+CallbackData o-> "events<TestEvent>" "List`1"
+@enduml

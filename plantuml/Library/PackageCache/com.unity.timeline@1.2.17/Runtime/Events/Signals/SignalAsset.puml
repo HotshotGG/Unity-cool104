@@ -1,0 +1,6 @@
+@startuml
+class SignalAsset {
+    OnEnable() : void
+}
+ScriptableObject <|-- SignalAsset
+@enduml

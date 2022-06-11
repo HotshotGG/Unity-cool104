@@ -1,0 +1,15 @@
+@startuml
+abstract class "ItemAction`1"<T> {
+    + {abstract} Execute(state:WindowState, items:T[]) : bool
+    + CanExecute(state:WindowState, items:T[]) : bool
+    + {static} HandleShortcut(state:WindowState, evt:Event, item:T) : bool
+    + {static} GetMenuEntries(items:T[], menuItems:List<MenuActionItem>) : void
+    + {static} Invoke(state:WindowState, items:T[]) : bool
+    + {static} Invoke(state:WindowState, item:T) : bool
+}
+class "List`1"<T> {
+}
+MenuItemActionBase <|-- "ItemAction`1"
+"ItemAction`1" --> "s_ActionClasses<ItemAction<T>>" "List`1"
+"ItemAction`1" --> "actions<ItemAction<T>>" "List`1"
+@enduml

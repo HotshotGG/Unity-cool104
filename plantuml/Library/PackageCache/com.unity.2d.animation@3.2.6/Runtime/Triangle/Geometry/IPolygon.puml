@@ -1,0 +1,20 @@
+@startuml
+interface IPolygon {
+    HasPointMarkers : bool <<get>> <<set>>
+    HasSegmentMarkers : bool <<get>> <<set>>
+    AddContour(points:IEnumerable<Vertex>, marker:int, hole:bool, convex:bool) : void
+    AddContour(points:IEnumerable<Vertex>, marker:int, hole:Point) : void
+    Bounds() : Rectangle
+    Add(vertex:Vertex) : void
+    Add(segment:ISegment, insert:bool) : void
+    Add(segment:ISegment, index:int) : void
+    Add(contour:Contour, hole:bool) : void
+    Add(contour:Contour, hole:Point) : void
+}
+class "List`1"<T> {
+}
+IPolygon --> "Points<Vertex>" "List`1"
+IPolygon --> "Segments<ISegment>" "List`1"
+IPolygon --> "Holes<Point>" "List`1"
+IPolygon --> "Regions<RegionPointer>" "List`1"
+@enduml

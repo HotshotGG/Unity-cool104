@@ -1,0 +1,48 @@
+@startuml
+class SweepLine {
+    {static} randomseed : int = 1
+    {static} SAMPLERATE : int = 10
+    {static} randomnation(choices:int) : int
+    xminextreme : double
+    + Triangulate(points:IList<Vertex>, config:Configuration) : IMesh
+    HeapInsert(heap:SweepEvent[], heapsize:int, newevent:SweepEvent) : void
+    Heapify(heap:SweepEvent[], heapsize:int, eventnum:int) : void
+    HeapDelete(heap:SweepEvent[], heapsize:int, eventnum:int) : void
+    CreateHeap(eventheap:SweepEvent[], size:int) : void
+    Splay(splaytree:SplayNode, searchpoint:Point, searchtri:Otri) : SplayNode
+    SplayInsert(splayroot:SplayNode, newkey:Otri, searchpoint:Point) : SplayNode
+    FrontLocate(splayroot:SplayNode, bottommost:Otri, searchvertex:Vertex, searchtri:Otri, farright:bool) : SplayNode
+    CircleTopInsert(splayroot:SplayNode, newkey:Otri, pa:Vertex, pb:Vertex, pc:Vertex, topy:double) : SplayNode
+    RightOfHyperbola(fronttri:Otri, newsite:Point) : bool
+    CircleTop(pa:Vertex, pb:Vertex, pc:Vertex, ccwabc:double) : double
+    Check4DeadEvent(checktri:Otri, eventheap:SweepEvent[], heapsize:int) : void
+    RemoveGhosts(startghost:Otri) : int
+}
+class "List`1"<T> {
+}
+class SweepEvent {
+    + xkey : double
+    + ykey : double
+    + heapposition : int
+}
+class SweepEventVertex {
+    + SweepEventVertex(e:SweepEvent)
+}
+class SplayNode {
+}
+ITriangulator <|-- SweepLine
+SweepLine --> "predicates" IPredicates
+SweepLine --> "mesh" Mesh
+SweepLine --> "splaynodes<SplayNode>" "List`1"
+SweepLine +-- SweepEvent
+SweepEvent --> "vertexEvent" Vertex
+SweepEvent --> "otriEvent" Otri
+SweepLine +-- SweepEventVertex
+Vertex <|-- SweepEventVertex
+SweepEventVertex --> "evt" SweepEvent
+SweepLine +-- SplayNode
+SplayNode --> "keyedge" Otri
+SplayNode --> "keydest" Vertex
+SplayNode --> "lchild" SplayNode
+SplayNode --> "rchild" SplayNode
+@enduml

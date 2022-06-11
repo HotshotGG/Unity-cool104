@@ -1,0 +1,14 @@
+@startuml
+class SimpleSmoother {
+    + SimpleSmoother()
+    + SimpleSmoother(factory:IVoronoiFactory)
+    + SimpleSmoother(factory:IVoronoiFactory, config:Configuration)
+    + Smooth(mesh:IMesh) : void
+    + Smooth(mesh:IMesh, limit:int) : void
+}
+ISmoother <|-- SimpleSmoother
+SimpleSmoother --> "pool" TrianglePool
+SimpleSmoother --> "config" Configuration
+SimpleSmoother --> "factory" IVoronoiFactory
+SimpleSmoother --> "options" ConstraintOptions
+@enduml

@@ -1,0 +1,13 @@
+@startuml
+class SubSegment {
+    + SubSegment()
+    + P0 : int <<get>>
+    + P1 : int <<get>>
+    + Label : int <<get>>
+    + GetVertex(index:int) : Vertex
+    + GetTriangle(index:int) : ITriangle
+    + <<override>> GetHashCode() : int
+    + <<override>> ToString() : string
+}
+ISegment <|-- SubSegment
+@enduml

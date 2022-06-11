@@ -1,0 +1,12 @@
+@startuml
+class BadTriQueue {
+    <<const>> SQRT2 : double = 1.4142135623730950488016887242096980785696718753769480732
+    + Count : int <<get>>
+    firstnonemptyq : int
+    count : int
+    + BadTriQueue()
+    + Enqueue(badtri:BadTriangle) : void
+    + Enqueue(enqtri:Otri, minedge:double, apex:Vertex, org:Vertex, dest:Vertex) : void
+    + Dequeue() : BadTriangle
+}
+@enduml

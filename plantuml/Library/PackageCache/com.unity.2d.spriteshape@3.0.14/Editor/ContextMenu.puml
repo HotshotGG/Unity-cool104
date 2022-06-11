@@ -1,0 +1,6 @@
+@startuml
+class ContextMenu {
+    + {static} CreateNewSpriteStrip() : void
+    + {static} CreateNewSpriteShape() : void
+}
+@enduml

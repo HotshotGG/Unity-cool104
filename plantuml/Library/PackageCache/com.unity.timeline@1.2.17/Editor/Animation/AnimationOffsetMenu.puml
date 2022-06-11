@@ -1,0 +1,10 @@
+@startuml
+class AnimationOffsetMenu <<static>> {
+    + {static} MatchFieldsPrefix : string = "Match Offsets Fields/"
+    {static} EnforcePreviewMode(state:WindowState) : bool
+    + {static} ResetClipOffsets(state:WindowState, clips:TimelineClip[]) : void
+}
+AnimationOffsetMenu o-> "MatchPreviousMenuItem" GUIContent
+AnimationOffsetMenu o-> "MatchNextMenuItem" GUIContent
+AnimationOffsetMenu o-> "ResetOffsetMenuItem" GUIContent
+@enduml

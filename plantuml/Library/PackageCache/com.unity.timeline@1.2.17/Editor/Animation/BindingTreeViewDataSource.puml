@@ -1,0 +1,19 @@
+@startuml
+class BindingTreeViewDataSource {
+    + <<const>> RootID : int
+    + <<const>> GroupID : int
+    + BindingTreeViewDataSource(treeView:TreeViewController, clip:AnimationClip, curveDataSource:CurveDataSource)
+    SetupRootNodeSettings() : void
+    {static} GroupName(binding:EditorCurveBinding) : string
+    {static} PropertyName(binding:EditorCurveBinding, arrayPrefixToRemove:string) : string
+    + <<override>> FetchData() : void
+    + UpdateData() : void
+}
+class CurveTreeViewNode {
+    + CurveTreeViewNode(id:int, parent:TreeViewItem, displayName:string, bindings:EditorCurveBinding[])
+}
+TreeViewDataSource <|-- BindingTreeViewDataSource
+BindingTreeViewDataSource --> "m_Clip" AnimationClip
+BindingTreeViewDataSource --> "m_CurveDataSource" CurveDataSource
+TreeViewItem <|-- CurveTreeViewNode
+@enduml

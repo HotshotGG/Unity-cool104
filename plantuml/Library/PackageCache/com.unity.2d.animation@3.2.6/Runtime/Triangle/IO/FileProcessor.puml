@@ -1,0 +1,8 @@
+@startuml
+class FileProcessor <<static>> {
+    {static} FileProcessor()
+}
+class "List`1"<T> {
+}
+FileProcessor --> "formats<IFileFormat>" "List`1"
+@enduml

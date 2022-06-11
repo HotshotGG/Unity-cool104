@@ -1,0 +1,36 @@
+@startuml
+class SelectListView {
+    + <<new>> AddToSelection(index:int) : void
+    + <<new>> ClearSelection() : void
+}
+class SpriteBoneInfluenceListWidget {
+    m_IgnoreSelectionChange : bool = false
+    + SpriteBoneInfluenceListWidget()
+    + Update() : void
+}
+class CustomUxmlFactory {
+}
+class CustomUxmlFactory {
+}
+class CustomUxmlTraits {
+}
+class "Action`1"<T> {
+}
+class "Func`1"<T> {
+}
+class "UxmlFactory`2"<T1,T2> {
+}
+ListView <|-- SelectListView
+VisualElement <|-- SpriteBoneInfluenceListWidget
+SpriteBoneInfluenceListWidget o-> "onAddBone" Action
+SpriteBoneInfluenceListWidget o-> "onRemoveBone" Action
+SpriteBoneInfluenceListWidget o-> "onReordered<IEnumerable<BoneCache>>" "Action`1"
+SpriteBoneInfluenceListWidget o-> "onSelectionChanged<IEnumerable<BoneCache>>" "Action`1"
+SpriteBoneInfluenceListWidget o-> "GetController<SpriteBoneInflueceToolController>" "Func`1"
+SelectListView +-- CustomUxmlFactory
+"UxmlFactory`2" "<SelectListView,UxmlTraits>" <|-- CustomUxmlFactory
+SpriteBoneInfluenceListWidget +-- CustomUxmlFactory
+"UxmlFactory`2" "<SpriteBoneInfluenceListWidget,CustomUxmlTraits>" <|-- CustomUxmlFactory
+SpriteBoneInfluenceListWidget +-- CustomUxmlTraits
+UxmlTraits <|-- CustomUxmlTraits
+@enduml

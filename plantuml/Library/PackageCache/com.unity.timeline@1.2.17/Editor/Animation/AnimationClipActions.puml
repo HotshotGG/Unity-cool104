@@ -1,0 +1,16 @@
+@startuml
+class MatchOffsetsPreviousAction {
+    + <<override>> Execute(state:WindowState, items:TimelineClip[]) : bool
+}
+class MatchOffsetsNextAction {
+    + <<override>> Execute(state:WindowState, items:TimelineClip[]) : bool
+}
+class ResetOffsets {
+    + <<override>> Execute(state:WindowState, items:TimelineClip[]) : bool
+}
+class "ItemAction`1"<T> {
+}
+ClipAction <|-- MatchOffsetsPreviousAction
+ClipAction <|-- MatchOffsetsNextAction
+ClipAction <|-- ResetOffsets
+@enduml

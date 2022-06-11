@@ -1,0 +1,26 @@
+@startuml
+class WebViewStatic {
+    {static} + GetWebView() : WebView
+    {static} + SetWebView(webView:WebView) : void
+}
+class CollabToolbarWindow {
+    + {static} s_ToolbarIsVisible : bool = false
+    <<const>> kWindowWidth : int = 320
+    <<const>> kWindowHeight : int = 350
+    + {static} CloseToolbar() : void
+    + {static} ShowToolbarWindow() : CollabToolbarWindow
+    + {static} ValidateShowToolbarWindow() : bool
+    + {static} IsVisible() : bool
+    + {static} ShowCenteredAtPosition(buttonRect:Rect) : bool
+    + OnReceiveTitle(title:string) : void
+    + <<new>> OnInitScripting() : void
+    + <<override>> OnEnable() : void
+    + <<new>> OnDestroy() : void
+}
+class "ScriptableSingleton`1"<T> {
+}
+"ScriptableSingleton`1" "<WebViewStatic>" <|-- WebViewStatic
+WebViewStatic --> "m_WebView" WebView
+WebViewEditorStaticWindow <|-- CollabToolbarWindow
+IHasCustomMenu <|-- CollabToolbarWindow
+@enduml

@@ -1,0 +1,8 @@
+@startuml
+class AnimationTrackExtensions <<static>> {
+    + {static} ConvertToClipMode(track:AnimationTrack) : void
+    + {static} ConvertFromClipMode(track:AnimationTrack, timeline:TimelineAsset) : void
+    + {static} CanConvertToClipMode(track:AnimationTrack) : bool
+    + {static} CanConvertFromClipMode(track:AnimationTrack) : bool
+}
+@enduml

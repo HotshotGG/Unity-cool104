@@ -1,0 +1,15 @@
+@startuml
+class LogItem {
+    message : string
+    info : string
+    + Message : string <<get>>
+    + Info : string <<get>>
+    + LogItem(level:LogLevel, message:string)
+    + LogItem(level:LogLevel, message:string, info:string)
+}
+ILogItem <|-- LogItem
+LogItem --> "time" DateTime
+LogItem --> "level" LogLevel
+LogItem --> "Time" DateTime
+LogItem --> "Level" LogLevel
+@enduml

@@ -1,0 +1,14 @@
+@startuml
+class Contour {
+    marker : int
+    convex : bool
+    + Contour(points:IEnumerable<Vertex>)
+    + Contour(points:IEnumerable<Vertex>, marker:int)
+    + Contour(points:IEnumerable<Vertex>, marker:int, convex:bool)
+    + GetSegments() : List<ISegment>
+    + FindInteriorPoint(limit:int, eps:double) : Point
+}
+class "List`1"<T> {
+}
+Contour --> "Points<Vertex>" "List`1"
+@enduml

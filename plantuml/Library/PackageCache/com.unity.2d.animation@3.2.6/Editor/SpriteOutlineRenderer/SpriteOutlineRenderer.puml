@@ -1,0 +1,19 @@
+@startuml
+class SpriteOutlineRenderer {
+    + SpriteOutlineRenderer(spriteEditor:ISpriteEditor, eventSystem:SkinningEvents)
+    + Dispose() : void
+}
+class OutlineRenderTexture {
+    + dirty : bool
+}
+class "Dictionary`2"<T1,T2> {
+}
+SpriteOutlineRenderer --> "m_OutlineMaterial" Material
+SpriteOutlineRenderer --> "m_BitMaskMaterial" Material
+SpriteOutlineRenderer o-> "m_OutlineTextureCache<string,OutlineRenderTexture>" "Dictionary`2"
+SpriteOutlineRenderer --> "m_CurrentDataProvider" ISpriteEditorDataProvider
+SpriteOutlineRenderer --> "m_EventSystem" SkinningEvents
+SpriteOutlineRenderer --> "m_SpriteEditor" ISpriteEditor
+SpriteOutlineRenderer +-- OutlineRenderTexture
+OutlineRenderTexture --> "outlineTexture" Texture
+@enduml

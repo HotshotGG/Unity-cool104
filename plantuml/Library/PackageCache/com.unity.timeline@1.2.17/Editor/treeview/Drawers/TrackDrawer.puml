@@ -1,0 +1,9 @@
+@startuml
+class TrackDrawer {
+    + {static} CreateInstance(trackAsset:TrackAsset) : TrackDrawer
+    + <<virtual>> DrawTrackHeaderButton(rect:Rect, track:TrackAsset, state:WindowState) : bool
+    + <<virtual>> DrawTrack(trackRect:Rect, trackAsset:TrackAsset, visibleTime:Vector2, state:WindowState) : bool
+    + <<virtual>> DrawRecordingBackground(trackRect:Rect, trackAsset:TrackAsset, visibleTime:Vector2, state:WindowState) : void
+}
+GUIDrawer <|-- TrackDrawer
+@enduml

@@ -1,0 +1,29 @@
+@startuml
+class Otri <<struct>> {
+    + <<override>> ToString() : string
+    + Sym(ot:Otri) : void
+    + Sym() : void
+    + Lnext(ot:Otri) : void
+    + Lnext() : void
+    + Lprev(ot:Otri) : void
+    + Lprev() : void
+    + Onext(ot:Otri) : void
+    + Onext() : void
+    + Oprev(ot:Otri) : void
+    + Oprev() : void
+    + Dnext(ot:Otri) : void
+    + Dnext() : void
+    + Dprev(ot:Otri) : void
+    + Dprev() : void
+    + Rnext(ot:Otri) : void
+    + Rnext() : void
+    + Rprev(ot:Otri) : void
+    + Rprev() : void
+    + Org() : Vertex
+    + Dest() : Vertex
+    + Apex() : Vertex
+    + Copy(ot:Otri) : void
+    + Equals(ot:Otri) : bool
+}
+Otri --> "Triangle" Triangle
+@enduml

@@ -1,0 +1,27 @@
+@startuml
+class SignalReceiverItem {
+    m_CurrentRowIdx : int
+    + SignalReceiverItem(signalAsset:SerializedProperty, eventListEntry:SerializedProperty, id:int, readonlySignal:bool, enabled:bool, treeView:SignalReceiverTreeView)
+    + GetHeight() : float
+    + Draw(rect:Rect, colIdx:int, rowIdx:int, padding:float, target:SignalReceiver) : void
+    DrawSignalNameColumn(rect:Rect, padding:float, target:SignalReceiver, rowIdx:int) : void
+    DrawReactionColumn(rect:Rect, rowIdx:int) : void
+    {static} GetOptionButtonSize() : Vector2
+    DrawOptionsButton(rect:Rect, rowIdx:int, target:SignalReceiver) : void
+    AvailableSignalAssets() : IEnumerable<SignalAsset>
+    CreateNewSignalAsset(path:string) : void
+}
+class UnityEventCloner {
+}
+TreeViewItem <|-- SignalReceiverItem
+ISignalAssetProvider <|-- SignalReceiverItem
+SignalReceiverItem o-> "k_EvtDrawer" SignalEventDrawer
+SignalReceiverItem --> "m_Asset" SerializedProperty
+SignalReceiverItem --> "m_Evt" SerializedProperty
+SignalReceiverItem --> "m_TreeView" SignalReceiverTreeView
+SignalReceiverItem --> "m_CurrentReceiver" SignalReceiver
+SignalReceiverItem --> "signalAsset" SignalAsset
+SignalReceiverItem +-- UnityEventCloner
+ScriptableObject <|-- UnityEventCloner
+UnityEventCloner --> "evt" UnityEvent
+@enduml

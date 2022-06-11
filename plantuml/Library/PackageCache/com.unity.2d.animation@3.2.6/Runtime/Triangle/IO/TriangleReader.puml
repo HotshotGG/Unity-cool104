@@ -1,0 +1,17 @@
+@startuml
+class TriangleReader {
+    startIndex : int = 0
+    + Read(filename:string, polygon:Polygon) : void
+    + Read(filename:string, geometry:Polygon, triangles:List<ITriangle>) : void
+    + Read(filename:string) : IPolygon
+    + ReadNodeFile(nodefilename:string) : Polygon
+    + ReadNodeFile(nodefilename:string, readElements:bool) : Polygon
+    + ReadPolyFile(polyfilename:string) : Polygon
+    + ReadPolyFile(polyfilename:string, readElements:bool) : Polygon
+    + ReadPolyFile(polyfilename:string, readElements:bool, readArea:bool) : Polygon
+    + ReadEleFile(elefilename:string) : List<ITriangle>
+    + ReadEdgeFile(edgeFile:string, invertices:int) : List<Edge>
+    IsStringNullOrWhiteSpace(value:string) : bool
+}
+TriangleReader o-> "nfi" NumberFormatInfo
+@enduml

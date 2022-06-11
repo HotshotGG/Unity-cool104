@@ -1,0 +1,22 @@
+@startuml
+class SkinningModule <<partial>> {
+    m_CollapseToolbar : bool
+    + <<override>> moduleName : string <<get>>
+    + <<override>> OnModuleActivate() : void
+    + <<override>> OnModuleDeactivate() : void
+    + <<override>> CanBeActivated() : bool
+    + <<override>> DoPostGUI() : void
+    + <<override>> DoMainGUI() : void
+    + <<override>> DoToolbarGUI(drawArea:Rect) : void
+    DoCopyPasteKeyboardEventHandling() : void
+    + <<override>> ApplyRevert(apply:bool) : bool
+    OnSpriteLibraryChanged() : void
+    OnMeshPreviewBehaviourChange(meshPreviewBehaviour:IMeshPreviewBehaviour) : void
+}
+class Styles <<static>> {
+    + {static} moduleName : string
+}
+SpriteEditorModuleBase <|-- SkinningModule
+SkinningModule o-> "m_MeshPreviewBehaviourOverride" IMeshPreviewBehaviour
+SkinningModule +-- Styles
+@enduml

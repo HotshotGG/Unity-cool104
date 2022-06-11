@@ -1,0 +1,7 @@
+@startuml
+class EnumerableTestState {
+    + Repeat : int
+    + Retry : int
+}
+ScriptableObject <|-- EnumerableTestState
+@enduml

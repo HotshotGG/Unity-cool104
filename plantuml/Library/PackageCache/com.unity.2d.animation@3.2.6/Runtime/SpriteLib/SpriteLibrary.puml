@@ -1,0 +1,26 @@
+@startuml
+class SpriteLibrary {
+    + GetSprite(category:string, label:string) : Sprite
+    + AddOverride(spriteLib:SpriteLibraryAsset, category:string, label:string) : void
+    + AddOverride(spriteLib:SpriteLibraryAsset, category:string) : void
+    + AddOverride(sprite:Sprite, category:string, label:string) : void
+    + RemoveOverride(category:string) : void
+    + RemoveOverride(category:string, label:string) : void
+    + HasOverride(category:string, label:string) : bool
+    + RefreshSpriteResolvers() : void
+}
+class StringAndHash {
+    + name : string
+    + hash : int
+    + StringAndHash(name:string)
+    + StringAndHash(hash:int)
+    + <<override>> Equals(obj:object) : bool
+    + <<override>> GetHashCode() : int
+}
+class "Dictionary`2"<T1,T2> {
+}
+MonoBehaviour <|-- SpriteLibrary
+SpriteLibrary o-> "m_Overrides<StringAndHash,Dictionary<StringAndHash, Sprite>>" "Dictionary`2"
+SpriteLibrary --> "spriteLibraryAsset" SpriteLibraryAsset
+SpriteLibrary +-- StringAndHash
+@enduml

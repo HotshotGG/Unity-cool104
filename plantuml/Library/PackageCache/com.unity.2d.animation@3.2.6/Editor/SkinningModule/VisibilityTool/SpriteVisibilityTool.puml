@@ -1,0 +1,143 @@
+@startuml
+interface ISpriteVisibilityToolModel {
+    previousVisibility : bool <<get>> <<set>>
+    allVisibility : bool <<get>> <<set>>
+    hasCharacter : bool <<get>>
+    UndoScope(description:string) : UndoScope
+}
+interface ISpriteVisibilityToolView {
+    Setup() : void
+    SetSelection(sprite:SpriteCache) : void
+    SetSelectionIds(selectedIds:IList<int>) : void
+}
+class SpriteVisibilityToolData {
+    m_AllVisibility : bool = true
+    m_PreviousVisibility : bool = true
+    + allVisibility : bool <<get>> <<set>>
+    + previousVisibility : bool <<get>> <<set>>
+}
+class SpriteVisibilityToolController {
+    m_UpdateViewOnSelection : bool = true
+    +  <<event>> OnAvailabilityChangeListeners : Action 
+    + SpriteVisibilityToolController(model:ISpriteVisibilityToolModel, events:SkinningEvents)
+    + Activate() : void
+    + Deactivate() : void
+    + Dispose() : void
+    OnViewModeChanged(mode:SkinningMode) : void
+    + isAvailable : bool <<get>>
+    SetAllCharacterSpriteVisibility() : void
+    + SetAllVisibility(visibility:bool) : void
+    + GetAllVisibility() : bool
+    + BuildTreeView() : List<TreeViewItem>
+    SpriteVisibilityItemOrderSort(x:ISpriteVisibilityItem, y:ISpriteVisibilityItem) : int
+    + GetCharacterPartVisibility(item:TreeViewItem) : bool
+    + SetCharacterPartVisibility(item:TreeViewItem, visible:bool, isolate:bool) : void
+    + SetSelectedSprite(rows:IList<TreeViewItem>, selectedIds:IList<int>) : void
+    + GetTreeViewSelectionID(sprite:SpriteCache) : int
+    + GetCategoryForSprite(treeViewItem:TreeViewItem) : SpriteCategory
+    + GetCategoryStrings() : string[]
+    + GetSpriteLabelName(category:SpriteCategory, treeViewItem:TreeViewItem) : string
+    GetCategoryIndexForSprite(category:SpriteCategory, treeViewItem:TreeViewItem) : int
+    + RemoveSpriteFromCategory(treeViewItem:TreeViewItem) : void
+    + SetCategoryForSprite(categoryName:string, treeViewItem:TreeViewItem) : void
+    + SetCategoryForSprite(categoryName:string, labelName:string, treeViewItem:TreeViewItem) : void
+    SetCategoryForSprite(categoryName:string, labelName:string, spriteVisibilityItem:ISpriteVisibilityItem) : void
+    + IsLabelDuplicate(category:SpriteCategory, labelName:string) : bool
+    + SetCategoryLabelName(labelname:string, treeViewItem:TreeViewItem) : void
+    + SupportCateogry(treeViewItem:TreeViewItem) : bool
+    + SupportConvertToCatgory(treeViewItem:TreeViewItem) : bool
+    + ClearCategory(treeViewItem:TreeViewItem) : void
+    + ConvertLayerToCategory(treeViewItem:TreeViewItem) : void
+    + ConvertToCategory(treeViewItem:TreeViewItem) : void
+    AddGroupToCategory(categoryName:string, groupItem:SpriteVisibilityGroupItem) : void
+    + RemoveUnusedCategory() : void
+}
+class SpriteVisibilityTool {
+    + SpriteVisibilityTool(s:SkinningCache)
+    + Setup() : void
+    + Dispose() : void
+    + name : string <<get>>
+    + Activate() : void
+    + Deactivate() : void
+    + isAvailable : bool <<get>>
+    + SetAvailabilityChangeCallback(callback:Action) : void
+    hasCharacter : bool <<get>>
+    previousVisibility : bool <<get>> <<set>>
+    allVisibility : bool <<get>> <<set>>
+    UndoScope(description:string) : UndoScope
+}
+class SpriteVisibilityToolView {
+    + SpriteVisibilityToolView()
+    InternalGetController() : SpriteVisibilityToolController
+    InternalGetAllVisibility() : bool
+    InternalSetAllVisibility(visibility:bool) : void
+    + Setup() : void
+    + SetSelection(sprite:SpriteCache) : void
+    + SetSelectionIds(selectedIds:IList<int>) : void
+}
+class SpriteTreeView {
+    m_SpriteCategoryRenameID : int
+    + SpriteTreeView(treeViewState:TreeViewState, multiColumnHeader:MultiColumnHeader)
+    SkinInit() : void
+    + Setup() : void
+    + <<override>> OnGUI(rect:Rect) : void
+    ConvertGroupToCategory() : void
+    ClearAllCategory() : void
+    ConvertLayerToCategory() : void
+    CellGUI(cellRect:Rect, item:TreeViewItem, column:int, args:RowGUIArgs) : void
+    DrawVisibilityCell(cellRect:Rect, item:TreeViewItem) : void
+    DrawNameCell(cellRect:Rect, item:TreeViewItem, args:RowGUIArgs) : void
+    DrawCategoryCell(cellRect:Rect, item:TreeViewItem, args:RowGUIArgs) : void
+    DrawCategoryNameControl(cellRect:Rect, item:TreeViewItem) : void
+    DrawIndexCell(cellRect:Rect, item:TreeViewItem, args:RowGUIArgs) : void
+    + SetSelectionIds(selectedIds:IList<int>) : void
+    + SetSelection(sprite:SpriteCache) : void
+}
+interface ISpriteVisibilityItem {
+    visibility : bool <<get>> <<set>>
+}
+class SpriteVisibilityGroupItem {
+    visibility : bool <<get>> <<set>>
+}
+class SpriteVisibilitySpriteItem {
+    visibility : bool <<get>> <<set>>
+}
+class "Func`1"<T> {
+}
+ISpriteVisibilityToolModel --> "view" ISpriteVisibilityToolView
+ISpriteVisibilityToolModel --> "character" CharacterCache
+ISpriteVisibilityToolModel --> "mode" SkinningMode
+ISpriteVisibilityToolModel --> "selectedSprite" SpriteCache
+ISpriteVisibilityToolModel --> "spriteCategoryList" SpriteCategoryListCacheObject
+CacheObject <|-- SpriteVisibilityToolData
+SpriteVisibilityToolController --> "m_Model" ISpriteVisibilityToolModel
+SpriteVisibilityToolController --> "m_Events" SkinningEvents
+IVisibilityTool <|-- SpriteVisibilityTool
+ISpriteVisibilityToolModel <|-- SpriteVisibilityTool
+SpriteVisibilityTool --> "m_View" SpriteVisibilityToolView
+SpriteVisibilityTool --> "m_Controller" SpriteVisibilityToolController
+SpriteVisibilityTool --> "skinningCache" SkinningCache
+SpriteVisibilityTool --> "view" VisualElement
+SpriteVisibilityTool --> "view" ISpriteVisibilityToolView
+SpriteVisibilityTool --> "selectedSprite" SpriteCache
+SpriteVisibilityTool --> "character" CharacterCache
+SpriteVisibilityTool --> "mode" SkinningMode
+SpriteVisibilityTool --> "spriteCategoryList" SpriteCategoryListCacheObject
+VisibilityToolViewBase <|-- SpriteVisibilityToolView
+ISpriteVisibilityToolView <|-- SpriteVisibilityToolView
+SpriteVisibilityToolView o-> "GetController<SpriteVisibilityToolController>" "Func`1"
+VisibilityTreeViewBase <|-- SpriteTreeView
+SpriteTreeView o-> "GetController<SpriteVisibilityToolController>" "Func`1"
+SpriteTreeView --> "m_Style" GUIStyle
+SpriteTreeView --> "m_WarningIcon" GUIContent
+SpriteVisibilityToolController +-- ISpriteVisibilityItem
+ISpriteVisibilityItem --> "characterOrder" ICharacterOrder
+SpriteVisibilityToolController +-- SpriteVisibilityGroupItem
+ISpriteVisibilityItem <|-- SpriteVisibilityGroupItem
+SpriteVisibilityGroupItem --> "group" CharacterGroupCache
+SpriteVisibilityGroupItem --> "characterOrder" ICharacterOrder
+SpriteVisibilityToolController +-- SpriteVisibilitySpriteItem
+ISpriteVisibilityItem <|-- SpriteVisibilitySpriteItem
+SpriteVisibilitySpriteItem --> "sprite" CharacterPartCache
+SpriteVisibilitySpriteItem --> "characterOrder" ICharacterOrder
+@enduml

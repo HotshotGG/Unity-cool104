@@ -1,0 +1,9 @@
+@startuml
+class BadSubseg {
+    + <<override>> GetHashCode() : int
+    + <<override>> ToString() : string
+}
+BadSubseg --> "subseg" Osub
+BadSubseg --> "org" Vertex
+BadSubseg --> "dest" Vertex
+@enduml

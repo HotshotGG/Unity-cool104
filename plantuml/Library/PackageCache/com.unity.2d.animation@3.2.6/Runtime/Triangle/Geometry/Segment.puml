@@ -1,0 +1,15 @@
+@startuml
+class Segment {
+    label : int
+    + Label : int <<get>> <<set>>
+    + P0 : int <<get>>
+    + P1 : int <<get>>
+    + Segment(v0:Vertex, v1:Vertex)
+    + Segment(v0:Vertex, v1:Vertex, label:int)
+    + GetVertex(index:int) : Vertex
+    + GetTriangle(index:int) : ITriangle
+}
+ISegment <|-- Segment
+Segment --> "v0" Vertex
+Segment --> "v1" Vertex
+@enduml

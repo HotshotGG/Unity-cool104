@@ -1,0 +1,23 @@
+@startuml
+class TrimClip {
+    m_IsCaptured : bool
+    m_OriginalDuration : double
+    m_OriginalTimeScale : double
+    m_UndoSaved : bool
+    {static} <<readonly>> kEpsilon : double = 0.0000001
+    + <<override>> Overlay(evt:Event, state:WindowState) : void
+    RefreshOverlayStrings(handle:TimelineClipHandle, state:WindowState) : void
+}
+class TrimClipAttractionHandler {
+    + OnAttractedEdge(attractable:IAttractable, manipulateEdges:ManipulateEdges, edge:AttractedEdge, time:double) : void
+}
+class "List`1"<T> {
+}
+Manipulator <|-- TrimClip
+TrimClip --> "m_TrimClipHandler" TimelineClipHandle
+TrimClip --> "m_SnapEngine" SnapEngine
+TrimClip o-> "m_OverlayText" StringBuilder
+TrimClip o-> "m_OverlayStrings<string>" "List`1"
+TrimClip +-- TrimClipAttractionHandler
+IAttractionHandler <|-- TrimClipAttractionHandler
+@enduml

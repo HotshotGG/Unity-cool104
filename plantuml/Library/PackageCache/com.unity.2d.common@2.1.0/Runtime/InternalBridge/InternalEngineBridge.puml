@@ -1,0 +1,9 @@
+@startuml
+class InternalEngineBridge <<static>> {
+    + {static} SetLocalAABB(spriteRenderer:SpriteRenderer, aabb:Bounds) : void
+    + {static} SetDeformableBuffer(spriteRenderer:SpriteRenderer, src:NativeArray<byte>) : void
+    + {static} GUIUnclip(v:Vector2) : Vector2
+    + {static} GetGUIClipTopMostRect() : Rect
+    + {static} GetGUIClipTopRect() : Rect
+}
+@enduml

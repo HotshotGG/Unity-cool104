@@ -1,0 +1,21 @@
+@startuml
+class SpriteMeshController {
+    + disable : bool <<get>> <<set>>
+    + OnGUI() : void
+}
+class EdgeIntersectionResult <<struct>> {
+    + startVertexIndex : int
+    + endVertexIndex : int
+    + intersectEdgeIndex : int
+}
+class "ISelection`1"<T> {
+}
+SpriteMeshController --> "spriteMeshView" ISpriteMeshView
+SpriteMeshController --> "spriteMeshData" ISpriteMeshData
+SpriteMeshController --> "selection<int>" "ISelection`1"
+SpriteMeshController --> "cacheUndo" ICacheUndo
+SpriteMeshController --> "triangulator" ITriangulator
+SpriteMeshController --> "frame" Rect
+SpriteMeshController +-- EdgeIntersectionResult
+EdgeIntersectionResult --> "endPosition" Vector2
+@enduml

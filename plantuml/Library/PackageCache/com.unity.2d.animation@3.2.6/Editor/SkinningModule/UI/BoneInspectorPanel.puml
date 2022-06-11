@@ -1,0 +1,24 @@
+@startuml
+class BoneInspectorPanel {
+    +  <<event>> onBoneDepthChanged : Action<BoneCache, int> 
+    +  <<event>> onBoneNameChanged : Action<BoneCache, string> 
+    + boneName : string <<get>> <<set>>
+    + boneDepth : int <<get>> <<set>>
+    + BoneInspectorPanel()
+    + BindElements() : void
+    + HidePanel() : void
+    + {static} GenerateFromUXML() : BoneInspectorPanel
+}
+class BoneInspectorPanelFactory {
+}
+class BoneInspectorPanelUxmlTraits {
+}
+class "UxmlFactory`2"<T1,T2> {
+}
+VisualElement <|-- BoneInspectorPanel
+BoneInspectorPanel --> "target" BoneCache
+BoneInspectorPanel +-- BoneInspectorPanelFactory
+"UxmlFactory`2" "<BoneInspectorPanel,BoneInspectorPanelUxmlTraits>" <|-- BoneInspectorPanelFactory
+BoneInspectorPanel +-- BoneInspectorPanelUxmlTraits
+UxmlTraits <|-- BoneInspectorPanelUxmlTraits
+@enduml

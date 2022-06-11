@@ -1,0 +1,25 @@
+@startuml
+class Rectangle {
+    xmin : double
+    ymin : double
+    xmax : double
+    ymax : double
+    + Rectangle()
+    + Rectangle(other:Rectangle)
+    + Rectangle(x:double, y:double, width:double, height:double)
+    + Left : double <<get>>
+    + Right : double <<get>>
+    + Bottom : double <<get>>
+    + Top : double <<get>>
+    + Width : double <<get>>
+    + Height : double <<get>>
+    + Resize(dx:double, dy:double) : void
+    + Expand(p:Point) : void
+    + Expand(points:IEnumerable<Point>) : void
+    + Expand(other:Rectangle) : void
+    + Contains(x:double, y:double) : bool
+    + Contains(pt:Point) : bool
+    + Contains(other:Rectangle) : bool
+    + Intersects(other:Rectangle) : bool
+}
+@enduml

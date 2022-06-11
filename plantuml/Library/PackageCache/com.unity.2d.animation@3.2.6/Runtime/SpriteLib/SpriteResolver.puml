@@ -1,0 +1,16 @@
+@startuml
+class SpriteResolver {
+    OnEnable() : void
+    + SetCategoryAndLabel(category:string, label:string) : void
+    + GetCategory() : string
+    + GetLabel() : string
+    LateUpdate() : void
+    + ResolveSpriteToSpriteRenderer() : void
+    OnTransformParentChanged() : void
+    categoryHashInt : int <<get>> <<set>>
+    labelHashInt : int <<get>> <<set>>
+}
+MonoBehaviour <|-- SpriteResolver
+SpriteResolver --> "spriteRenderer" SpriteRenderer
+SpriteResolver --> "spriteLibrary" SpriteLibrary
+@enduml

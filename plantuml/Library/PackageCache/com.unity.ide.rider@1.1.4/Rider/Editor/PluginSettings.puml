@@ -1,0 +1,6 @@
+@startuml
+class PluginSettings {
+    + {static} LogEventsCollectorEnabled : bool <<get>>
+}
+PluginSettings --> "SelectedLoggingLevel" LoggingLevel
+@enduml

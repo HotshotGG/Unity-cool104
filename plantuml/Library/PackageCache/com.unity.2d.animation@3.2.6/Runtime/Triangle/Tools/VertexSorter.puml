@@ -1,0 +1,6 @@
+@startuml
+class VertexSorter {
+    VertexSorter(points:Vertex[], seed:int)
+}
+VertexSorter --> "rand" Random
+@enduml

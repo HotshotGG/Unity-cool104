@@ -1,0 +1,14 @@
+@startuml
+class TrimItemModeRipple {
+    m_OriginalClipStart : double
+    m_OriginalClipEnd : double
+    m_BlendDuration : double
+    m_TrimStartShift : double
+    + OnBeforeTrim(item:ITrimmable, trimDirection:TrimEdge) : void
+    + TrimStart(item:ITrimmable, time:double) : void
+    + TrimEnd(item:ITrimmable, time:double, affectTimeScale:bool) : void
+    + DrawGUI(state:WindowState, bounds:Rect, color:Color, edge:TrimEdge) : void
+}
+ITrimItemMode <|-- TrimItemModeRipple
+ITrimItemDrawer <|-- TrimItemModeRipple
+@enduml

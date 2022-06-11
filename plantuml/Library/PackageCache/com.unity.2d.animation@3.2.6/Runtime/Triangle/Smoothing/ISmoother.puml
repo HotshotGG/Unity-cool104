@@ -1,0 +1,6 @@
+@startuml
+interface ISmoother {
+    Smooth(mesh:IMesh) : void
+    Smooth(mesh:IMesh, limit:int) : void
+}
+@enduml

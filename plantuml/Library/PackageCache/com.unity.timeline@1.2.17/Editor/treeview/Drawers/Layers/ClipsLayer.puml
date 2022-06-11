@@ -1,0 +1,9 @@
+@startuml
+class ClipsLayer {
+    + ClipsLayer(layerOrder:Layer, parent:IRowGUI)
+    + <<override>> Draw(rect:Rect, state:WindowState) : void
+    {static} DrawConnector(clips:IEnumerable<TimelineClipGUI>) : void
+}
+ItemsLayer <|-- ClipsLayer
+ClipsLayer o-> "k_ConnectorIcon" GUIStyle
+@enduml

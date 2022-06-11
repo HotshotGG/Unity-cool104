@@ -1,0 +1,9 @@
+@startuml
+class EnumerableTestMethodCommand {
+    + EnumerableTestMethodCommand(testMethod:TestMethod)
+    + ExecuteEnumerable(context:ITestExecutionContext) : IEnumerable
+    + <<override>> Execute(context:ITestExecutionContext) : TestResult
+}
+TestCommand <|-- EnumerableTestMethodCommand
+IEnumerableTestMethodCommand <|-- EnumerableTestMethodCommand
+@enduml

@@ -1,0 +1,16 @@
+@startuml
+class OrbManager {
+    Start() : void
+    Update() : void
+    + TouchOrb() : void
+    AddOrbPoint() : void
+    + SetKind(kind:ORB_KIND) : void
+}
+enum ORB_KIND {
+    BLUE,
+    GREEN,
+    PURPLE,
+}
+MonoBehaviour <|-- OrbManager
+OrbManager +-- ORB_KIND
+@enduml

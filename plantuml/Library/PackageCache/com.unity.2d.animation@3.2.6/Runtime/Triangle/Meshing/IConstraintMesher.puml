@@ -1,0 +1,6 @@
+@startuml
+interface IConstraintMesher {
+    Triangulate(polygon:IPolygon) : IMesh
+    Triangulate(polygon:IPolygon, options:ConstraintOptions) : IMesh
+}
+@enduml

@@ -1,0 +1,8 @@
+@startuml
+class ConstraintOptions {
+    + UseRegions : bool <<get>> <<set>>
+    + ConformingDelaunay : bool <<get>> <<set>>
+    + Convex : bool <<get>> <<set>>
+    + SegmentSplitting : int <<get>> <<set>>
+}
+@enduml

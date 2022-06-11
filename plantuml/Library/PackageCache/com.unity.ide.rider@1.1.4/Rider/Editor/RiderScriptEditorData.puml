@@ -1,0 +1,9 @@
+@startuml
+class RiderScriptEditorData {
+    + Init() : void
+    + Invalidate(editorInstallationPath:string) : void
+}
+class "ScriptableSingleton`1"<T> {
+}
+"ScriptableSingleton`1" "<RiderScriptEditorData>" <|-- RiderScriptEditorData
+@enduml

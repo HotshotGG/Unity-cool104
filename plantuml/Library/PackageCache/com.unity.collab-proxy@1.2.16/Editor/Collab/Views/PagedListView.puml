@@ -1,0 +1,47 @@
+@startuml
+interface IPagerData {
+    curPage : int <<get>>
+    totalPages : int <<get>>
+}
+class PagerElement {
+    + PagerElement(dataSource:IPagerData)
+    OnPageDownClicked() : void
+    OnPageUpClicked() : void
+    + Refresh() : void
+    UpdateControls() : void
+}
+enum PagerLocation {
+    Top,
+    Bottom,
+}
+class PagedListView {
+    + <<const>> DefaultItemsPerPage : int = 10
+    m_PageSize : int
+    m_TotalItems : int
+    m_CurPage : int
+    + pageSize : int <<set>>
+    + totalItems : int <<set>>
+    + PagedListView()
+    LayoutItems() : void
+    UpdatePager() : void
+    pageCount : int <<get>>
+    + curPage : int <<get>> <<set>>
+    + totalPages : int <<get>>
+}
+class "IEnumerable`1"<T> {
+}
+IPagerData --> "OnPageChanged" PageChangeAction
+VisualElement <|-- PagerElement
+PagerElement --> "m_Data" IPagerData
+PagerElement --> "m_PageText" Label
+PagerElement --> "m_DownButton" Button
+PagerElement --> "m_UpButton" Button
+VisualElement <|-- PagedListView
+IPagerData <|-- PagedListView
+PagedListView --> "m_ItemContainer" VisualElement
+PagedListView --> "m_PagerTop" PagerElement
+PagedListView --> "m_PagerBottom" PagerElement
+PagedListView --> "m_Items<VisualElement>" "IEnumerable`1"
+PagedListView --> "items<VisualElement>" "IEnumerable`1"
+PagedListView --> "OnPageChanged" PageChangeAction
+@enduml

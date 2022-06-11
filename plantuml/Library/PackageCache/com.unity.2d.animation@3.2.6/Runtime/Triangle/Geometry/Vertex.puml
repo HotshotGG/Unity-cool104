@@ -1,0 +1,10 @@
+@startuml
+class Vertex {
+    + Vertex()
+    + Vertex(x:double, y:double)
+    + Vertex(x:double, y:double, mark:int)
+    + <<override>> GetHashCode() : int
+}
+Point <|-- Vertex
+Vertex --> "Type" VertexType
+@enduml

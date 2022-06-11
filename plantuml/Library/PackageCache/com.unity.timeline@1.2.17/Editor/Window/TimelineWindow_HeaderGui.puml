@@ -1,0 +1,23 @@
+@startuml
+class TimelineWindow <<partial>> {
+    SequencerHeaderGUI() : void
+    MarkerHeaderGUI() : void
+    TransportToolbarGUI() : void
+    PreviewModeButtonGUI() : void
+    GotoBeginingSequenceGUI() : void
+    PlayButtonGUIEditor() : void
+    PlayButtonGUIPlayMode() : void
+    PlayButtonGUI() : void
+    NextEventButtonGUI() : void
+    PreviousEventButtonGUI() : void
+    GotoEndSequenceGUI() : void
+    PlayRangeButtonGUI() : void
+    AddButtonGUI() : void
+    ShowMarkersButton() : void
+    {static} EditModeToolbarGUI(mode:TimelineMode) : void
+    TimeCodeGUI() : void
+    ReferenceTimeGUI() : void
+    OnTimeReferenceModeChanged() : void
+}
+TimelineWindow --> "m_MarkerHeaderGUI" TimelineMarkerHeaderGUI
+@enduml

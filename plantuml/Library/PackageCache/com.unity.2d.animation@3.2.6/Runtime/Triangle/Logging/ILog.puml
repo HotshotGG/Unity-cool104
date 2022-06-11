@@ -1,0 +1,18 @@
+@startuml
+enum LogLevel {
+    Info= 0,
+    Warning= 1,
+    Error= 2,
+}
+interface "ILog`1"<T> {
+    Add(item:T) : void
+    Clear() : void
+    Info(message:string) : void
+    Error(message:string, info:string) : void
+    Warning(message:string, info:string) : void
+}
+class "IList`1"<T> {
+}
+"ILog`1" --> "Data<T>" "IList`1"
+"ILog`1" --> "Level" LogLevel
+@enduml

@@ -1,0 +1,15 @@
+@startuml
+class TMP_EditorPanel {
+    IsPreset : bool
+    UpdateTargetsSortingLayerID(sortingLayerID:int) : void
+    UpdateTargetsSortingOrder(sortingOrder:int) : void
+}
+TMP_BaseEditorPanel <|-- TMP_EditorPanel
+TMP_EditorPanel o-> "k_SortingLayerLabel" GUIContent
+TMP_EditorPanel o-> "k_OrderInLayerLabel" GUIContent
+TMP_EditorPanel o-> "k_OrthographicLabel" GUIContent
+TMP_EditorPanel o-> "k_VolumetricLabel" GUIContent
+TMP_EditorPanel --> "m_IsVolumetricTextProp" SerializedProperty
+TMP_EditorPanel --> "m_IsOrthographicProp" SerializedProperty
+TMP_EditorPanel --> "m_Renderer" Renderer
+@enduml

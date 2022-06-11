@@ -1,0 +1,12 @@
+@startuml
+class InfiniteTrackDrawer {
+    + InfiniteTrackDrawer(dataSource:IPropertyKeyDataSource)
+    + CanDraw(track:TrackAsset, state:WindowState) : bool
+    {static} DrawRecordBackground(trackRect:Rect) : void
+    + <<override>> DrawTrack(trackRect:Rect, trackAsset:TrackAsset, visibleTime:Vector2, state:WindowState) : bool
+    DrawKeyFrame(key:float, state:WindowState) : void
+}
+TrackDrawer <|-- InfiniteTrackDrawer
+InfiniteTrackDrawer --> "m_DataSource" IPropertyKeyDataSource
+InfiniteTrackDrawer --> "m_TrackRect" Rect
+@enduml

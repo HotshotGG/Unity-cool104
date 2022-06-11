@@ -1,0 +1,8 @@
+@startuml
+interface IMeshFormat {
+    Import(filename:string) : IMesh
+    Write(mesh:IMesh, filename:string) : void
+    Write(mesh:IMesh, stream:Stream) : void
+}
+IFileFormat <|-- IMeshFormat
+@enduml

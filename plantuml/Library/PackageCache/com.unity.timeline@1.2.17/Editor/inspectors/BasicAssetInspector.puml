@@ -1,0 +1,11 @@
+@startuml
+class BasicAssetInspector {
+    + <<override>> OnInspectorGUI() : void
+    + <<virtual>> ApplyChanges() : void
+    {static} SkipField(fieldName:string) : bool
+}
+class ActivationPlayableAssetInspector {
+}
+Editor <|-- BasicAssetInspector
+BasicAssetInspector <|-- ActivationPlayableAssetInspector
+@enduml

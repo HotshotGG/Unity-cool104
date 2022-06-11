@@ -1,0 +1,36 @@
+@startuml
+class WeightedTriangle <<struct>> {
+    + p1 : int
+    + p2 : int
+    + p3 : int
+    + weight : float
+    + CompareTo(other:WeightedTriangle) : int
+}
+class SpriteMeshDataController {
+    + CreateVertex(position:Vector2) : void
+    + CreateVertex(position:Vector2, edgeIndex:int) : void
+    + CreateEdge(index1:int, index2:int) : void
+    + RemoveVertex(index:int) : void
+    + RemoveVertex(indices:IEnumerable<int>) : void
+    + RemoveEdge(edge:Edge) : void
+    + FindEdgesContainsIndex(index:int, result:List<Edge>) : bool
+    + Triangulate(triangulator:ITriangulator) : void
+    + Subdivide(triangulator:ITriangulator, largestAreaFactor:float) : void
+    + ClearWeights(selection:ISelection<int>) : void
+    + OutlineFromAlpha(outlineGenerator:IOutlineGenerator, textureDataProvider:ITextureDataProvider, outlineDetail:float, alphaTolerance:byte) : void
+    + NormalizeWeights(selection:ISelection<int>) : void
+    + CalculateWeights(weightsGenerator:IWeightsGenerator, selection:ISelection<int>, filterTolerance:float) : void
+    + CalculateWeightsSafe(weightsGenerator:IWeightsGenerator, selection:ISelection<int>, filterTolerance:float) : void
+    + SmoothWeights(iterations:int, selection:ISelection<int>) : void
+    + FindTriangle(point:Vector2, indices:Vector3Int, barycentricCoords:Vector3) : bool
+    + SortTrianglesByDepth() : void
+    + GetMultiEditChannelData(selection:ISelection<int>, channel:int, enabled:bool, boneIndex:int, weight:float, isEnabledMixed:bool, isBoneIndexMixed:bool, isWeightMixed:bool) : void
+    + SetMultiEditChannelData(selection:ISelection<int>, channel:int, oldEnabled:bool, newEnabled:bool, oldBoneIndex:int, newBoneIndex:int, oldWeight:float, newWeight:float) : void
+    + GetControlPoints(points:Vector2[], edges:Edge[], pins:int[]) : void
+    + SmoothFill() : void
+}
+class "IComparable`1"<T> {
+}
+"IComparable`1" "<WeightedTriangle>" <|-- WeightedTriangle
+SpriteMeshDataController --> "spriteMeshData" ISpriteMeshData
+@enduml

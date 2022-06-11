@@ -1,0 +1,40 @@
+@startuml
+class TrianglePool {
+    size : int
+    count : int
+    + TrianglePool()
+    + Get() : Triangle
+    + Release(triangle:Triangle) : void
+    + Restart() : TrianglePool
+    + Add(item:Triangle) : void
+    + Clear() : void
+    + Contains(item:Triangle) : bool
+    + CopyTo(array:Triangle[], index:int) : void
+    + Count : int <<get>>
+    + IsReadOnly : bool <<get>>
+    + Remove(item:Triangle) : bool
+    + GetEnumerator() : IEnumerator<Triangle>
+    GetEnumerator() : System.Collections.IEnumerator
+}
+class "ICollection`1"<T> {
+}
+class "Stack`1"<T> {
+}
+class Enumerator {
+    count : int
+    index : int
+    offset : int
+    + Dispose() : void
+    Current : object <<get>>
+    + MoveNext() : bool
+    + Reset() : void
+}
+class "IEnumerator`1"<T> {
+}
+"ICollection`1" "<Triangle>" <|-- TrianglePool
+TrianglePool --> "stack<Triangle>" "Stack`1"
+TrianglePool +-- Enumerator
+"IEnumerator`1" "<Triangle>" <|-- Enumerator
+Enumerator --> "current" Triangle
+Enumerator --> "Current" Triangle
+@enduml

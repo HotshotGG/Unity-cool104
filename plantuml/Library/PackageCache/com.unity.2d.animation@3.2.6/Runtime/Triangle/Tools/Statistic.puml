@@ -1,0 +1,23 @@
+@startuml
+class Statistic {
+    minEdge : double = 0
+    + ShortestEdge : double <<get>>
+    maxEdge : double = 0
+    + LongestEdge : double <<get>>
+    minAspect : double = 0
+    + ShortestAltitude : double <<get>>
+    maxAspect : double = 0
+    + LargestAspectRatio : double <<get>>
+    minArea : double = 0
+    + SmallestArea : double <<get>>
+    maxArea : double = 0
+    + LargestArea : double <<get>>
+    minAngle : double = 0
+    + SmallestAngle : double <<get>>
+    maxAngle : double = 0
+    + LargestAngle : double <<get>>
+    meshArea : double = 0
+    + MeshArea : double <<get>>
+    + Update(mesh:Mesh, sampleDegrees:int) : void
+}
+@enduml

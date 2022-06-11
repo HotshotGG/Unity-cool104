@@ -1,0 +1,21 @@
+@startuml
+class SaveData {
+    + _bestScore : int = 0
+    + _tryCount : int = 0
+    + _dateTime : string
+}
+class SaveManager {
+    + _filePath : string = ""
+    + _fileName : string = "saveData.json"
+    + SaveManager()
+    + Save() : void
+    + Load() : void
+}
+class Player {
+    + id : int
+    + name : string
+    + role : string
+}
+SaveManager --> "_saveData" SaveData
+SaveData +-- Player
+@enduml

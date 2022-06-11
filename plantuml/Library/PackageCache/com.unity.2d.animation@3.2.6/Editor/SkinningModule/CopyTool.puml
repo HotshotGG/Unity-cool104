@@ -1,0 +1,38 @@
+@startuml
+interface ICopyToolStringStore {
+    stringStore : string <<get>> <<set>>
+}
+class SystemCopyBufferStringStore {
+    + stringStore : string <<get>> <<set>>
+}
+class CopyTool {
+    + pixelsPerUnit : float <<set>>
+    + <<override>> Initialize(layout:LayoutOverlay) : void
+    + OnCopyActivated() : void
+    + CopyAll() : SkinningCopyData
+    + CopySingle(sprite:SpriteCache) : SkinningCopyData
+    + OnPasteActivated(bone:bool, mesh:bool, flipX:bool, flipY:bool) : void
+    SetBonePositionAndRotation(boneCache:BoneCache[], bone:TransformCache, position:Vector3[], rotation:Quaternion[]) : void
+    + PasteSkeletonBones(sprite:SpriteCache, spriteBones:List<SpriteBone>, flipX:bool, flipY:bool, scale:float) : NewBonesStore
+    + PasteMesh(sprite:SpriteCache, skinningSpriteData:SkinningCopySpriteData, flipX:bool, flipY:bool, scale:float, newBonesStore:NewBonesStore) : void
+}
+class CopyToolView {
+    +  <<event>> onPasteActivated : Action<bool, bool, bool, bool> 
+    + Show() : void
+    + Hide() : void
+    + Initialize(layoutOverlay:LayoutOverlay) : void
+    BindElements() : void
+    OnPasteActivated(bone:bool, mesh:bool, flipX:bool, flipY:bool) : void
+}
+class NewBonesStore {
+    + NewBonesStore()
+    + MapAllExistingBones() : void
+}
+class "Dictionary`2"<T1,T2> {
+}
+ICopyToolStringStore <|-- SystemCopyBufferStringStore
+MeshToolWrapper <|-- CopyTool
+CopyTool --> "copyToolStringStore" ICopyToolStringStore
+CopyTool +-- NewBonesStore
+NewBonesStore --> "newBoneNameDict<string,string>" "Dictionary`2"
+@enduml

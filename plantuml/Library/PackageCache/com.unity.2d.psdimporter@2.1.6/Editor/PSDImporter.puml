@@ -1,0 +1,89 @@
+@startuml
+class PSDImporter {
+    m_MosaicLayers : bool = true
+    m_ImportHiddenLayers : bool = false
+    m_ImportedTextureWidth : int
+    m_ImportedTextureHeight : int
+    m_PaperDollMode : bool = false
+    m_KeepDupilcateSpriteName : bool = false
+    m_TextureActualWidth : int
+    m_TextureActualHeight : int
+    m_SpritePackingTag : string = ""
+    m_ResliceFromLayer : bool = false
+    m_CharacterMode : bool = true
+    m_GenerateGOHierarchy : bool = false
+    m_TextureAssetName : string = null
+    m_PrefabAssetName : string = null
+    m_SpriteLibAssetName : string = null
+    + <<override>> OnImportAsset(ctx:AssetImportContext) : void
+    {static} ValidatePSDLayerId(layers:List<BitmapLayer>, uniqueNameGenerator:UniqueNameGenerator) : void
+    ValidatePSDLayerId(doc:Document) : void
+    ImportTexture(ctx:AssetImportContext, imageData:NativeArray<Color32>, textureWidth:int, textureHeight:int, spriteStart:int, spriteCount:int) : TextureGenerationOutput
+    AutoGenerateSpriteSkinData(metaData:SpriteMetaData) : void
+    GetUniqueSpriteName(name:string, namehash:List<int>) : string
+    ImportFromLayers(ctx:AssetImportContext, doc:Document) : void
+    MemorySnapshotFinish(path:string, done:bool) : void
+    EnsureSingleSpriteExist() : void
+    RegisterAssets(ctx:AssetImportContext, output:TextureGenerationOutput) : void
+    SpriteIsMainFromSpriteLib(spriteId:string, categoryName:string) : bool
+    BuildGroupGameObject(psdGroup:List<PSDLayer>, index:int, root:Transform) : void
+    shouldProduceGameObject : bool <<get>>
+    shouldResliceFromLayer : bool <<get>>
+    characterMode : bool <<get>>
+    definitionScale : float <<get>>
+    CreateBoneGO(index:int, bones:SpriteBone[], bonesGO:BoneGO[], defaultRoot:Transform) : void
+    CreateBonesGO(root:Transform) : BoneGO[]
+    GetSpriteLiblabel(spriteId:string, category:string, label:string) : void
+    OnProducePaperDollPrefab(assetname:string, sprites:Sprite[], spriteLib:SpriteLibraryAsset) : GameObject
+    OnProducePrefab(assetname:string, sprites:Sprite[], spriteLib:SpriteLibraryAsset) : GameObject
+    GetBoundingBox(root:GameObject) : Bounds?
+    CleanUpGameobjectsWithOutRig(root:GameObject) : bool
+    {static} SanitizeName(name:string) : string
+    {static} GetUniqueName(name:string, stringHash:List<int>, logNewNameGenerated:bool, context:UnityEngine.Object) : string
+    pixelsPerUnit : float <<get>>
+    GetDataProvider() : T
+    HasDataProvider(type:Type) : bool
+    Apply() : void
+    InitSpriteEditorDataProvider() : void
+    GetSpriteRects() : SpriteRect[]
+    GetSpriteImportData() : List<SpriteMetaData>
+    SetSpriteRects(spriteRects:SpriteRect[]) : void
+    mosaicMode : bool <<get>>
+    ProduceSpriteLibAsset(sprites:Sprite[]) : SpriteLibraryAsset
+}
+class UniqueNameGenerator {
+    + ContainHash(i:int) : bool
+    + AddHash(i:int) : void
+    + GetUniqueName(name:string) : string
+}
+class GameObjectCreationFactory {
+    + CreateGameObject(name:string, components:System.Type[]) : GameObject
+}
+class BoneGO <<struct>> {
+    + index : int
+}
+class "List`1"<T> {
+}
+ScriptedImporter <|-- PSDImporter
+ISpriteEditorDataProvider <|-- PSDImporter
+PSDImporter o-> "m_TextureImporterSettings" TextureImporterSettings
+PSDImporter o-> "m_SpriteImportData<SpriteMetaData>" "List`1"
+PSDImporter o-> "m_MosaicSpriteImportData<SpriteMetaData>" "List`1"
+PSDImporter o-> "m_RigSpriteImportData<SpriteMetaData>" "List`1"
+PSDImporter o-> "m_PlatformSettings<TextureImporterPlatformSettings>" "List`1"
+PSDImporter o-> "m_DocumentPivot" Vector2
+PSDImporter o-> "m_DocumentAlignment" SpriteAlignment
+PSDImporter --> "m_DocumentSize" Vector2Int
+PSDImporter o-> "m_SpriteCategoryList" SpriteCategoryList
+PSDImporter o-> "m_GameObjectFactory" GameObjectCreationFactory
+PSDImporter o-> "m_MosaicPSDLayers<PSDLayer>" "List`1"
+PSDImporter o-> "m_RigPSDLayers<PSDLayer>" "List`1"
+PSDImporter o-> "m_CharacterData" CharacterData
+PSDImporter --> "spriteImportMode" SpriteImportMode
+PSDImporter +-- UniqueNameGenerator
+UniqueNameGenerator o-> "m_NameHash<int>" "List`1"
+PSDImporter +-- GameObjectCreationFactory
+UniqueNameGenerator <|-- GameObjectCreationFactory
+PSDImporter +-- BoneGO
+BoneGO --> "go" GameObject
+@enduml

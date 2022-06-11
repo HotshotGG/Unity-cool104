@@ -1,0 +1,13 @@
+@startuml
+class HalfEdge {
+    + ID : int <<get>> <<set>>
+    + Boundary : int <<get>> <<set>>
+    + HalfEdge(origin:Vertex)
+    + HalfEdge(origin:Vertex, face:Face)
+    + <<override>> ToString() : string
+}
+HalfEdge --> "Origin" Vertex
+HalfEdge --> "Face" Face
+HalfEdge --> "Twin" HalfEdge
+HalfEdge --> "Next" HalfEdge
+@enduml

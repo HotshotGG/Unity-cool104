@@ -1,0 +1,42 @@
+@startuml
+class CollabHistoryWindow {
+    <<const>> kWindowTitle : string = "Collab History"
+    <<const>> kServiceUrl : string = "developer.cloud.unity3d.com"
+    + {static} ShowHistoryWindow() : void
+    + {static} ValidateShowHistoryWindow() : bool
+    m_ItemsPerPage : int = 5
+    m_InProgressRev : string
+    m_RevisionActionsEnabled : bool
+    + CollabHistoryWindow()
+    + OnEnable() : void
+    + OnDisable() : void
+    + revisionActionsEnabled : bool <<get>> <<set>>
+    + SetupGUI() : void
+    + UpdateState(state:HistoryState, force:bool) : void
+    + UpdateRevisions(datas:IEnumerable<RevisionData>, tip:string, totalRevisions:int, currentPage:int) : void
+    + inProgressRevision : string <<get>> <<set>>
+    + itemsPerPage : int <<set>>
+    UpdateHistoryView(history:VisualElement) : void
+    NoSeatClick() : void
+    SignInClick() : void
+}
+class "Dictionary`2"<T1,T2> {
+}
+class "List`1"<T> {
+}
+EditorWindow <|-- CollabHistoryWindow
+ICollabHistoryWindow <|-- CollabHistoryWindow
+CollabHistoryWindow --> "m_Presenter" CollabHistoryPresenter
+CollabHistoryWindow --> "m_Views<HistoryState,VisualElement>" "Dictionary`2"
+CollabHistoryWindow o-> "m_HistoryItems<CollabHistoryItem>" "List`1"
+CollabHistoryWindow --> "m_State" HistoryState
+CollabHistoryWindow --> "m_Container" VisualElement
+CollabHistoryWindow --> "m_Pager" PagedListView
+CollabHistoryWindow --> "m_HistoryView" ScrollView
+CollabHistoryWindow --> "OnPageChangeAction" PageChangeAction
+CollabHistoryWindow --> "OnGoBackAction" RevisionAction
+CollabHistoryWindow --> "OnUpdateAction" RevisionAction
+CollabHistoryWindow --> "OnRestoreAction" RevisionAction
+CollabHistoryWindow --> "OnShowBuildAction" ShowBuildAction
+CollabHistoryWindow --> "OnShowServicesAction" Action
+@enduml

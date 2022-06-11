@@ -1,0 +1,31 @@
+@startuml
+class SequenceState {
+    m_Time : double
+    m_CachedEvaluableRange : Range?
+    + start : double <<get>>
+    + timeScale : double <<get>>
+    + duration : double <<get>>
+    m_IsReadOnly : bool?
+    + isReadOnly : bool <<get>>
+    + ResetIsReadOnly() : void
+    + time : double <<get>> <<set>>
+    + frame : int <<get>> <<set>>
+    + frameRate : float <<get>> <<set>>
+    + SequenceState(windowState:WindowState, asset:TimelineAsset, director:PlayableDirector, hostClip:TimelineClip, parentSequence:SequenceState)
+    + GetEvaluableRange() : Range
+    + TimeAsString(timeValue:double, format:string) : string
+    + ToGlobalTime(t:double) : double
+    + ToLocalTime(t:double) : double
+    GetLocalTime() : double
+    SetLocalTime(newTime:double) : void
+    GetGlobalEvaluableRange() : Range
+    + Dispose() : void
+}
+ISequenceState <|-- SequenceState
+SequenceState --> "m_WindowState" WindowState
+SequenceState --> "m_ParentSequence" SequenceState
+SequenceState --> "asset" TimelineAsset
+SequenceState --> "director" PlayableDirector
+SequenceState --> "hostClip" TimelineClip
+SequenceState --> "viewModel" TimelineAssetViewModel
+@enduml

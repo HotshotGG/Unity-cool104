@@ -1,0 +1,42 @@
+@startuml
+class SpriteBoneInflueceToolController {
+    + SpriteBoneInflueceToolController(model:ISpriteBoneInfluenceToolModel, events:SkinningEvents)
+    + Activate() : void
+    + Deactivate() : void
+    + OnViewCreated() : void
+    + GetSelectedSpriteBoneInfluence() : BoneCache[]
+    + GetSelectedBoneForList(bones:IEnumerable<BoneCache>) : int[]
+    + ShouldEnableAddButton(bones:IEnumerable<BoneCache>) : bool
+    + InCharacterMode() : bool
+}
+interface ISpriteBoneInfluenceToolModel {
+    hasCharacter : bool <<get>>
+    UndoScope(description:string) : UndoScope
+    GetSpriteCharacterPart(sprite:SpriteCache) : CharacterPartCache
+}
+class SpriteBoneInfluenceTool {
+    hasCharacter : bool <<get>>
+    UndoScope(description:string) : UndoScope
+    + <<override>> Initialize(layout:LayoutOverlay) : void
+    + GetSpriteCharacterPart(sprite:SpriteCache) : CharacterPartCache
+}
+class "IEnumerable`1"<T> {
+}
+SpriteBoneInflueceToolController --> "m_Events" SkinningEvents
+SpriteBoneInflueceToolController --> "m_Model" ISpriteBoneInfluenceToolModel
+ISpriteBoneInfluenceToolModel --> "view" ISpriteBoneInfluenceWindow
+ISpriteBoneInfluenceToolModel --> "selectedBones<BoneCache>" "IEnumerable`1"
+ISpriteBoneInfluenceToolModel --> "selectedSprite" SpriteCache
+ISpriteBoneInfluenceToolModel --> "skinningMode" SkinningMode
+ISpriteBoneInfluenceToolModel --> "characterSkeleton" SkeletonCache
+BaseTool <|-- SpriteBoneInfluenceTool
+ISpriteBoneInfluenceToolModel <|-- SpriteBoneInfluenceTool
+SpriteBoneInfluenceTool --> "m_Controller" SpriteBoneInflueceToolController
+SpriteBoneInfluenceTool --> "skeletonTool" SkeletonTool
+SpriteBoneInfluenceTool --> "previewBehaviour" IMeshPreviewBehaviour
+SpriteBoneInfluenceTool --> "view" ISpriteBoneInfluenceWindow
+SpriteBoneInfluenceTool --> "selectedBones<BoneCache>" "IEnumerable`1"
+SpriteBoneInfluenceTool --> "selectedSprite" SpriteCache
+SpriteBoneInfluenceTool --> "skinningMode" SkinningMode
+SpriteBoneInfluenceTool --> "characterSkeleton" SkeletonCache
+@enduml

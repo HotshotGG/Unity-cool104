@@ -1,0 +1,111 @@
+@startuml
+enum BlendKind {
+    None,
+    Ease,
+    Mix,
+}
+enum BlendAngle {
+    Descending,
+    Ascending,
+}
+class IconData <<struct>> {
+    + width : float <<get>>
+    + height : float <<get>>
+    + IconData(icon:Texture2D)
+}
+class ClipBorder {
+    + <<readonly>> thickness : float
+    ClipBorder(color:Color, thickness:float)
+    <<const>> k_ClipSelectionBorder : float = 1.0f
+    <<const>> k_ClipRecordingBorder : float = 2.0f
+    + {static} Recording() : ClipBorder
+    + {static} Selection() : ClipBorder
+    + {static} Default() : ClipBorder
+}
+class ClipBlends <<struct>> {
+    + ClipBlends(inKind:BlendKind, inRect:Rect, outKind:BlendKind, outRect:Rect)
+}
+class ClipDrawData <<struct>> {
+    + title : string
+    + selected : bool
+    + inlineCurvesSelected : bool
+    + localVisibleStartTime : double
+    + localVisibleEndTime : double
+    + previousClipSelected : bool
+    + supportsLooping : bool
+    + minLoopIndex : int
+}
+class ClipDrawer <<static>> {
+    <<const>> k_ClipSwatchLineThickness : float = 4.0f
+    <<const>> k_MinClipWidth : float = 7.0f
+    <<const>> k_ClipInOutMinWidth : float = 15.0f
+    <<const>> k_ClipLoopsMinWidth : float = 20.0f
+    <<const>> k_ClipLabelPadding : float = 6.0f
+    <<const>> k_ClipLabelMinWidth : float = 10.0f
+    <<const>> k_IconsPadding : float = 1.0f
+    <<const>> k_ClipInlineWidth : float = 1.0f
+    {static} GetLoopString(loopIndex:int) : string
+    {static} DrawLoops(drawData:ClipDrawData) : void
+    {static} DrawClipBorder(drawData:ClipDrawData) : void
+    + {static} DrawClipSelectionBorder(clipRect:Rect, border:ClipBorder, blends:ClipBlends) : void
+    {static} DrawBlendLine(rect:Rect, blendAngle:BlendAngle, width:float, color:Color) : void
+    {static} DrawClipBlendSelectionBorder(clipRect:Rect, border:ClipBorder, blends:ClipBlends) : void
+    {static} DrawClipDefaultBorder(clipRect:Rect, border:ClipBorder, blends:ClipBlends) : void
+    {static} DrawClipTimescale(targetRect:Rect, clippedRect:Rect, timeScale:double) : void
+    {static} DrawClipInOut(targetRect:Rect, clip:TimelineClip) : void
+    {static} DrawClipLabel(data:ClipDrawData, availableRect:Rect, color:Color) : void
+    {static} DrawClipLabel(title:string, availableRect:Rect, color:Color, errorText:string) : void
+    {static} DrawClipLabel(title:string, availableRect:Rect, textColor:Color, leftIcons:IconData[], rightIcons:IconData[], tooltipMessage:string) : void
+    {static} DrawClipIcons(icons:IconData[], side:IconData.Side, labelWidth:float, availableRect:Rect) : void
+    {static} DrawClipName(rect:Rect, content:GUIContent, textColor:Color) : void
+    {static} DrawIcon(imageRect:Rect, color:Color, icon:Texture2D) : void
+    {static} DrawClipBackground(clipCenterSection:Rect, selected:bool) : void
+    {static} DrawClipBlends(blends:ClipBlends, inColor:Color, outColor:Color, backgroundColor:Color) : void
+    {static} DrawClipSwatch(targetRect:Rect, swatchColor:Color) : void
+    + {static} DrawSimpleClip(clip:TimelineClip, targetRect:Rect, border:ClipBorder, overlay:Color, drawOptions:ClipDrawOptions) : void
+    + {static} DrawDefaultClip(drawData:ClipDrawData) : void
+    {static} DrawClipEditorBackground(drawData:ClipDrawData) : void
+    + {static} DrawAnimationRecordBorder(drawData:ClipDrawData) : void
+    + {static} DrawRecordProhibited(drawData:ClipDrawData) : void
+    + {static} DrawRecordOnBlend(drawData:ClipDrawData) : void
+    + {static} DrawRecordInvalidClip(drawData:ClipDrawData) : void
+    + {static} DrawInvalidRecordIcon(rect:Rect, helpText:GUIContent) : void
+}
+enum Side {
+    Left= -1,
+    Right= 1,
+}
+class "List`1"<T> {
+}
+class Styles <<static>> {
+    + {static} <<readonly>> HoldText : string
+}
+class "Dictionary`2"<T1,T2> {
+}
+IconData --> "icon" Texture2D
+IconData --> "tint" Color
+ClipBorder --> "color" Color
+ClipBlends --> "inKind" BlendKind
+ClipBlends --> "inRect" Rect
+ClipBlends --> "outKind" BlendKind
+ClipBlends --> "outRect" Rect
+ClipBlends o-> "kNone" ClipBlends
+ClipDrawData --> "clip" TimelineClip
+ClipDrawData --> "targetRect" Rect
+ClipDrawData --> "unclippedRect" Rect
+ClipDrawData --> "clippedRect" Rect
+ClipDrawData --> "clipCenterSection" Rect
+ClipDrawData --> "previousClip" TimelineClip
+ClipDrawData --> "loopRects<Rect>" "List`1"
+ClipDrawData --> "clipBlends" ClipBlends
+ClipDrawData --> "ClipDrawOptions" ClipDrawOptions
+ClipDrawData --> "clipEditor" ClipEditor
+ClipDrawer o-> "s_TitleContent" GUIContent
+ClipDrawer o-> "s_LoopStringCache<int,string>" "Dictionary`2"
+IconData +-- Side
+ClipDrawer +-- Styles
+Styles o-> "iconWarn" Texture2D
+Styles o-> "s_IconNoRecord" Texture2D
+Styles o-> "s_ClipNotRecorable" GUIContent
+Styles o-> "s_ClipNoRecordInBlend" GUIContent
+@enduml

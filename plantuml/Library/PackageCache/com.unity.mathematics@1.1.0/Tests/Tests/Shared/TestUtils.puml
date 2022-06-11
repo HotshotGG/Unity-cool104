@@ -1,0 +1,99 @@
+@startuml
+class TestUtils {
+    + {static} AreEqual(a:bool, b:bool) : void
+    + {static} AreEqual(a:int, b:int) : void
+    + {static} AreEqual(a:uint, b:uint) : void
+    + {static} AreEqual(a:long, b:long) : void
+    + {static} AreEqual(a:ulong, b:ulong) : void
+    + {static} AreEqual(a:float, b:float, delta:float) : void
+    + {static} AreEqual(a:float, b:float, maxUlp:int, signedZeroEqual:bool) : void
+    + {static} AreEqual(a:double, b:double, delta:double) : void
+    + {static} AreEqual(a:double, b:double, maxUlp:int, signedZeroEqual:bool) : void
+    + {static} AreEqual(a:bool2, b:bool2) : void
+    + {static} AreEqual(a:bool3, b:bool3) : void
+    + {static} AreEqual(a:bool4, b:bool4) : void
+    + {static} AreEqual(a:bool2x2, b:bool2x2) : void
+    + {static} AreEqual(a:bool3x2, b:bool3x2) : void
+    + {static} AreEqual(a:bool4x2, b:bool4x2) : void
+    + {static} AreEqual(a:bool2x3, b:bool2x3) : void
+    + {static} AreEqual(a:bool3x3, b:bool3x3) : void
+    + {static} AreEqual(a:bool4x3, b:bool4x3) : void
+    + {static} AreEqual(a:bool2x4, b:bool2x4) : void
+    + {static} AreEqual(a:bool3x4, b:bool3x4) : void
+    + {static} AreEqual(a:bool4x4, b:bool4x4) : void
+    + {static} AreEqual(a:int2, b:int2) : void
+    + {static} AreEqual(a:int3, b:int3) : void
+    + {static} AreEqual(a:int4, b:int4) : void
+    + {static} AreEqual(a:int2x2, b:int2x2) : void
+    + {static} AreEqual(a:int3x2, b:int3x2) : void
+    + {static} AreEqual(a:int4x2, b:int4x2) : void
+    + {static} AreEqual(a:int2x3, b:int2x3) : void
+    + {static} AreEqual(a:int3x3, b:int3x3) : void
+    + {static} AreEqual(a:int4x3, b:int4x3) : void
+    + {static} AreEqual(a:int2x4, b:int2x4) : void
+    + {static} AreEqual(a:int3x4, b:int3x4) : void
+    + {static} AreEqual(a:int4x4, b:int4x4) : void
+    + {static} AreEqual(a:uint2, b:uint2) : void
+    + {static} AreEqual(a:uint3, b:uint3) : void
+    + {static} AreEqual(a:uint4, b:uint4) : void
+    + {static} AreEqual(a:uint2x2, b:uint2x2) : void
+    + {static} AreEqual(a:uint3x2, b:uint3x2) : void
+    + {static} AreEqual(a:uint4x2, b:uint4x2) : void
+    + {static} AreEqual(a:uint2x3, b:uint2x3) : void
+    + {static} AreEqual(a:uint3x3, b:uint3x3) : void
+    + {static} AreEqual(a:uint4x3, b:uint4x3) : void
+    + {static} AreEqual(a:uint2x4, b:uint2x4) : void
+    + {static} AreEqual(a:uint3x4, b:uint3x4) : void
+    + {static} AreEqual(a:uint4x4, b:uint4x4) : void
+    + {static} AreEqual(a:float2, b:float2, delta:float) : void
+    + {static} AreEqual(a:float2, b:float2, maxUlp:int, signedZeroEqual:bool) : void
+    + {static} AreEqual(a:float3, b:float3, delta:float) : void
+    + {static} AreEqual(a:float3, b:float3, maxUlp:int, signedZeroEqual:bool) : void
+    + {static} AreEqual(a:float4, b:float4, delta:float) : void
+    + {static} AreEqual(a:float4, b:float4, maxUlp:int, signedZeroEqual:bool) : void
+    + {static} AreEqual(a:float2x2, b:float2x2, delta:float) : void
+    + {static} AreEqual(a:float2x2, b:float2x2, maxUlp:int, signedZeroEqual:bool) : void
+    + {static} AreEqual(a:float3x2, b:float3x2, delta:float) : void
+    + {static} AreEqual(a:float3x2, b:float3x2, maxUlp:int, signedZeroEqual:bool) : void
+    + {static} AreEqual(a:float4x2, b:float4x2, delta:float) : void
+    + {static} AreEqual(a:float4x2, b:float4x2, maxUlp:int, signedZeroEqual:bool) : void
+    + {static} AreEqual(a:float2x3, b:float2x3, delta:float) : void
+    + {static} AreEqual(a:float2x3, b:float2x3, maxUlp:int, signedZeroEqual:bool) : void
+    + {static} AreEqual(a:float3x3, b:float3x3, delta:float) : void
+    + {static} AreEqual(a:float3x3, b:float3x3, maxUlp:int, signedZeroEqual:bool) : void
+    + {static} AreEqual(a:float4x3, b:float4x3, delta:float) : void
+    + {static} AreEqual(a:float4x3, b:float4x3, maxUlp:int, signedZeroEqual:bool) : void
+    + {static} AreEqual(a:float2x4, b:float2x4, delta:float) : void
+    + {static} AreEqual(a:float2x4, b:float2x4, maxUlp:int, signedZeroEqual:bool) : void
+    + {static} AreEqual(a:float3x4, b:float3x4, delta:float) : void
+    + {static} AreEqual(a:float3x4, b:float3x4, maxUlp:int, signedZeroEqual:bool) : void
+    + {static} AreEqual(a:float4x4, b:float4x4, delta:float) : void
+    + {static} AreEqual(a:float4x4, b:float4x4, maxUlp:int, signedZeroEqual:bool) : void
+    + {static} AreEqual(a:double2, b:double2, delta:double) : void
+    + {static} AreEqual(a:double2, b:double2, maxUlp:int, signedZeroEqual:bool) : void
+    + {static} AreEqual(a:double3, b:double3, delta:double) : void
+    + {static} AreEqual(a:double3, b:double3, maxUlp:int, signedZeroEqual:bool) : void
+    + {static} AreEqual(a:double4, b:double4, delta:double) : void
+    + {static} AreEqual(a:double4, b:double4, maxUlp:int, signedZeroEqual:bool) : void
+    + {static} AreEqual(a:double2x2, b:double2x2, delta:double) : void
+    + {static} AreEqual(a:double2x2, b:double2x2, maxUlp:int, signedZeroEqual:bool) : void
+    + {static} AreEqual(a:double3x2, b:double3x2, delta:double) : void
+    + {static} AreEqual(a:double3x2, b:double3x2, maxUlp:int, signedZeroEqual:bool) : void
+    + {static} AreEqual(a:double4x2, b:double4x2, delta:double) : void
+    + {static} AreEqual(a:double4x2, b:double4x2, maxUlp:int, signedZeroEqual:bool) : void
+    + {static} AreEqual(a:double2x3, b:double2x3, delta:double) : void
+    + {static} AreEqual(a:double2x3, b:double2x3, maxUlp:int, signedZeroEqual:bool) : void
+    + {static} AreEqual(a:double3x3, b:double3x3, delta:double) : void
+    + {static} AreEqual(a:double3x3, b:double3x3, maxUlp:int, signedZeroEqual:bool) : void
+    + {static} AreEqual(a:double4x3, b:double4x3, delta:double) : void
+    + {static} AreEqual(a:double4x3, b:double4x3, maxUlp:int, signedZeroEqual:bool) : void
+    + {static} AreEqual(a:double2x4, b:double2x4, delta:double) : void
+    + {static} AreEqual(a:double2x4, b:double2x4, maxUlp:int, signedZeroEqual:bool) : void
+    + {static} AreEqual(a:double3x4, b:double3x4, delta:double) : void
+    + {static} AreEqual(a:double3x4, b:double3x4, maxUlp:int, signedZeroEqual:bool) : void
+    + {static} AreEqual(a:double4x4, b:double4x4, delta:double) : void
+    + {static} AreEqual(a:double4x4, b:double4x4, maxUlp:int, signedZeroEqual:bool) : void
+    + {static} AreEqual(a:quaternion, b:quaternion, delta:float) : void
+    + {static} AreEqual(a:RigidTransform, b:RigidTransform, delta:float) : void
+}
+@enduml

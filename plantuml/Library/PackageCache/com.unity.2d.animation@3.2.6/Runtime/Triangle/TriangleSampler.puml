@@ -1,0 +1,13 @@
+@startuml
+class TriangleSampler {
+    + TriangleSampler(mesh:Mesh)
+    + TriangleSampler(mesh:Mesh, random:Random)
+    + Reset() : void
+    + Update() : void
+    + GetEnumerator() : IEnumerator<Triangle>
+    GetEnumerator() : System.Collections.IEnumerator
+}
+class "IEnumerable`1"<T> {
+}
+"IEnumerable`1" "<Triangle>" <|-- TriangleSampler
+@enduml

@@ -1,0 +1,7 @@
+@startuml
+class BoundedBiharmonicWeightsGenerator {
+    + Calculate(vertices:Vector2[], edges:Edge[], controlPoints:Vector2[], bones:Edge[], pins:int[]) : BoneWeight[]
+    + DebugMesh(spriteMeshData:ISpriteMeshData, vertices:Vector2[], edges:Edge[], controlPoints:Vector2[], bones:Edge[], pins:int[]) : void
+}
+IWeightsGenerator <|-- BoundedBiharmonicWeightsGenerator
+@enduml

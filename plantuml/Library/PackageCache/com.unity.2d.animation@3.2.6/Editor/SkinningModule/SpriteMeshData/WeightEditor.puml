@@ -1,0 +1,24 @@
+@startuml
+enum WeightEditorMode {
+    AddAndSubtract,
+    GrowAndShrink,
+    Smooth,
+}
+class WeightEditor {
+    + boneIndex : int <<get>> <<set>>
+    + useRelativeValues : bool <<get>>
+    + emptySelectionEditsAll : bool <<get>> <<set>>
+    + autoNormalize : bool <<get>> <<set>>
+    + WeightEditor()
+    + OnEditStart(relative:bool) : void
+    + OnEditEnd() : void
+    + DoEdit(value:float) : void
+}
+class "ISelection`1"<T> {
+}
+WeightEditor --> "spriteMeshData" ISpriteMeshData
+WeightEditor --> "cacheUndo" ICacheUndo
+WeightEditor --> "mode" WeightEditorMode
+WeightEditor --> "selection<int>" "ISelection`1"
+WeightEditor --> "currentMode" WeightEditorMode
+@enduml

@@ -1,0 +1,21 @@
+@startuml
+class QualityMesher {
+    + QualityMesher(mesh:Mesh, config:Configuration)
+    + Apply(quality:QualityOptions, delaunay:bool) : void
+    + AddBadSubseg(badseg:BadSubseg) : void
+    + CheckSeg4Encroach(testsubseg:Osub) : int
+    + TestTriangle(testtri:Otri) : void
+}
+class "Queue`1"<T> {
+}
+class "ILog`1"<T> {
+}
+QualityMesher --> "predicates" IPredicates
+QualityMesher --> "badsubsegs<BadSubseg>" "Queue`1"
+QualityMesher --> "queue" BadTriQueue
+QualityMesher --> "mesh" Mesh
+QualityMesher --> "behavior" Behavior
+QualityMesher --> "newLocation" NewLocation
+QualityMesher --> "logger<LogItem>" "ILog`1"
+QualityMesher --> "newvertex_tri" Triangle
+@enduml

@@ -1,0 +1,42 @@
+@startuml
+interface IClipCurveEditorOwner {
+    inlineCurvesSelected : bool <<get>> <<set>>
+    showLoops : bool <<get>>
+}
+class InlineCurveResizeHandle {
+    + InlineCurveResizeHandle(trackGUI:TimelineTrackGUI)
+    + Draw(headerRect:Rect, trackRect:Rect, state:WindowState) : void
+}
+class InlineCurveEditor {
+    m_LastSelectionWasClip : bool
+    + InlineCurveEditor(trackGUI:TimelineTrackGUI)
+    {static} MouseOverTrackArea(curveRect:Rect, trackRect:Rect) : bool
+    {static} MouseOverHeaderArea(headerRect:Rect, trackRect:Rect) : bool
+    {static} DrawCurveEditor(clipCurveEditorOwner:IClipCurveEditorOwner, state:WindowState, headerRect:Rect, trackRect:Rect, activeRange:Vector2, locked:bool) : void
+    + Draw(headerRect:Rect, trackRect:Rect, state:WindowState) : void
+    + Refresh() : void
+    {static} RefreshInlineCurves(guiItem:IClipCurveEditorOwner) : void
+    DrawCurveEditorForTrack(headerRect:Rect, trackRect:Rect, state:WindowState) : void
+    DrawCurveEditorsForClipsOnTrack(headerRect:Rect, trackRect:Rect, state:WindowState) : void
+    DrawCurvesEditorForNothingSelected(headerRect:Rect, trackRect:Rect, state:WindowState) : void
+    ShouldShowClipCurves(state:WindowState) : bool
+    ShouldShowTrackCurves() : bool
+    TrackHasCurvesToShow() : bool
+    UpdateViewModel() : void
+    {static} HandleCurrentEvent() : void
+}
+IClipCurveEditorOwner --> "clipCurveEditor" ClipCurveEditor
+IClipCurveEditorOwner --> "owner" TrackAsset
+IBounds <|-- InlineCurveResizeHandle
+InlineCurveResizeHandle --> "boundingRect" Rect
+InlineCurveResizeHandle --> "trackGUI" TimelineTrackGUI
+IBounds <|-- InlineCurveEditor
+InlineCurveEditor --> "m_TrackRect" Rect
+InlineCurveEditor --> "m_HeaderRect" Rect
+InlineCurveEditor --> "m_TrackGUI" TimelineTrackGUI
+InlineCurveEditor --> "m_ResizeHandle" InlineCurveResizeHandle
+InlineCurveEditor --> "m_LastSelectedClipGUI" TimelineClipGUI
+InlineCurveEditor --> "boundingRect" Rect
+InlineCurveEditor --> "currentClipGui" TimelineClipGUI
+InlineCurveEditor --> "currentCurveEditor" IClipCurveEditorOwner
+@enduml

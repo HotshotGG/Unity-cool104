@@ -1,0 +1,8 @@
+@startuml
+class SpriteSkinManager {
+}
+class SpriteSkinManagerInternal {
+}
+SpriteSkinManager +-- SpriteSkinManagerInternal
+MonoBehaviour <|-- SpriteSkinManagerInternal
+@enduml

@@ -1,0 +1,9 @@
+@startuml
+class TMPro_TexturePostProcessor {
+    OnPostprocessTexture(texture:Texture2D) : void
+}
+class FontAssetPostProcessor {
+}
+AssetPostprocessor <|-- TMPro_TexturePostProcessor
+AssetPostprocessor <|-- FontAssetPostProcessor
+@enduml

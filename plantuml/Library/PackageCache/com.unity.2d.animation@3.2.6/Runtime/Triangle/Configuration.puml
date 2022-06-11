@@ -1,0 +1,11 @@
+@startuml
+class Configuration {
+    + Configuration()
+    + Configuration(predicates:Func<IPredicates>)
+    + Configuration(predicates:Func<IPredicates>, trianglePool:Func<TrianglePool>)
+}
+class "Func`1"<T> {
+}
+Configuration --> "Predicates<IPredicates>" "Func`1"
+Configuration --> "TrianglePool<TrianglePool>" "Func`1"
+@enduml

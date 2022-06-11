@@ -1,0 +1,28 @@
+@startuml
+class MeshCache {
+    + vertexCount : int <<get>>
+    + boneCount : int <<get>>
+    + GetPosition(index:int) : Vector2
+    + SetPosition(index:int, position:Vector2) : void
+    + GetWeight(index:int) : EditableBoneWeight
+    + SetWeight(index:int, weight:EditableBoneWeight) : void
+    + AddVertex(position:Vector2, weight:BoneWeight) : void
+    + RemoveVertex(index:int) : void
+    GetBoneData(index:int) : SpriteBoneData
+    GetBoneDepth(index:int) : float
+    + Clear() : void
+    + ContainsBone(bone:BoneCache) : bool
+    + SetCompatibleBoneSet(bones:BoneCache[]) : void
+}
+class "List`1"<T> {
+}
+SkinningObject <|-- MeshCache
+ISpriteMeshData <|-- MeshCache
+MeshCache --> "textureDataProvider" ITextureDataProvider
+MeshCache --> "sprite" SpriteCache
+MeshCache --> "vertices<Vertex2D>" "List`1"
+MeshCache --> "vertexPositionOverride<Vector3>" "List`1"
+MeshCache --> "edges<Edge>" "List`1"
+MeshCache --> "indices<int>" "List`1"
+MeshCache --> "frame" Rect
+@enduml

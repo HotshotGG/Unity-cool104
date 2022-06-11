@@ -1,0 +1,30 @@
+@startuml
+class TimelineWindow <<partial>> {
+    TracksGUI(clientRect:Rect, state:WindowState, trackState:TimelineModeGUIState) : void
+    DrawNoSequenceGUI(windowState:WindowState) : void
+    DrawTracksGUI(clientRect:Rect, trackState:TimelineModeGUIState) : void
+    DrawOverlay(overlayData:OverlayData) : void
+    RefreshInlineCurves() : void
+}
+enum OverlayDataTypes {
+    None,
+    BackgroundColor,
+    BackgroundTexture,
+    TextBox,
+}
+class OverlayData <<struct>> {
+    + text : string <<get>>
+    + {static} CreateColorOverlay(rectangle:Rect, backgroundColor:Color) : OverlayData
+    + {static} CreateTextureOverlay(rectangle:Rect, backTexture:Texture2D) : OverlayData
+    + {static} CreateTextBoxOverlay(rectangle:Rect, msg:string, textstyle:GUIStyle, textcolor:Color, bgTextColor:Color, bgTextStyle:GUIStyle) : OverlayData
+}
+TimelineWindow --> "treeView" TimelineTreeViewGUI
+TimelineWindow +-- OverlayDataTypes
+TimelineWindow +-- OverlayData
+OverlayData --> "types" OverlayDataTypes
+OverlayData --> "rect" Rect
+OverlayData --> "texture" Texture2D
+OverlayData --> "color" Color
+OverlayData --> "backgroundTextStyle" GUIStyle
+OverlayData --> "textStyle" GUIStyle
+@enduml

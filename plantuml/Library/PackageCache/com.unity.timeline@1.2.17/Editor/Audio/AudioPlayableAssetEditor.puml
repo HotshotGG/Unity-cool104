@@ -1,0 +1,13 @@
+@startuml
+class AudioPlayableAssetEditor {
+    <<readonly>> k_NoClipAssignedError : string
+    + <<override>> GetClipOptions(clip:TimelineClip) : ClipDrawOptions
+    + <<override>> DrawBackground(clip:TimelineClip, region:ClipBackgroundRegion) : void
+    {static} GammaCorrect(color:Color) : Color
+}
+class "Dictionary`2"<T1,T2> {
+}
+ClipEditor <|-- AudioPlayableAssetEditor
+AudioPlayableAssetEditor o-> "m_PersistentPreviews<TimelineClip,WaveformPreview>" "Dictionary`2"
+AudioPlayableAssetEditor o-> "m_ColorSpace" ColorSpace
+@enduml

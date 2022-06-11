@@ -1,0 +1,9 @@
+@startuml
+class Incremental {
+    + Triangulate(points:IList<Vertex>, config:Configuration) : IMesh
+    GetBoundingBox() : void
+    RemoveBox() : int
+}
+ITriangulator <|-- Incremental
+Incremental --> "mesh" Mesh
+@enduml

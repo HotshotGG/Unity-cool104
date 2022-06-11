@@ -1,0 +1,6 @@
+@startuml
+class CollabHistoryDropDownItem {
+    + CollabHistoryDropDownItem(path:string, action:string)
+}
+VisualElement <|-- CollabHistoryDropDownItem
+@enduml

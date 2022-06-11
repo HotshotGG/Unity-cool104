@@ -1,0 +1,8 @@
+@startuml
+class BoundedVoronoi {
+    offset : int
+    + BoundedVoronoi(mesh:Mesh)
+    + BoundedVoronoi(mesh:Mesh, factory:IVoronoiFactory, predicates:IPredicates)
+}
+VoronoiBase <|-- BoundedVoronoi
+@enduml

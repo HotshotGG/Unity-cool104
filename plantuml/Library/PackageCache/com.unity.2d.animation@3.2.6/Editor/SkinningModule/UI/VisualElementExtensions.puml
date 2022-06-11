@@ -1,0 +1,5 @@
+@startuml
+class VisualElementExtensions <<static>> {
+    + {static} SetHiddenFromLayout(element:VisualElement, isHidden:bool) : void
+}
+@enduml

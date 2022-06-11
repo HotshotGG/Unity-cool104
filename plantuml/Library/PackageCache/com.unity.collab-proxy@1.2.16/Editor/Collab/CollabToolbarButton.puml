@@ -1,0 +1,48 @@
+@startuml
+class CollabToolbarButton {
+    <<const>> kCollabButtonWidth : float = 78.0f
+    m_DynamicTooltip : string
+    {static} m_ShowCollabTooltip : bool = false
+    + CollabToolbarButton()
+    OnUnityConnectUserStateChanged(state:UserInfo) : void
+    OnUnityConnectStateChanged(state:ConnectInfo) : void
+    + <<override>> OnGUI(rect:Rect) : void
+    GUIToScreenRect(guiRect:Rect) : Rect
+    ShowPopup(rect:Rect) : void
+    DoCollabDropDown(rect:Rect) : void
+    + OnCollabStateChanged(info:CollabInfo) : void
+    + UpdateCollabToolbarState() : void
+    ReserveRight(width:float, pos:Rect) : void
+    ReserveBottom(height:float, pos:Rect) : void
+    GetCollabButton() : ButtonWithAnimatedIconRotation
+    + Dispose() : void
+}
+enum CollabToolbarState {
+    NeedToEnableCollab,
+    UpToDate,
+    Conflict,
+    OperationError,
+    ServerHasChanges,
+    FilesToPush,
+    InProgress,
+    Disabled,
+    Offline,
+}
+class CollabToolbarContent {
+    <<readonly>> m_iconName : string
+    <<readonly>> m_toolTip : string
+    + CollabToolbarContent(state:CollabToolbarState, iconName:string, toolTip:string)
+}
+class "Dictionary`2"<T1,T2> {
+}
+SubToolbar <|-- CollabToolbarButton
+IDisposable <|-- CollabToolbarButton
+CollabToolbarButton o-> "m_CollabToolbarState" CollabToolbarState
+CollabToolbarButton --> "m_CollabButton" ButtonWithAnimatedIconRotation
+CollabToolbarButton +-- CollabToolbarState
+CollabToolbarButton +-- CollabToolbarContent
+CollabToolbarContent --> "m_state" CollabToolbarState
+CollabToolbarContent --> "m_CollabIcons<CollabToolbarContent,GUIContent>" "Dictionary`2"
+CollabToolbarContent --> "RegisteredForState" CollabToolbarState
+CollabToolbarContent --> "GuiContent" GUIContent
+@enduml

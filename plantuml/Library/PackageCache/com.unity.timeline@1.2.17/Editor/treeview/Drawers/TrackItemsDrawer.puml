@@ -1,0 +1,14 @@
+@startuml
+class TrackItemsDrawer <<struct>> {
+    + TrackItemsDrawer(parent:IRowGUI)
+    BuildGUICache(parent:IRowGUI) : void
+    + Draw(rect:Rect, state:WindowState) : void
+}
+class "List`1"<T> {
+}
+class "IEnumerable`1"<T> {
+}
+TrackItemsDrawer --> "m_Layers<ItemsLayer>" "List`1"
+TrackItemsDrawer --> "m_ClipsLayer" ClipsLayer
+TrackItemsDrawer --> "clips<TimelineClipGUI>" "IEnumerable`1"
+@enduml

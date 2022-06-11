@@ -1,0 +1,55 @@
+@startuml
+class HistoryTests {
+    + SetUp() : void
+    + TearDown() : void
+    + CollabHistoryPresenter_OnUpdatePage__PropagatesRevisionResult() : void
+    + CollabHistoryPresenter_OnUpdatePage__RevisionNumberingIsInOrder() : void
+    + CollabHistoryPresenter_OnUpdatePage__RevisionNumberingChangesForMorePages() : void
+    + CollabHistoryPresenter_OnUpdatePage__ObtainedIsCalculated() : void
+    + CollabHistoryPresenter_OnUpdatePage__CurrentIsCalculated() : void
+    + CollabHistoryPresenter_OnUpdatePage__InProgressIsCalculated() : void
+    + CollabHistoryPresenter_OnUpdatePage__EnabledIsCalculated() : void
+    + CollabHistoryPresenter_OnUpdatePage__DisabledIsCalculated() : void
+    + CollabHistoryPresenter_OnUpdatePage__BuildStateHasNoneWhenNotTip() : void
+    + CollabHistoryPresenter_OnUpdatePage__BuildStateTipHasNoneWhenEnabled() : void
+    + CollabHistoryPresenter_OnUpdatePage__BuildStateHasConfigureWhenTip() : void
+    + CollabHistoryPresenter_OnUpdatePage__BuildStateHasConfigureWhenZeroBuildStatus() : void
+    + CollabHistoryPresenter_OnUpdatePage__BuildStateHasNoneWhenZeroBuildStatuses() : void
+    + CollabHistoryPresenter_OnUpdatePage__BuildStateHasSuccessWhenCompleteAndSucceeded() : void
+    + CollabHistoryPresenter_OnUpdatePage__BuildStateHasInProgress() : void
+    + CollabHistoryPresenter_OnUpdatePage__BuildStateHasFailure() : void
+    + CollabHistoryPresenter_OnUpdatePage__BuildStateHasFailureWhenAnyBuildsFail() : void
+    + CollabHistoryPresenter_OnUpdatePage__ChangesPropagateThrough() : void
+    + CollabHistoryPresenter_OnUpdatePage__ChangesTotalIsCalculated() : void
+    + CollabHistoryPresenter_OnUpdatePage__ChangesTruncatedIsCalculated() : void
+    + CollabHistoryPresenter_OnUpdatePage__OnlyKeeps10ChangeActions() : void
+    + CollabHistoryPresenter_OnUpdatePage__DeduplicatesMetaFiles() : void
+    + CollabHistoryPresenter_OnUpdatePage__FolderMetaFilesAreCounted() : void
+}
+class TestRevisionsService {
+    +  <<event>> FetchRevisionsCallback : RevisionsDelegate 
+    + tipRevision : string <<get>> <<set>>
+    + currentUser : string <<get>> <<set>>
+    + GetRevisions(offset:int, count:int) : void
+}
+class TestHistoryWindow {
+    + revisionActionsEnabled : bool <<get>> <<set>>
+    + itemsPerPage : int <<get>> <<set>>
+    + errMessage : string <<get>> <<set>>
+    + inProgressRevision : string <<get>> <<set>>
+    + UpdateState(state:HistoryState, force:bool) : void
+    + UpdateRevisions(items:IEnumerable<RevisionData>, tip:string, totalRevisions:int, currPage:int) : void
+}
+class "IEnumerable`1"<T> {
+}
+IRevisionsService <|-- TestRevisionsService
+TestRevisionsService --> "result" RevisionsResult
+ICollabHistoryWindow <|-- TestHistoryWindow
+TestHistoryWindow --> "items<RevisionData>" "IEnumerable`1"
+TestHistoryWindow --> "OnPageChangeAction" PageChangeAction
+TestHistoryWindow --> "OnGoBackAction" RevisionAction
+TestHistoryWindow --> "OnUpdateAction" RevisionAction
+TestHistoryWindow --> "OnRestoreAction" RevisionAction
+TestHistoryWindow --> "OnShowBuildAction" ShowBuildAction
+TestHistoryWindow --> "OnShowServicesAction" Action
+@enduml

@@ -1,0 +1,30 @@
+@startuml
+class SpriteResolverInspector {
+    m_CategorySelectionIndex : int = 0
+    m_PreviousCategoryHash : int = 0
+    m_labelSelectionIndex : int = 0
+    m_PreviouslabelHash : int = 0
+    + OnEnable() : void
+    UpdateSpriteLibrary() : void
+    ValidateCategorySelectionIndexValue() : void
+    + <<override>> OnInspectorGUI() : void
+}
+class Style <<static>> {
+}
+class SpriteCategorySelectionList <<struct>> {
+    + categoryName : string
+    + categoryNameHash : int
+}
+class "Dictionary`2"<T1,T2> {
+}
+Editor <|-- SpriteResolverInspector
+SpriteResolverInspector o-> "m_SpriteLibSelection<int,SpriteCategorySelectionList>" "Dictionary`2"
+SpriteResolverInspector o-> "m_SpriteSelectorWidget" SpriteSelectorWidget
+SpriteResolverInspector --> "spriteResolver" SpriteResolver
+SpriteResolverInspector +-- Style
+Style o-> "noSpriteLibContainer" GUIContent
+Style o-> "categoryLabel" GUIContent
+Style o-> "labelLabel" GUIContent
+Style o-> "categoryIsEmptyLabel" GUIContent
+SpriteResolverInspector +-- SpriteCategorySelectionList
+@enduml

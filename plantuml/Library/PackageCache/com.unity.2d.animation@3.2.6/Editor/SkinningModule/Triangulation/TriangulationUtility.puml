@@ -1,0 +1,6 @@
+@startuml
+class TriangulationUtility {
+    + {static} Triangulate(vertices:IList<Vector2>, edges:IList<Edge>, indices:IList<int>) : void
+    + {static} Tessellate(minAngle:float, maxAngle:float, meshAreaFactor:float, largestTriangleAreaFactor:float, smoothIterations:int, vertices:IList<Vector2>, edges:IList<Edge>, indices:IList<int>) : void
+}
+@enduml

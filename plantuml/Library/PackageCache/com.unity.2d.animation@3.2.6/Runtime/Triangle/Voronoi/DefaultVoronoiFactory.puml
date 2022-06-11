@@ -1,0 +1,10 @@
+@startuml
+class DefaultVoronoiFactory {
+    + Initialize(vertexCount:int, edgeCount:int, faceCount:int) : void
+    + Reset() : void
+    + CreateVertex(x:double, y:double) : Vertex
+    + CreateHalfEdge(origin:Vertex, face:Face) : HalfEdge
+    + CreateFace(vertex:Geometry.Vertex) : Face
+}
+IVoronoiFactory <|-- DefaultVoronoiFactory
+@enduml

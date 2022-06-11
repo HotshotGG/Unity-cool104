@@ -1,0 +1,134 @@
+@startuml
+class PSDImporterEditor {
+    m_IsPOT : bool = false
+    m_ShowAdvanced : bool = false
+    m_ShowExperimental : bool = false
+    m_PlatformSettingsIndex : int
+    m_ShowPerAxisWrapModes : bool = false
+    + <<override>> OnEnable() : void
+    + <<override>> OnInspectorGUI() : void
+    {static} IsPSD(doc:PsdFile) : bool
+    {static} FileColorMode(doc:PsdFile) : PsdColorMode
+    IsCharacterRigged() : bool
+    LoadPlatformSettings() : void
+    StorePlatformSettings() : void
+    DoPlatformSettings() : void
+    DoAdvanceInspector() : void
+    CommonTextureSettingsGUI() : void
+    {static} WrapModeAxisPopup(label:GUIContent, wrapProperty:SerializedProperty) : void
+    DoWrapModePopup() : void
+    IsVolume() : bool
+    DoSpriteInspector() : void
+    DoTextureDefaultInspector() : void
+    ColorSpaceGUI() : void
+    POTScaleGUI() : void
+    ReadableGUI() : void
+    AlphaHandlingGUI() : void
+    MipMapGUI() : void
+    ToggleFromInt(property:SerializedProperty, label:GUIContent) : void
+    EnumPopup(property:SerializedProperty, type:System.Type, label:GUIContent) : void
+    ExportMosaicTexture() : void
+    + <<override>> showImportedObject : bool <<get>>
+}
+class "Dictionary`2"<T1,T2> {
+}
+class Styles {
+    + Styles()
+}
+ScriptedImporterEditor <|-- PSDImporterEditor
+PSDImporterEditor --> "m_TextureType" SerializedProperty
+PSDImporterEditor --> "m_TextureShape" SerializedProperty
+PSDImporterEditor --> "m_SpriteMode" SerializedProperty
+PSDImporterEditor --> "m_SpritePixelsToUnits" SerializedProperty
+PSDImporterEditor --> "m_SpriteMeshType" SerializedProperty
+PSDImporterEditor --> "m_SpriteExtrude" SerializedProperty
+PSDImporterEditor --> "m_Alignment" SerializedProperty
+PSDImporterEditor --> "m_SpritePivot" SerializedProperty
+PSDImporterEditor --> "m_NPOTScale" SerializedProperty
+PSDImporterEditor --> "m_IsReadable" SerializedProperty
+PSDImporterEditor --> "m_sRGBTexture" SerializedProperty
+PSDImporterEditor --> "m_AlphaSource" SerializedProperty
+PSDImporterEditor --> "m_MipMapMode" SerializedProperty
+PSDImporterEditor --> "m_EnableMipMap" SerializedProperty
+PSDImporterEditor --> "m_FadeOut" SerializedProperty
+PSDImporterEditor --> "m_BorderMipMap" SerializedProperty
+PSDImporterEditor --> "m_MipMapsPreserveCoverage" SerializedProperty
+PSDImporterEditor --> "m_AlphaTestReferenceValue" SerializedProperty
+PSDImporterEditor --> "m_MipMapFadeDistanceStart" SerializedProperty
+PSDImporterEditor --> "m_MipMapFadeDistanceEnd" SerializedProperty
+PSDImporterEditor --> "m_AlphaIsTransparency" SerializedProperty
+PSDImporterEditor --> "m_FilterMode" SerializedProperty
+PSDImporterEditor --> "m_Aniso" SerializedProperty
+PSDImporterEditor --> "m_WrapU" SerializedProperty
+PSDImporterEditor --> "m_WrapV" SerializedProperty
+PSDImporterEditor --> "m_WrapW" SerializedProperty
+PSDImporterEditor --> "m_ConvertToNormalMap" SerializedProperty
+PSDImporterEditor --> "m_MosaicLayers" SerializedProperty
+PSDImporterEditor --> "m_ImportHiddenLayers" SerializedProperty
+PSDImporterEditor --> "m_ResliceFromLayer" SerializedProperty
+PSDImporterEditor --> "m_CharacterMode" SerializedProperty
+PSDImporterEditor --> "m_DocumentPivot" SerializedProperty
+PSDImporterEditor --> "m_DocumentAlignment" SerializedProperty
+PSDImporterEditor --> "m_GenerateGOHierarchy" SerializedProperty
+PSDImporterEditor --> "m_PaperDollMode" SerializedProperty
+PSDImporterEditor --> "m_KeepDupilcateSpriteName" SerializedProperty
+PSDImporterEditor o-> "m_AdvanceInspectorGUI<TextureImporterType,Action[]>" "Dictionary`2"
+PSDImporterEditor o-> "m_TexturePlatformSettingsView" TexturePlatformSettingsView
+PSDImporterEditor o-> "m_TexturePlatformSettingsController" TexturePlatformSettingsController
+PSDImporterEditor o-> "m_PlatfromSettings<string,List<TextureImporterPlatformSettings>>" "Dictionary`2"
+PSDImporterEditor +-- Styles
+Styles o-> "textureTypeTitle" GUIContent
+Styles o-> "textureShape" GUIContent
+Styles o-> "textureShapeOptionsDictionnary<TextureImporterShape,GUIContent[]>" "Dictionary`2"
+Styles o-> "textureShapeValuesDictionnary<TextureImporterShape,int[]>" "Dictionary`2"
+Styles o-> "filterMode" GUIContent
+Styles o-> "textureFormat" GUIContent
+Styles o-> "defaultPlatform" GUIContent
+Styles o-> "mipmapFadeOutToggle" GUIContent
+Styles o-> "mipmapFadeOut" GUIContent
+Styles o-> "readWrite" GUIContent
+Styles o-> "alphaSource" GUIContent
+Styles o-> "generateMipMaps" GUIContent
+Styles o-> "sRGBTexture" GUIContent
+Styles o-> "borderMipMaps" GUIContent
+Styles o-> "mipMapsPreserveCoverage" GUIContent
+Styles o-> "alphaTestReferenceValue" GUIContent
+Styles o-> "mipMapFilter" GUIContent
+Styles o-> "npot" GUIContent
+Styles o-> "compressionQuality" GUIContent
+Styles o-> "compressionQualitySlider" GUIContent
+Styles o-> "spriteMode" GUIContent
+Styles o-> "spritePackingTag" GUIContent
+Styles o-> "spritePixelsPerUnit" GUIContent
+Styles o-> "spriteExtrude" GUIContent
+Styles o-> "spriteMeshType" GUIContent
+Styles o-> "spriteAlignment" GUIContent
+Styles o-> "characterAlignment" GUIContent
+Styles o-> "warpNotSupportWarning" GUIContent
+Styles o-> "anisoLevelLabel" GUIContent
+Styles o-> "anisotropicDisableInfo" GUIContent
+Styles o-> "anisotropicForceEnableInfo" GUIContent
+Styles o-> "unappliedSettingsDialogTitle" GUIContent
+Styles o-> "unappliedSettingsDialogContent" GUIContent
+Styles o-> "applyButtonLabel" GUIContent
+Styles o-> "revertButtonLabel" GUIContent
+Styles o-> "spriteEditorButtonLabel" GUIContent
+Styles o-> "resliceFromLayerWarning" GUIContent
+Styles o-> "alphaIsTransparency" GUIContent
+Styles o-> "etc1Compression" GUIContent
+Styles o-> "crunchedCompression" GUIContent
+Styles o-> "showAdvanced" GUIContent
+Styles o-> "platformSettingsLabel" GUIContent
+Styles o-> "wrapModeLabel" GUIContent
+Styles o-> "wrapU" GUIContent
+Styles o-> "wrapV" GUIContent
+Styles o-> "wrapW" GUIContent
+Styles o-> "importHiddenLayer" GUIContent
+Styles o-> "mosaicLayers" GUIContent
+Styles o-> "characterMode" GUIContent
+Styles o-> "generateGOHierarchy" GUIContent
+Styles o-> "resliceFromLayer" GUIContent
+Styles o-> "paperDollMode" GUIContent
+Styles o-> "experimental" GUIContent
+Styles o-> "keepDuplicateSpriteName" GUIContent
+@enduml

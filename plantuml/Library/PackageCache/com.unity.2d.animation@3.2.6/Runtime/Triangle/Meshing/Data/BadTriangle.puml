@@ -1,0 +1,11 @@
+@startuml
+class BadTriangle {
+    + key : double
+    + <<override>> ToString() : string
+}
+BadTriangle --> "poortri" Otri
+BadTriangle --> "org" Vertex
+BadTriangle --> "dest" Vertex
+BadTriangle --> "apex" Vertex
+BadTriangle --> "next" BadTriangle
+@enduml

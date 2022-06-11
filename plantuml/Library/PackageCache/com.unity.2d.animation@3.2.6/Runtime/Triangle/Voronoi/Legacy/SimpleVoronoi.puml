@@ -1,0 +1,20 @@
+@startuml
+class SimpleVoronoi {
+    rayIndex : int
+    + SimpleVoronoi(mesh:Mesh)
+}
+class "Dictionary`2"<T1,T2> {
+}
+class "ICollection`1"<T> {
+}
+class "IEnumerable`1"<T> {
+}
+IVoronoi <|-- SimpleVoronoi
+SimpleVoronoi o-> "predicates" IPredicates
+SimpleVoronoi --> "mesh" Mesh
+SimpleVoronoi --> "regions<int,VoronoiRegion>" "Dictionary`2"
+SimpleVoronoi --> "rayPoints<int,Point>" "Dictionary`2"
+SimpleVoronoi --> "bounds" Rectangle
+SimpleVoronoi --> "Regions<VoronoiRegion>" "ICollection`1"
+SimpleVoronoi --> "Edges<IEdge>" "IEnumerable`1"
+@enduml

@@ -1,0 +1,7 @@
+@startuml
+interface IAssemblyWrapper {
+    Location : string <<get>>
+    GetReferencedAssemblies() : AssemblyName[]
+}
+IAssemblyWrapper --> "Assembly" Assembly
+@enduml

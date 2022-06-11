@@ -1,0 +1,6 @@
+@startuml
+interface ITestAssemblyProvider {
+    GetTestsWithNUnit() : ITest
+    GetUserAssemblies() : IAssemblyWrapper[]
+}
+@enduml

@@ -1,0 +1,67 @@
+@startuml
+abstract class TrackAction {
+    + {abstract} Execute(state:WindowState, tracks:TrackAsset[]) : bool
+    + {static} Invoke(state:WindowState, tracks:TrackAsset[]) : void
+    + {static} GetMenuEntries(state:WindowState, mousePos:Vector2?, tracks:TrackAsset[], items:List<MenuActionItem>) : void
+    + {static} HandleShortcut(state:WindowState, evt:Event, tracks:TrackAsset[]) : bool
+}
+class EditTrackInAnimationWindow {
+    + {static} Do(state:WindowState, track:TrackAsset) : bool
+    + <<override>> Execute(state:WindowState, tracks:TrackAsset[]) : bool
+    {static} CreateTimeControlClipData(track:TrackAsset) : TimelineWindowTimeControl.ClipData
+}
+class LockSelectedTrack {
+    + {static} <<readonly>> LockSelectedTrackOnlyText : string
+    + {static} <<readonly>> UnlockSelectedTrackOnlyText : string
+    + <<override>> Execute(state:WindowState, tracks:TrackAsset[]) : bool
+    + {static} Lock(state:WindowState, tracks:TrackAsset[], shouldlock:bool) : void
+}
+class LockTrack {
+    + {static} <<readonly>> UnlockText : string
+    + <<override>> Execute(state:WindowState, tracks:TrackAsset[]) : bool
+    + {static} SetLockState(tracks:TrackAsset[], shouldLock:bool, state:WindowState) : void
+}
+class ShowHideMarkers {
+    + <<override>> Execute(state:WindowState, tracks:TrackAsset[]) : bool
+    {static} ShowHide(state:WindowState, tracks:TrackAsset[], shouldLock:bool) : void
+}
+class MuteSelectedTrack {
+    + {static} <<readonly>> UnmuteSelectedText : string
+    + <<override>> Execute(state:WindowState, tracks:TrackAsset[]) : bool
+    + {static} Mute(state:WindowState, tracks:TrackAsset[], shouldMute:bool) : void
+}
+class MuteTrack {
+    + {static} <<readonly>> UnMuteText : string
+    + <<override>> Execute(state:WindowState, tracks:TrackAsset[]) : bool
+    + {static} Mute(state:WindowState, tracks:TrackAsset[], shouldMute:bool) : void
+}
+class DeleteTracks {
+    + {static} Do(timeline:TimelineAsset, track:TrackAsset) : void
+    + <<override>> Execute(state:WindowState, tracks:TrackAsset[]) : bool
+}
+class CopyTracksToClipboard {
+    + {static} Do(state:WindowState, tracks:TrackAsset[]) : bool
+    + <<override>> Execute(state:WindowState, tracks:TrackAsset[]) : bool
+}
+class DuplicateTracks {
+    + <<override>> Execute(state:WindowState, tracks:TrackAsset[]) : bool
+}
+class RemoveInvalidMarkersAction {
+    + <<override>> Execute(state:WindowState, tracks:TrackAsset[]) : bool
+}
+class "List`1"<T> {
+}
+MenuItemActionBase <|-- TrackAction
+TrackAction --> "s_ActionClasses<TrackAction>" "List`1"
+TrackAction --> "actions<TrackAction>" "List`1"
+TrackAction <|-- EditTrackInAnimationWindow
+TrackAction <|-- LockSelectedTrack
+TrackAction <|-- LockTrack
+TrackAction <|-- ShowHideMarkers
+TrackAction <|-- MuteSelectedTrack
+TrackAction <|-- MuteTrack
+TrackAction <|-- DeleteTracks
+TrackAction <|-- CopyTracksToClipboard
+TrackAction <|-- DuplicateTracks
+TrackAction <|-- RemoveInvalidMarkersAction
+@enduml

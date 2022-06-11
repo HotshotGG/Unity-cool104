@@ -1,0 +1,7 @@
+@startuml
+class TMP_SpriteAssetMenu <<static>> {
+    {static} CopyTexture(command:MenuCommand) : void
+    {static} UpdateSpriteAsset(command:MenuCommand) : void
+    + {static} CreateSpriteAsset() : void
+}
+@enduml

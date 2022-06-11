@@ -1,0 +1,22 @@
+@startuml
+class RiderScriptEditor {
+    {static} RiderScriptEditor()
+    <<const>> unity_generate_all : string = "unity_generate_all_csproj"
+    + RiderScriptEditor(discovery:IDiscovery, projectGeneration:IGenerator)
+    + OnGUI() : void
+    + SyncIfNeeded(addedFiles:string[], deletedFiles:string[], movedFiles:string[], movedFromFiles:string[], importedFiles:string[]) : void
+    + SyncAll() : void
+    + Initialize(editorInstallationPath:string) : void
+    + OpenProject(path:string, line:int, column:int) : bool
+    {static} IsUnityScript(path:string) : bool
+    {static} GetBaseUnityDeveloperFolder() : string
+    + TryGetInstallationForPath(editorPath:string, installation:CodeEditor.Installation) : bool
+    + {static} IsRiderInstallation(path:string) : bool
+    + {static} CurrentEditor : string <<get>>
+    + CreateSolutionIfDoesntExist() : void
+}
+IExternalCodeEditor <|-- RiderScriptEditor
+RiderScriptEditor --> "m_Discoverability" IDiscovery
+RiderScriptEditor --> "m_ProjectGeneration" IGenerator
+RiderScriptEditor o-> "m_Initiliazer" RiderInitializer
+@enduml

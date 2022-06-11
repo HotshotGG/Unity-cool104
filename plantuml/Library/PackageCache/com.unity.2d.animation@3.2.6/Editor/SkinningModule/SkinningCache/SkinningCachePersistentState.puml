@@ -1,0 +1,48 @@
+@startuml
+interface ISkinningCachePersistentState {
+    lastVisibilityToolActive : bool <<get>> <<set>>
+    lastVisibilityToolIndex : int <<get>> <<set>>
+    lastBrushSize : float <<get>> <<set>>
+    lastBrushHardness : float <<get>> <<set>>
+    lastBrushStep : float <<get>> <<set>>
+}
+class SkinningCachePersistentState {
+    + SkinningCachePersistentState()
+    + SetDefault() : void
+    + lastSpriteId : string <<get>> <<set>>
+    + lastVisibilityToolActive : bool <<get>> <<set>>
+    + lastVisibilityToolIndex : int <<get>> <<set>>
+    + lastBrushSize : float <<get>> <<set>>
+    + lastBrushHardness : float <<get>> <<set>>
+    + lastBrushStep : float <<get>> <<set>>
+}
+class "List`1"<T> {
+}
+class "SerializableDictionary`2"<T1,T2> {
+}
+class "ScriptableSingleton`1"<T> {
+}
+ISkinningCachePersistentState --> "lastSpriteId" String
+ISkinningCachePersistentState --> "lastUsedTool" Tools
+ISkinningCachePersistentState --> "lastBoneSelectionIds<int>" "List`1"
+ISkinningCachePersistentState --> "lastTexture" Texture2D
+ISkinningCachePersistentState --> "lastPreviewPose<int,BonePose>" "SerializableDictionary`2"
+ISkinningCachePersistentState --> "lastBoneVisibility<int,bool>" "SerializableDictionary`2"
+ISkinningCachePersistentState --> "lastBoneExpansion<int,bool>" "SerializableDictionary`2"
+ISkinningCachePersistentState --> "lastSpriteVisibility<string,bool>" "SerializableDictionary`2"
+ISkinningCachePersistentState --> "lastGroupVisibility<int,bool>" "SerializableDictionary`2"
+ISkinningCachePersistentState --> "lastMode" SkinningMode
+ISkinningCachePersistentState --> "lastVertexSelection" IndexedSelection
+"ScriptableSingleton`1" "<SkinningCachePersistentState>" <|-- SkinningCachePersistentState
+ISkinningCachePersistentState <|-- SkinningCachePersistentState
+SkinningCachePersistentState --> "lastUsedTool" Tools
+SkinningCachePersistentState --> "lastBoneSelectionIds<int>" "List`1"
+SkinningCachePersistentState --> "lastTexture" Texture2D
+SkinningCachePersistentState --> "lastPreviewPose<int,BonePose>" "SerializableDictionary`2"
+SkinningCachePersistentState --> "lastBoneVisibility<int,bool>" "SerializableDictionary`2"
+SkinningCachePersistentState --> "lastBoneExpansion<int,bool>" "SerializableDictionary`2"
+SkinningCachePersistentState --> "lastSpriteVisibility<string,bool>" "SerializableDictionary`2"
+SkinningCachePersistentState --> "lastGroupVisibility<int,bool>" "SerializableDictionary`2"
+SkinningCachePersistentState --> "lastMode" SkinningMode
+SkinningCachePersistentState --> "lastVertexSelection" IndexedSelection
+@enduml

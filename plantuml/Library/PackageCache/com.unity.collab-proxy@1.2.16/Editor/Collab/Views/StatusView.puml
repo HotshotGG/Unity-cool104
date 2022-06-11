@@ -1,0 +1,14 @@
+@startuml
+class StatusView {
+    + message : string <<get>> <<set>>
+    + buttonText : string <<get>> <<set>>
+    + StatusView()
+}
+VisualElement <|-- StatusView
+StatusView --> "m_Image" Image
+StatusView --> "m_Message" Label
+StatusView --> "m_Button" Button
+StatusView --> "m_Callback" Action
+StatusView --> "icon" Texture
+StatusView --> "callback" Action
+@enduml

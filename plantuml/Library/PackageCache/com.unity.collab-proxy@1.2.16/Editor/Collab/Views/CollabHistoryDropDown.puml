@@ -1,0 +1,6 @@
+@startuml
+class CollabHistoryDropDown {
+    + CollabHistoryDropDown(changes:ICollection<ChangeData>, changesTotal:int, changesTruncated:bool, revisionId:string)
+}
+VisualElement <|-- CollabHistoryDropDown
+@enduml

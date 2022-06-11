@@ -1,0 +1,80 @@
+@startuml
+class TimelineClipGUI {
+    m_MinLoopIndex : int = 1
+    m_LastDirtyIndex : int
+    m_ClipViewDirty : bool = true
+    supportResize : bool <<get>>
+    {static} <<readonly>> k_MinMixWidth : float = 2
+    {static} <<readonly>> k_MaxHandleWidth : float = 10f
+    {static} <<readonly>> k_MinHandleWidth : float = 1f
+    m_ShowDrillIcon : bool?
+    name : string <<get>>
+    + inlineCurvesSelected : bool <<get>> <<set>>
+    + GetClipBlends() : ClipBlends
+    + <<override>> start : double <<get>>
+    + <<override>> end : double <<get>>
+    + supportsLooping : bool <<get>>
+    showLoops : bool <<get>>
+    + supportsSubTimelines : bool <<get>>
+    + minLoopIndex : int <<get>>
+    + <<override>> Select() : void
+    + <<override>> IsSelected() : bool
+    + <<override>> Deselect() : void
+    + TimelineClipGUI(clip:TimelineClip, parent:IRowGUI, provider:IZOrderProvider)
+    CreateInlineCurveEditor(state:WindowState) : void
+    UpdateDrawData(state:WindowState, drawRect:Rect, title:string, selected:bool, previousClipSelected:bool, rectXOffset:float) : void
+    UpdateClipIcons(state:WindowState) : void
+    {static} UpdateClipDrawOptions(clipEditor:ClipEditor, clip:TimelineClip) : ClipDrawOptions
+    {static} DrawClip(drawData:ClipDrawData) : void
+    + DrawGhostClip(targetRect:Rect) : void
+    + DrawInvalidClip(targetRect:Rect) : void
+    DrawSimpleClip(targetRect:Rect, border:ClipBorder, overlay:Color) : void
+    DrawInto(drawRect:Rect, state:WindowState) : void
+    CalculateClipRectangle(trackRect:Rect, state:WindowState) : void
+    AddToSpacePartitioner(state:WindowState) : void
+    CalculateBlendRect() : void
+    + <<override>> Draw(trackRect:Rect, trackRectChanged:bool, state:WindowState) : void
+    DetectClipChanged(trackRectChanged:bool) : void
+    ResetClipChanged() : void
+    GetExtrapolationIcon(mode:TimelineClip.ClipExtrapolation) : GUIStyle
+    GetPreExtrapolationBounds(trackRect:Rect, clipRect:Rect, icon:GUIStyle) : Rect
+    GetPostExtrapolationBounds(trackRect:Rect, clipRect:Rect, icon:GUIStyle) : Rect
+    {static} DrawExtrapolationIcon(rect:Rect, icon:GUIStyle) : void
+    DrawExtrapolation(trackRect:Rect, clipRect:Rect) : void
+    {static} ProjectRectOnTimeline(rect:Rect, trackRect:Rect, state:WindowState) : Rect
+    CalculateLoopRects(trackRect:Rect, state:WindowState) : void
+    + <<override>> RectToTimeline(trackRect:Rect, state:WindowState) : Rect
+    + SnappableEdgesFor(attractable:IAttractable, manipulateEdges:ManipulateEdges) : IEnumerable<Edge>
+    + ShouldSnapTo(snappable:ISnappable) : bool
+    ShowDrillIcon(resolver:PlayableDirector) : bool
+    {static} AddEdge(edges:List<Edge>, time:double, showEdgeHint:bool) : void
+}
+class "List`1"<T> {
+}
+TimelineItemGUI <|-- TimelineClipGUI
+IClipCurveEditorOwner <|-- TimelineClipGUI
+ISnappable <|-- TimelineClipGUI
+IAttractable <|-- TimelineClipGUI
+TimelineClipGUI --> "m_EditorItem" EditorClip
+TimelineClipGUI --> "m_ClipCenterSection" Rect
+TimelineClipGUI o-> "m_LoopRects<Rect>" "List`1"
+TimelineClipGUI --> "m_ClipDrawData" ClipDrawData
+TimelineClipGUI o-> "m_MixOutRect" Rect
+TimelineClipGUI o-> "m_MixInRect" Rect
+TimelineClipGUI --> "clipCurveEditor" ClipCurveEditor
+TimelineClipGUI --> "previousClip" TimelineClipGUI
+TimelineClipGUI --> "nextClip" TimelineClipGUI
+TimelineClipGUI --> "m_ClipEditor" ClipEditor
+TimelineClipGUI o-> "s_TempSubDirectors<PlayableDirector>" "List`1"
+TimelineClipGUI o-> "k_DiggableClipIcon" IconData
+TimelineClipGUI --> "mixOutRect" Rect
+TimelineClipGUI --> "mixInRect" Rect
+TimelineClipGUI --> "owner" TrackAsset
+TimelineClipGUI --> "drawer" TrackDrawer
+TimelineClipGUI --> "clippedRect" Rect
+TimelineClipGUI --> "item" ITimelineItem
+TimelineClipGUI --> "zOrderProvider" IZOrderProvider
+TimelineClipGUI --> "leftHandle" TimelineClipHandle
+TimelineClipGUI --> "rightHandle" TimelineClipHandle
+TimelineClipGUI --> "clip" TimelineClip
+@enduml

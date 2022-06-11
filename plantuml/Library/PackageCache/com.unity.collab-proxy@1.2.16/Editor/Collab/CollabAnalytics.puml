@@ -1,0 +1,11 @@
+@startuml
+class CollabAnalytics <<static>> {
+    + {static} SendUserAction(category:string, action:string) : void
+    + {static} <<readonly>> historyCategoryString : string = "History"
+}
+class CollabUserActionAnalyticsEvent <<struct>> {
+    + category : string
+    + action : string
+}
+CollabAnalytics +-- CollabUserActionAnalyticsEvent
+@enduml

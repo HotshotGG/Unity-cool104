@@ -1,0 +1,10 @@
+@startuml
+class NewLocation {
+    <<const>> EPS : double = 1e-50
+    + NewLocation(mesh:Mesh, predicates:IPredicates)
+    + FindLocation(org:Vertex, dest:Vertex, apex:Vertex, xi:double, eta:double, offcenter:bool, badotri:Otri) : Point
+}
+NewLocation --> "predicates" IPredicates
+NewLocation --> "mesh" Mesh
+NewLocation --> "behavior" Behavior
+@enduml

@@ -1,0 +1,14 @@
+@startuml
+class DebugWriter {
+    iteration : int
+    session : string
+    tmpFile : string
+    triangles : int
+    {static} DebugWriter()
+    + Start(session:string) : void
+    + Write(mesh:Mesh, skip:bool) : void
+    + Finish() : void
+}
+DebugWriter o-> "nfi" NumberFormatInfo
+DebugWriter --> "stream" StreamWriter
+@enduml

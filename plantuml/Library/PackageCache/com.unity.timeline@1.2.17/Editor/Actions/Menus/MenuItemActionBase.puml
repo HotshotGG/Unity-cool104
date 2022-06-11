@@ -1,0 +1,29 @@
+@startuml
+enum MenuActionDisplayState {
+    Visible,
+    Disabled,
+    Hidden,
+}
+class MenuActionItem <<struct>> {
+    + category : string
+    + entryName : string
+    + shortCut : string
+    + priority : int
+    + isChecked : bool
+    + isActiveInMode : bool
+}
+class MenuItemActionBase {
+    + mousePosition : Vector2? <<get>> <<set>>
+    + {static} GetActionsOfType(actionType:Type) : IEnumerable<Type>
+    + {static} GetShortcutAttributeForAction(action:MenuItemActionBase) : ShortcutAttribute
+    + {static} BuildMenu(menu:GenericMenu, items:List<MenuActionItem>) : void
+    + {static} GetActiveInModeAttribute(action:MenuItemActionBase) : ActiveInModeAttribute
+    + {static} IsActionActiveInMode(action:MenuItemActionBase, mode:TimelineModes) : bool
+    + priority : int <<get>>
+    + category : string <<get>>
+    + menuName : string <<get>>
+    + shortCut : string <<get>>
+    + showInMenu : bool <<get>>
+}
+MenuActionItem --> "state" MenuActionDisplayState
+@enduml

@@ -1,0 +1,6 @@
+@startuml
+interface IQualityMesher {
+    Triangulate(polygon:IPolygon, quality:QualityOptions) : IMesh
+    Triangulate(polygon:IPolygon, options:ConstraintOptions, quality:QualityOptions) : IMesh
+}
+@enduml

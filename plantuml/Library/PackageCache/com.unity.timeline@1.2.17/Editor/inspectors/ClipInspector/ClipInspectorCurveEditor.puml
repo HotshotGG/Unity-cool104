@@ -1,0 +1,29 @@
+@startuml
+class ClipInspectorCurveEditor {
+    <<const>> k_HeaderHeight : float = 30
+    <<const>> k_PresetHeight : float = 30
+    + {static} <<readonly>> kDisableTrackTime : double
+    m_trackTime : double
+    + trackTime : double <<get>> <<set>>
+    + headerString : string <<get>> <<set>>
+    + ClipInspectorCurveEditor()
+    {static} ConsumeMouseEvents(rect:Rect) : void
+    DrawPresets(position:Rect, curveLibrary:PresetLibrary) : void
+    DrawTrackHead(clientRect:Rect) : void
+    DrawLegend(r:Rect) : void
+    {static} LabelName(propertyName:string) : string
+    + SetCurves(curves:AnimationCurve[], bindings:EditorCurveBinding[]) : void
+    ProcessUpdates() : void
+    + SetSelected(curve:AnimationCurve) : void
+    UpdateSelectionColors() : void
+    + {static} CurveField(title:GUIContent, property:SerializedProperty, onClick:Action<SerializedProperty>) : void
+    {static} DrawCurve(controlRect:Rect, property:SerializedProperty, onClick:Action<SerializedProperty>, fgColor:Color, bgColor:Color) : Rect
+}
+class "Action`2"<T1,T2> {
+}
+ClipInspectorCurveEditor --> "m_CurveEditor" CurveEditor
+ClipInspectorCurveEditor --> "m_CurveUpdatedCallback<AnimationCurve,EditorCurveBinding>" "Action`2"
+ClipInspectorCurveEditor o-> "m_TextContent" GUIContent
+ClipInspectorCurveEditor --> "m_LabelStyle" GUIStyle
+ClipInspectorCurveEditor --> "m_LegendStyle" GUIStyle
+@enduml

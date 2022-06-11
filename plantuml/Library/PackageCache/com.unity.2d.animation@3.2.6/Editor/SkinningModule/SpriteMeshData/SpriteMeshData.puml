@@ -1,0 +1,52 @@
+@startuml
+class SpriteBoneData {
+    + name : string
+    + parentId : int
+    + depth : float
+    + length : float
+}
+interface ISpriteMeshData {
+    vertexCount : int <<get>>
+    boneCount : int <<get>>
+    GetPosition(index:int) : Vector2
+    SetPosition(index:int, position:Vector2) : void
+    GetWeight(index:int) : EditableBoneWeight
+    SetWeight(index:int, weight:EditableBoneWeight) : void
+    AddVertex(position:Vector2, weight:BoneWeight) : void
+    RemoveVertex(index:int) : void
+    GetBoneData(index:int) : SpriteBoneData
+    GetBoneDepth(index:int) : float
+    Clear() : void
+}
+class SpriteMeshData {
+    + vertexCount : int <<get>>
+    + boneCount : int <<get>>
+    + GetPosition(index:int) : Vector2
+    + SetPosition(index:int, position:Vector2) : void
+    + GetWeight(index:int) : EditableBoneWeight
+    + SetWeight(index:int, weight:EditableBoneWeight) : void
+    + AddVertex(position:Vector2, weight:BoneWeight) : void
+    + RemoveVertex(index:int) : void
+    + GetBoneData(index:int) : SpriteBoneData
+    + GetBoneDepth(index:int) : float
+    + Clear() : void
+}
+class "List`1"<T> {
+}
+SpriteBoneData --> "localPosition" Vector2
+SpriteBoneData o-> "localRotation" Quaternion
+SpriteBoneData --> "position" Vector2
+SpriteBoneData --> "endPosition" Vector2
+ISpriteMeshData --> "frame" Rect
+ISpriteMeshData --> "indices<int>" "List`1"
+ISpriteMeshData --> "edges<Edge>" "List`1"
+ISpriteMeshData <|-- SpriteMeshData
+SpriteMeshData o-> "spriteID" GUID
+SpriteMeshData o-> "pivot" Vector2
+SpriteMeshData o-> "m_Bones<SpriteBoneData>" "List`1"
+SpriteMeshData --> "frame" Rect
+SpriteMeshData --> "vertices<Vertex2D>" "List`1"
+SpriteMeshData --> "indices<int>" "List`1"
+SpriteMeshData --> "edges<Edge>" "List`1"
+SpriteMeshData --> "bones<SpriteBoneData>" "List`1"
+@enduml

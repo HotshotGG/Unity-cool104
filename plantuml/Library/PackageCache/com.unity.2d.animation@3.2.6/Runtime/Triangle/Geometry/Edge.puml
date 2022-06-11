@@ -1,0 +1,10 @@
+@startuml
+class Edge {
+    + P0 : int <<get>>
+    + P1 : int <<get>>
+    + Label : int <<get>>
+    + Edge(p0:int, p1:int)
+    + Edge(p0:int, p1:int, label:int)
+}
+IEdge <|-- Edge
+@enduml

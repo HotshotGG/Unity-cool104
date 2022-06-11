@@ -1,0 +1,39 @@
+@startuml
+interface ISpriteBoneInfluenceWindow {
+    headerText : string <<get>> <<set>>
+    SetHiddenFromLayout(hide:bool) : void
+    OnSpriteSelectionChanged() : void
+    OnSkeletonChanged() : void
+    OnMeshChanged() : void
+    visible : bool <<get>>
+    OnBoneSelectionChanged() : void
+     <<event>> onAddBone : Action 
+     <<event>> onRemoveBone : Action 
+     <<event>> onReordered : Action<IEnumerable<BoneCache>> 
+     <<event>> onSelectionChanged : Action<IEnumerable<BoneCache>> 
+    SetController(controller:SpriteBoneInflueceToolController) : void
+}
+class SpriteBoneInfluenceWindow {
+    +  <<event>> onAddBone : Action 
+    +  <<event>> onRemoveBone : Action 
+    +  <<event>> onReordered : Action<IEnumerable<BoneCache>> 
+    +  <<event>> onSelectionChanged : Action<IEnumerable<BoneCache>> 
+    + headerText : string <<get>> <<set>>
+    InternalGetController() : SpriteBoneInflueceToolController
+    + OnSpriteSelectionChanged() : void
+    + OnMeshChanged() : void
+    + OnSkeletonChanged() : void
+    + OnBoneSelectionChanged() : void
+    SetController(controller:SpriteBoneInflueceToolController) : void
+    SetHiddenFromLayout(hide:bool) : void
+}
+class CustomUxmlFactory {
+}
+class "UxmlFactory`2"<T1,T2> {
+}
+VisualElement <|-- SpriteBoneInfluenceWindow
+ISpriteBoneInfluenceWindow <|-- SpriteBoneInfluenceWindow
+SpriteBoneInfluenceWindow --> "m_Controller" SpriteBoneInflueceToolController
+SpriteBoneInfluenceWindow +-- CustomUxmlFactory
+"UxmlFactory`2" "<SpriteBoneInfluenceWindow,UxmlTraits>" <|-- CustomUxmlFactory
+@enduml

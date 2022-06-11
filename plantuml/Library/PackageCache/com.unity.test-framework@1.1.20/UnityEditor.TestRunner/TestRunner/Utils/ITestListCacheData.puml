@@ -1,0 +1,8 @@
+@startuml
+interface ITestListCacheData {
+}
+class "List`1"<T> {
+}
+ITestListCacheData --> "platforms<TestPlatform>" "List`1"
+ITestListCacheData --> "cachedData<ITest>" "List`1"
+@enduml

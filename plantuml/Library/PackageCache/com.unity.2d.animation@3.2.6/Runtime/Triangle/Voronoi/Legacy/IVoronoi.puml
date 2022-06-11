@@ -1,0 +1,10 @@
+@startuml
+interface IVoronoi {
+}
+class "ICollection`1"<T> {
+}
+class "IEnumerable`1"<T> {
+}
+IVoronoi --> "Regions<VoronoiRegion>" "ICollection`1"
+IVoronoi --> "Edges<IEdge>" "IEnumerable`1"
+@enduml

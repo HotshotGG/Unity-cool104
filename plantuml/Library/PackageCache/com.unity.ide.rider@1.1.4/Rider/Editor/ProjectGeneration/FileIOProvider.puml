@@ -1,0 +1,8 @@
+@startuml
+class FileIOProvider {
+    + Exists(fileName:string) : bool
+    + ReadAllText(fileName:string) : string
+    + WriteAllText(fileName:string, content:string) : void
+}
+IFileIO <|-- FileIOProvider
+@enduml

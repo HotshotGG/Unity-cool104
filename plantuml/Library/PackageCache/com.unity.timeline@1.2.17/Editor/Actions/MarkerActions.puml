@@ -1,0 +1,8 @@
+@startuml
+class CopyMarkersToClipboard {
+    + <<override>> Execute(state:WindowState, markers:IMarker[]) : bool
+}
+class "ItemAction`1"<T> {
+}
+MarkerAction <|-- CopyMarkersToClipboard
+@enduml

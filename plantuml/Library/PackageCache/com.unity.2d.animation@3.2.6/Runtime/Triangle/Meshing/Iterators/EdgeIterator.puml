@@ -1,0 +1,20 @@
+@startuml
+class EdgeIterator {
+    + EdgeIterator(mesh:Mesh)
+    + Dispose() : void
+    Current : object <<get>>
+    + MoveNext() : bool
+    + Reset() : void
+}
+class "IEnumerator`1"<T> {
+}
+"IEnumerator`1" "<Edge>" <|-- EdgeIterator
+EdgeIterator --> "triangles<Triangle>" "IEnumerator`1"
+EdgeIterator o-> "tri" Otri
+EdgeIterator o-> "neighbor" Otri
+EdgeIterator o-> "sub" Osub
+EdgeIterator --> "current" Edge
+EdgeIterator --> "p1" Vertex
+EdgeIterator --> "p2" Vertex
+EdgeIterator --> "Current" Edge
+@enduml

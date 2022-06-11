@@ -1,0 +1,33 @@
+@startuml
+class Mesh {
+    + NumberOfInputPoints : int <<get>>
+    + NumberOfEdges : int <<get>>
+    + IsPolygon : bool <<get>>
+    + Mesh(config:Configuration)
+    + Refine(quality:QualityOptions, delaunay:bool) : void
+    + Renumber() : void
+    + Renumber(num:NodeNumbering) : void
+}
+class "ILog`1"<T> {
+}
+class "Stack`1"<T> {
+}
+class "ICollection`1"<T> {
+}
+class "IList`1"<T> {
+}
+class "IEnumerable`1"<T> {
+}
+IMesh <|-- Mesh
+Mesh --> "predicates" IPredicates
+Mesh --> "logger<LogItem>" "ILog`1"
+Mesh --> "qualityMesher" QualityMesher
+Mesh --> "flipstack<Otri>" "Stack`1"
+Mesh --> "Bounds" Rectangle
+Mesh --> "Vertices<Vertex>" "ICollection`1"
+Mesh --> "Holes<Point>" "IList`1"
+Mesh --> "Triangles<Triangle>" "ICollection`1"
+Mesh --> "Segments<SubSegment>" "ICollection`1"
+Mesh --> "Edges<Edge>" "IEnumerable`1"
+Mesh --> "CurrentNumbering" NodeNumbering
+@enduml

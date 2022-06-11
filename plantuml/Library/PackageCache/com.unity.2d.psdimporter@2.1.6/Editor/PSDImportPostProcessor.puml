@@ -1,0 +1,6 @@
+@startuml
+class PSDImportPostProcessor {
+    OnPostprocessSprites(texture:Texture2D, sprites:Sprite[]) : void
+}
+AssetPostprocessor <|-- PSDImportPostProcessor
+@enduml

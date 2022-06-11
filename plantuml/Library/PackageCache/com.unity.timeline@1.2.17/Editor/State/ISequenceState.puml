@@ -1,0 +1,42 @@
+@startuml
+interface ISequenceState {
+    start : double <<get>>
+    timeScale : double <<get>>
+    duration : double <<get>>
+    isReadOnly : bool <<get>>
+    time : double <<get>> <<set>>
+    frame : int <<get>> <<set>>
+    frameRate : float <<get>> <<set>>
+    GetEvaluableRange() : Range
+    TimeAsString(timeValue:double, format:string) : string
+    ToGlobalTime(t:double) : double
+    ToLocalTime(t:double) : double
+    ResetIsReadOnly() : void
+}
+class NullSequenceState {
+    + start : double <<get>>
+    + timeScale : double <<get>>
+    + duration : double <<get>>
+    + isReadOnly : bool <<get>>
+    + time : double <<get>> <<set>>
+    + frame : int <<get>> <<set>>
+    + frameRate : float <<get>> <<set>>
+    + GetEvaluableRange() : Range
+    + TimeAsString(timeValue:double, format:string) : string
+    + ToGlobalTime(t:double) : double
+    + ToLocalTime(t:double) : double
+    + ResetIsReadOnly() : void
+    + Dispose() : void
+}
+IDisposable <|-- ISequenceState
+ISequenceState --> "asset" TimelineAsset
+ISequenceState --> "director" PlayableDirector
+ISequenceState --> "hostClip" TimelineClip
+ISequenceState --> "viewModel" TimelineAssetViewModel
+ISequenceState <|-- NullSequenceState
+NullSequenceState --> "asset" TimelineAsset
+NullSequenceState --> "director" PlayableDirector
+NullSequenceState --> "hostClip" TimelineClip
+NullSequenceState --> "m_ViewModel" TimelineAssetViewModel
+NullSequenceState --> "viewModel" TimelineAssetViewModel
+@enduml

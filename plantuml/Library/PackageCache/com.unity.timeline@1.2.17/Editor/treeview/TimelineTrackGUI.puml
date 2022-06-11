@@ -1,0 +1,85 @@
+@startuml
+class TimelineTrackGUI {
+    m_InlineCurvesSkipped : bool
+    m_TrackHash : int
+    m_BlendHash : int
+    m_LastDirtyIndex : int
+    + <<override>> expandable : bool <<get>>
+    + inlineCurvesSelected : bool <<get>> <<set>>
+    showLoops : bool <<get>>
+    {static} DoesTrackAllowsRecording(track:TrackAsset) : bool
+    m_TrackHasAnimatableParameters : bool?
+    trackHasAnimatableParameters : bool <<get>>
+    + locked : bool <<get>>
+    + showMarkers : bool <<get>>
+    + muted : bool <<get>>
+    showTrackRecordingDisabled : bool <<get>>
+    + TimelineTrackGUI(tv:TreeViewController, w:TimelineTreeViewGUI, id:int, depth:int, parent:TreeViewItem, displayName:string, sequenceActor:TrackAsset)
+    + <<override>> GetVerticalSpacingBetweenTracks() : float
+    UpdateInfiniteClipEditor(window:TimelineWindow) : void
+    DetectTrackChanged() : void
+    OnTrackChanged() : void
+    UpdateDrawData(state:WindowState) : void
+    + <<override>> Draw(headerRect:Rect, contentRect:Rect, state:WindowState) : void
+    DrawInlineCurves(curvesHeaderRect:Rect, curvesContentRect:Rect, state:WindowState) : void
+    {static} IsInlineCurvesEditorInBounds(windowSpaceTrackRect:Rect, inlineCurveHeight:float, state:WindowState) : bool
+    DrawErrorIcon(position:Rect, state:WindowState) : void
+    DrawBackground(trackRect:Rect, trackAsset:TrackAsset, visibleTime:Vector2, state:WindowState) : void
+    InlineCurveHeight() : float
+    + <<override>> GetHeight(state:WindowState) : float
+    GetTrackContentHeight(state:WindowState) : float
+    {static} CanDrawIcon(icon:GUIContent) : bool
+    showSceneReference : bool <<get>>
+    DrawTrackHeader(trackHeaderRect:Rect, state:WindowState) : void
+    DrawHeaderBackground(headerRect:Rect) : void
+    DrawTrackColorKind(rect:Rect) : void
+    DrawTrackIconKind(rect:Rect, state:WindowState) : float
+    DrawTrackBinding(rect:Rect, headerRect:Rect) : void
+    DrawTrackDropDownMenu(rect:Rect) : float
+    CanDrawInlineCurve() : bool
+    DrawInlineCurveButton(rect:Rect, state:WindowState) : float
+    DrawRecordButton(rect:Rect, state:WindowState) : float
+    DrawCustomTrackButton(rect:Rect, state:WindowState) : float
+    DrawLockMarkersButton(rect:Rect, state:WindowState) : float
+    {static} ObjectBindingField(position:Rect, obj:Object, binding:PlayableBinding) : void
+    DoTrackBindingGUI(rect:Rect, headerRect:Rect) : void
+    IsRecording(state:WindowState) : bool
+    DrawRecordingTrackBackground(trackRect:Rect, trackAsset:TrackAsset, visibleTime:Vector2, state:WindowState) : void
+    UpdateClipOverlaps() : void
+    BlendHash() : int
+    + <<override>> OnGraphRebuilt() : void
+    RefreshCurveEditor() : void
+}
+class TrackDrawData <<struct>> {
+    + m_AllowsRecording : bool
+    + m_ShowTrackBindings : bool
+    + m_HasBinding : bool
+    + m_IsSubTrack : bool
+}
+class Styles <<static>> {
+    + {static} <<readonly>> kArmForRecordDisabled : string
+}
+class "List`1"<T> {
+}
+TimelineGroupGUI <|-- TimelineTrackGUI
+IClipCurveEditorOwner <|-- TimelineTrackGUI
+IRowGUI <|-- TimelineTrackGUI
+TimelineTrackGUI --> "s_ArmForRecordContentOn" GUIContent
+TimelineTrackGUI --> "s_ArmForRecordContentOff" GUIContent
+TimelineTrackGUI --> "s_ArmForRecordDisabled" GUIContent
+TimelineTrackGUI --> "m_InfiniteTrackDrawer" InfiniteTrackDrawer
+TimelineTrackGUI --> "m_ItemsDrawer" TrackItemsDrawer
+TimelineTrackGUI --> "m_TrackDrawData" TrackDrawData
+TimelineTrackGUI --> "m_TrackDrawOptions" TrackDrawOptions
+TimelineTrackGUI --> "m_TrackEditor" TrackEditor
+TimelineTrackGUI --> "m_DefaultTrackIcon" GUIContent
+TimelineTrackGUI --> "clipCurveEditor" ClipCurveEditor
+TimelineTrackGUI --> "owner" TrackAsset
+TimelineTrackGUI --> "clips<TimelineClipGUI>" "List`1"
+TimelineTrackGUI --> "asset" TrackAsset
+TimelineTrackGUI +-- TrackDrawData
+TrackDrawData --> "m_Binding" PlayableBinding
+TrackDrawData --> "m_TrackIcon" Texture
+TimelineTrackGUI +-- Styles
+Styles o-> "kProblemIcon" Texture2D
+@enduml

@@ -1,0 +1,51 @@
+@startuml
+class MeshVisibilityTool {
+    + MeshVisibilityTool(s:SkinningCache)
+    + Setup() : void
+    + Dispose() : void
+    + name : string <<get>>
+    + Activate() : void
+    + Deactivate() : void
+    + isAvailable : bool <<get>>
+    + SetAvailabilityChangeCallback(callback:Action) : void
+    SetAllVisibility(visibility:bool) : void
+    SetAllMeshVisibility() : void
+    GetAllVisibility() : bool
+}
+class MeshVisibilityToolModel {
+    m_AllVisibility : bool = true
+    m_PreviousVisibility : bool = true
+    + allVisibility : bool <<get>> <<set>>
+    + SetMeshVisibility(sprite:SpriteCache, visibility:bool) : void
+    + GetMeshVisibility(sprite:SpriteCache) : bool
+    + ShouldDisable(sprite:SpriteCache) : bool
+    + previousVisiblity : bool <<get>> <<set>>
+}
+class MeshVisibilityToolView {
+    + MeshVisibilityToolView(s:SkinningCache)
+    InternalGetModel() : MeshVisibilityToolModel
+    + Setup(sprites:SpriteCache[]) : void
+    InternalGetAllVisibility() : bool
+    InternalSetAllVisibility(visibility:bool) : void
+}
+class MeshTreeView {
+    + MeshTreeView(treeViewState:TreeViewState, header:MultiColumnHeader)
+    + Setup(sprites:SpriteCache[]) : void
+    + SetSelection(sprite:SpriteCache) : void
+}
+class "Func`1"<T> {
+}
+class "Action`1"<T> {
+}
+IVisibilityTool <|-- MeshVisibilityTool
+MeshVisibilityTool --> "skinningCache" SkinningCache
+MeshVisibilityTool --> "view" VisualElement
+SkinningObject <|-- MeshVisibilityToolModel
+VisibilityToolViewBase <|-- MeshVisibilityToolView
+MeshVisibilityToolView o-> "GetModel<MeshVisibilityToolModel>" "Func`1"
+MeshVisibilityToolView o-> "SetAllVisibility<bool>" "Action`1"
+MeshVisibilityToolView o-> "GetAllVisibility<bool>" "Func`1"
+MeshVisibilityToolView --> "skinningCache" SkinningCache
+VisibilityTreeViewBase <|-- MeshTreeView
+MeshTreeView o-> "GetModel<MeshVisibilityToolModel>" "Func`1"
+@enduml

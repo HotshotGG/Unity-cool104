@@ -1,0 +1,16 @@
+@startuml
+class Triangle {
+    + Triangle()
+    + ID : int <<get>> <<set>>
+    + Label : int <<get>> <<set>>
+    + Area : double <<get>> <<set>>
+    + GetVertex(index:int) : Vertex
+    + GetVertexID(index:int) : int
+    + GetNeighbor(index:int) : ITriangle
+    + GetNeighborID(index:int) : int
+    + GetSegment(index:int) : ISegment
+    + <<override>> GetHashCode() : int
+    + <<override>> ToString() : string
+}
+ITriangle <|-- Triangle
+@enduml

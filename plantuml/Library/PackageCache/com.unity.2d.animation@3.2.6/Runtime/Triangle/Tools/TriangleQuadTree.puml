@@ -1,0 +1,32 @@
+@startuml
+class TriangleQuadTree {
+    + TriangleQuadTree(mesh:Mesh, maxDepth:int, sizeBound:int)
+    + Query(x:double, y:double) : ITriangle
+}
+class QuadNode {
+    <<const>> SW : int = 0
+    <<const>> SE : int = 1
+    <<const>> NW : int = 2
+    <<const>> NE : int = 3
+    <<const>> EPS : double = 1e-6
+    bitRegions : byte
+    + QuadNode(box:Rectangle, tree:TriangleQuadTree)
+    + QuadNode(box:Rectangle, tree:TriangleQuadTree, init:bool)
+    + FindTriangles(searchPoint:Point) : List<int>
+    + CreateSubRegion(currentDepth:int) : void
+    AddTriangleToRegion(triangle:Point[], index:int) : void
+    FindTriangleIntersections(triangle:Point[], index:int) : void
+    FindIntersectionsWithX(dx:double, dy:double, triangle:Point[], index:int, k:int) : void
+    FindIntersectionsWithY(dx:double, dy:double, triangle:Point[], index:int, k:int) : void
+    FindRegion(point:Point) : int
+    AddToRegion(index:int, region:int) : void
+}
+class "List`1"<T> {
+}
+TriangleQuadTree --> "root" QuadNode
+TriangleQuadTree +-- QuadNode
+QuadNode --> "bounds" Rectangle
+QuadNode --> "pivot" Point
+QuadNode --> "tree" TriangleQuadTree
+QuadNode --> "triangles<int>" "List`1"
+@enduml

@@ -1,0 +1,25 @@
+@startuml
+class CollabHistoryPresenter {
+    + <<const>> ItemsPerPage : int = 5
+    m_IsCollabError : bool
+    m_TotalRevisions : int
+    m_CurrentPage : int
+    m_RequestedPage : int
+    m_FetchInProgress : bool
+    m_ProgressRevision : string
+    + BuildServiceEnabled : bool <<get>> <<set>>
+    + CollabHistoryPresenter(window:ICollabHistoryWindow, factory:ICollabHistoryItemFactory, service:IRevisionsService)
+    + OnWindowEnabled() : void
+    + OnWindowDisabled() : void
+    + UpdateBuildServiceStatus() : void
+    + ShowBuildForCommit(revisionID:string) : void
+    + ShowServicePage() : void
+    + OnUpdatePage(page:int) : void
+}
+CollabHistoryPresenter --> "m_Window" ICollabHistoryWindow
+CollabHistoryPresenter --> "m_Factory" ICollabHistoryItemFactory
+CollabHistoryPresenter --> "m_Service" IRevisionsService
+CollabHistoryPresenter --> "m_ConnectState" ConnectInfo
+CollabHistoryPresenter --> "m_CollabState" CollabInfo
+CollabHistoryPresenter --> "m_BuildAccess" BuildAccess
+@enduml

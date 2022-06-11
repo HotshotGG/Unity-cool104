@@ -1,0 +1,18 @@
+@startuml
+interface IMesh {
+    Renumber() : void
+    Refine(quality:QualityOptions, delaunay:bool) : void
+}
+class "ICollection`1"<T> {
+}
+class "IEnumerable`1"<T> {
+}
+class "IList`1"<T> {
+}
+IMesh --> "Vertices<Vertex>" "ICollection`1"
+IMesh --> "Edges<Edge>" "IEnumerable`1"
+IMesh --> "Segments<SubSegment>" "ICollection`1"
+IMesh --> "Triangles<Triangle>" "ICollection`1"
+IMesh --> "Holes<Point>" "IList`1"
+IMesh --> "Bounds" Rectangle
+@enduml

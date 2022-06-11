@@ -1,0 +1,5 @@
+@startuml
+class UnityUtils <<static>> {
+}
+UnityUtils --> "UnityVersion" Version
+@enduml

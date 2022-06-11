@@ -1,0 +1,38 @@
+@startuml
+class TimelineCursors {
+    <<const>> k_CursorAssetRoot : string = "Cursors/"
+    <<const>> k_CursorAssetsNamespace : string = "Timeline."
+    <<const>> k_CursorAssetExtension : string = ".png"
+    <<const>> k_MixBothCursorAssetName : string
+    <<const>> k_MixLeftCursorAssetName : string
+    <<const>> k_MixRightCursorAssetName : string
+    <<const>> k_ReplaceCursorAssetName : string
+    <<const>> k_RippleCursorAssetName : string
+    {static} <<readonly>> s_PlatformPath : string
+    {static} <<readonly>> s_CursorAssetDirectory : string
+    {static} s_CurrentCursor : CursorType?
+    + {static} SetCursor(cursorType:CursorType) : void
+    + {static} ClearCursor() : void
+    {static} LoadCursorAsset(assetPath:string) : Texture2D
+}
+enum CursorType {
+    MixBoth,
+    MixLeft,
+    MixRight,
+    Replace,
+    Ripple,
+    Pan,
+}
+class CursorInfo {
+    + <<readonly>> assetPath : string
+    + CursorInfo(assetPath:string, hotSpot:Vector2, mouseCursorType:MouseCursor)
+}
+class "Dictionary`2"<T1,T2> {
+}
+TimelineCursors o-> "s_CursorInfoLookup<CursorType,CursorInfo>" "Dictionary`2"
+TimelineCursors o-> "s_CursorAssetCache<string,Texture2D>" "Dictionary`2"
+TimelineCursors +-- CursorType
+TimelineCursors +-- CursorInfo
+CursorInfo --> "hotSpot" Vector2
+CursorInfo --> "mouseCursorType" MouseCursor
+@enduml

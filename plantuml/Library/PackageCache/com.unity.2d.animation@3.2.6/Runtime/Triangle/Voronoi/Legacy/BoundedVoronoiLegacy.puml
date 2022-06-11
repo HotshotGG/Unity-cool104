@@ -1,0 +1,24 @@
+@startuml
+class BoundedVoronoiLegacy {
+    segIndex : int
+    includeBoundary : bool = true
+    + BoundedVoronoiLegacy(mesh:Mesh)
+    + BoundedVoronoiLegacy(mesh:Mesh, includeBoundary:bool)
+}
+class "List`1"<T> {
+}
+class "Dictionary`2"<T1,T2> {
+}
+class "ICollection`1"<T> {
+}
+class "IEnumerable`1"<T> {
+}
+IVoronoi <|-- BoundedVoronoiLegacy
+BoundedVoronoiLegacy o-> "predicates" IPredicates
+BoundedVoronoiLegacy --> "mesh" Mesh
+BoundedVoronoiLegacy --> "regions<VoronoiRegion>" "List`1"
+BoundedVoronoiLegacy --> "segPoints<Point>" "List`1"
+BoundedVoronoiLegacy --> "subsegMap<int,SubSegment>" "Dictionary`2"
+BoundedVoronoiLegacy --> "Regions<VoronoiRegion>" "ICollection`1"
+BoundedVoronoiLegacy --> "Edges<IEdge>" "IEnumerable`1"
+@enduml

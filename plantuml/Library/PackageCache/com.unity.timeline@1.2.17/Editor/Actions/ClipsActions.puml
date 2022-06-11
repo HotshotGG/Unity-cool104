@@ -1,0 +1,70 @@
+@startuml
+class EditClipInAnimationWindow {
+    + <<override>> Execute(state:WindowState, clips:TimelineClip[]) : bool
+}
+class EditSubTimeline {
+    IsValid(state:WindowState, clips:TimelineClip[]) : bool
+    + <<override>> Execute(state:WindowState, clips:TimelineClip[]) : bool
+    {static} ExecuteInternal(state:WindowState, directors:IList<PlayableDirector>, directorIndex:int, clip:TimelineClip) : void
+}
+class TrimStart {
+    + <<override>> Execute(state:WindowState, clips:TimelineClip[]) : bool
+}
+class TrimEnd {
+    + <<override>> Execute(state:WindowState, clips:TimelineClip[]) : bool
+}
+class Split {
+    + <<override>> Execute(state:WindowState, clips:TimelineClip[]) : bool
+}
+class CompleteLastLoop {
+    + <<override>> Execute(state:WindowState, clips:TimelineClip[]) : bool
+}
+class TrimLastLoop {
+    + <<override>> Execute(state:WindowState, clips:TimelineClip[]) : bool
+}
+class MatchDuration {
+    + <<override>> Execute(state:WindowState, clips:TimelineClip[]) : bool
+}
+class DoubleSpeed {
+    + <<override>> Execute(state:WindowState, clips:TimelineClip[]) : bool
+}
+class HalfSpeed {
+    + <<override>> Execute(state:WindowState, clips:TimelineClip[]) : bool
+}
+class ResetDuration {
+    + <<override>> Execute(state:WindowState, clips:TimelineClip[]) : bool
+}
+class ResetSpeed {
+    + <<override>> Execute(state:WindowState, clips:TimelineClip[]) : bool
+}
+class ResetAll {
+    + <<override>> Execute(state:WindowState, clips:TimelineClip[]) : bool
+}
+class Tile {
+    + <<override>> Execute(state:WindowState, clips:TimelineClip[]) : bool
+}
+class FindSourceAsset {
+    + <<override>> Execute(state:WindowState, clips:TimelineClip[]) : bool
+}
+class CopyClipsToClipboard {
+    + <<override>> Execute(state:WindowState, clips:TimelineClip[]) : bool
+}
+class "ItemAction`1"<T> {
+}
+ClipAction <|-- EditClipInAnimationWindow
+ClipAction <|-- EditSubTimeline
+"ItemAction`1" "<TimelineClip>" <|-- TrimStart
+"ItemAction`1" "<TimelineClip>" <|-- TrimEnd
+ClipAction <|-- Split
+ClipAction <|-- CompleteLastLoop
+ClipAction <|-- TrimLastLoop
+ClipAction <|-- MatchDuration
+ClipAction <|-- DoubleSpeed
+ClipAction <|-- HalfSpeed
+ClipAction <|-- ResetDuration
+ClipAction <|-- ResetSpeed
+ClipAction <|-- ResetAll
+ClipAction <|-- Tile
+ClipAction <|-- FindSourceAsset
+ClipAction <|-- CopyClipsToClipboard
+@enduml
