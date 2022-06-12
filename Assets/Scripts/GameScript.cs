@@ -30,23 +30,9 @@ public class GameScript : SingletonMonoBehaviour<GameScript>
     // Start is called before the first frame update
     void Start()
     {
-        // init
-        //SaveManager.GetInstance().Load();
-        //public void WriteNewLogData(string name, int playTimes, int bestScore, DateTime lastUpdated){
-        //FirebaseManager.Instance.WriteNewLogData("kaneko", 99999, 28, DateTime.Now);
-        //_bestScore.GetComponent<TextMeshProUGUI>().text = "BEST:" + SaveManager.GetInstance()._saveData._bestScore;
-        //_tryCount.GetComponent<TextMeshProUGUI>().text = "TRY:" + SaveManager.GetInstance()._saveData._tryCount;
-
-        //SetMiniGems();
-        
-        // score
-        //_score.GetComponent<TextMeshProUGUI>().text = "0";
-
-        // deck shuffle
 
         GemDeck.Instance.Shuffle();
         
-
         // drow
         foreach(GameObject gemBase in _gemsBase)
             gemBase.GetComponent<GemBase>().Drow();
@@ -69,8 +55,6 @@ public class GameScript : SingletonMonoBehaviour<GameScript>
     {
 
     }
-
-
 
     public void GameOver()
     {

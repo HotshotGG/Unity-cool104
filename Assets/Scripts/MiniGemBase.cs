@@ -24,7 +24,8 @@ public class MiniGemBase : SingletonMonoBehaviour<MiniGemBase>
          {
             if(child._suit == suit && child._number == number)
             {
-                Destroy(child.transform.gameObject);
+                child.transform.gameObject.GetComp
+                //Destroy(child.transform.gameObject);
             }
             else if (child._suit == suit || child._number == number)
             {
